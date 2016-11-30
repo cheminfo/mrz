@@ -113,7 +113,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    parseCountry,
 	    parseDate,
 	    parseSex,
-	    parseDocumentNumber
+	    parseDocumentNumber,
+	    parseDocumentType
 	} = __webpack_require__(4);
 
 
@@ -138,10 +139,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    result.format = 'TD3';
-	    result.documentType = {
-	        code: first[0],
-	        type: parseText(first[1])
-	    };
+	    result.documentType = parseDocumentType(first.substring(0, 2));
 	    result.issuingCountry = parseCountry(parseText(first, 2, 5));
 	    result.documentNumber = parseDocumentNumber(parseText(first, 5, 14), first.substr(14, 1));
 	    result.optional1 = parseText(first, 15, 30);
@@ -172,10 +170,45 @@ return /******/ (function(modules) { // webpackBootstrap
 	const COUNTRIES = __webpack_require__(1);
 
 	function parseDocumentNumber(value, checkDigit) {
-	    return {
+	    var result = {
 	        value,
 	        isValid: check(value, checkDigit)
 	    };
+	    if (!result.isValid) {
+	        result.error = 'Check digit "' + checkDigit + '" not valid';
+	    }
+
+	}
+
+	function parseDocumentType(code) {
+	    var result = {
+	        code: code.substring(0, 1),
+	        label: '',
+	        type: parseText(code.substring(1, 2)),
+	        isValid: true
+	    };
+	    switch (result.code) {
+	        case 'P':
+	            result.label = 'Passport';
+	            break;
+	        case 'I':
+	            result.label = 'Identity card';
+	            break;
+	        case 'A':
+	            result.label = '';
+	            break;
+	        case 'C':
+	            result.label = '';
+	            break;
+	        default:
+	            result.isValid = false;
+	            result.error = 'Document type must be either P, I, A or C';
+	    }
+	    if (result.type === 'V') {
+	        result.isValid = false;
+	        result.error = 'Document type (second symbol) may not be V';
+	    }
+	    return result;
 	}
 
 	function parseSex(value) {
@@ -251,7 +284,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    parseCountry,
 	    parseDate,
 	    parseSex,
-	    parseDocumentNumber
+	    parseDocumentNumber,
+	    parseDocumentType
 	};
 
 
@@ -267,7 +301,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    parseCountry,
 	    parseDate,
 	    parseSex,
-	    parseDocumentNumber
+	    parseDocumentNumber,
+	    parseDocumentType
 	} = __webpack_require__(4);
 
 	module.exports = function parseTD3(lines) {
@@ -285,10 +320,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        logs.push('Second line does not have 44 symbols');
 	    }
 	    result.format = 'TD3';
-	    result.documentType = {
-	        code: first[0],
-	        type: parseText(first[1])
-	    };
+	    result.documentType = parseDocumentType(first.substring(0, 2));
 	    result.issuingCountry = parseCountry(parseText(first, 2, 5));
 	    result.lastname = parseText(first, 5, 50).replace(/ {2}.*/, '');
 	    result.firstname = parseText(first, 5, 50).replace(/.* {2}/, '');
