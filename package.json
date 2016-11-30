@@ -14,7 +14,9 @@
     "test-cov": "istanbul cover node_modules/.bin/_mocha -- --require should --reporter dot --recursive",
     "test-travis": "istanbul cover node_modules/.bin/_mocha --report lcovonly -- --require should --reporter dot --recursive",
     "test-mocha": "mocha --require should --reporter mocha-better-spec-reporter",
-    "build": "cheminfo build"
+    "build": "npm run buildCountries && cheminfo build",
+    "prepublish": "npm run buildCountries",
+    "buildCountries": ""
   },
   "repository": {
     "type": "git",
