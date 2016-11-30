@@ -11,15 +11,25 @@ var {
 
 
 module.exports = function parseTD1(lines) {
+    var result = {isValid: true};
     var logs = [];
     logs.push('Parsing TD1 format');
     var first = lines[0];
-    if (first.length !== 30) logs.push('First line does not have 30 symbols');
+    if (first.length !== 30) {
+        result.isValid = false;
+        logs.push('First line does not have 30 symbols');
+    }
     var second = lines[1];
-    if (second.length !== 30) logs.push('Second line does not have 30 symbols');
+    if (second.length !== 30) {
+        result.isValid = false;
+        logs.push('Second line does not have 30 symbols');
+    }
     var third = lines[2];
-    if (third.length !== 30) logs.push('Third line does not have 30 symbols');
-    var result = {};
+    if (third.length !== 30) {
+        result.isValid = false;
+        logs.push('Third line does not have 30 symbols');
+    }
+
     result.format = 'TD3';
     result.documentType = {
         code: first[0],
@@ -34,7 +44,7 @@ module.exports = function parseTD1(lines) {
     result.expirationDate = parseDate(parseText(second, 8, 14), second.substr(14, 1));
     result.nationality = parseCountry(parseText(second, 15, 18), second.substr(18, 1));
     result.optional2 = parseText(second, 18, 29);
-    result.isValid = check(first.substring(5, 30) + second.substring(0, 7) + second.substring(8, 15) + second.substring(18, 29), second.substr(29, 1));
+    if (result.isValid) result.isValid = check(first.substring(5, 30) + second.substring(0, 7) + second.substring(8, 15) + second.substring(18, 29), second.substr(29, 1));
 
     result.lastname = parseText(third, 0, 30).replace(/ {2}.*/, '');
     result.firstname = parseText(third, 0, 30).replace(/.* {2}/, '');

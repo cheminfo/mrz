@@ -10,13 +10,19 @@ var {
 } = require('./utils');
 
 module.exports = function parseTD3(lines) {
+    var result = {isValid: true};
     var logs = [];
     logs.push('Parsing TD3 format');
     var first = lines[0];
-    if (first.length !== 44) logs.push('First line does not have 44 symbols');
+    if (first.length !== 44) {
+        result.isValid = false;
+        logs.push('First line does not have 44 symbols');
+    }
     var second = lines[1];
-    if (second.length !== 44) logs.push('Second line does not have 44 symbols');
-    var result = {};
+    if (second.length !== 44) {
+        result.isValid = false;
+        logs.push('Second line does not have 44 symbols');
+    }
     result.format = 'TD3';
     result.documentType = {
         code: first[0],
@@ -37,7 +43,7 @@ module.exports = function parseTD3(lines) {
         value: parseText(second, 28, 42)
     };
     result.personalNumber.isValid = check(second.substring(28, 42), second.substr(42, 1));
-    result.isValid = check(second.substring(0, 10) + second.substring(13, 20) + second.substring(21, 43), second.substr(43, 1));
+    if (result.isValid) result.isValid = check(second.substring(0, 10) + second.substring(13, 20) + second.substring(21, 43), second.substr(43, 1));
 
     logs.push('TD3 parse completed');
     return {
