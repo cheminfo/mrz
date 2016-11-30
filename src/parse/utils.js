@@ -3,10 +3,14 @@
 const COUNTRIES = require('../generated/countries');
 
 function parseDocumentNumber(value, checkDigit) {
-    return {
+    var result = {
         value,
         isValid: check(value, checkDigit)
     };
+    if (!result.isValid) {
+        result.error = 'Check digit "' + checkDigit + '" not valid';
+    }
+
 }
 
 function parseDocumentType(code) {
