@@ -16,7 +16,7 @@
     "test-mocha": "mocha --require should --reporter mocha-better-spec-reporter",
     "build": "npm run buildCountries && cheminfo build",
     "prepublish": "npm run buildCountries",
-    "buildCountries": ""
+    "buildCountries": "node builder/createCountriesJs.js"
   },
   "repository": {
     "type": "git",
