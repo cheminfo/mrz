@@ -50,8 +50,7 @@ module.exports = function parseTD1(lines) {
     result.firstname = parseText(third, 0, 30).replace(/.* {2}/, '');
 
     logs.push('TD1 parse completed');
-    return {
-        logs,
-        value: result
-    };
+
+    result.logs = logs;
+    return result;
 };

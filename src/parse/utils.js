@@ -1,6 +1,6 @@
 'use strict';
 
-const COUNTRIES = require('../util/countries');
+const COUNTRIES = require('../generated/countries');
 
 function parseDocumentNumber(value, checkDigit) {
     return {
@@ -9,15 +9,21 @@ function parseDocumentNumber(value, checkDigit) {
     };
 }
 
-
 function parseSex(value) {
-    var label = 'Unknown';
+    var label = '';
+    if (value === '') label = 'Unknown';
     if (value === 'M') label = 'Masculin';
     if (value === 'F') label = 'Féminin';
-    return {
+    var result = {
         code: value,
-        label: label
+        label: label,
+        isValid: true
     };
+    if (!label) {
+        result.isValid = false;
+        result.error = `The sex "${value}" is incorrect. Allowed values: M, F or <.`;
+    }
+    return result;
 }
 
 function parseDate(value, checkDigit) {
@@ -26,19 +32,33 @@ function parseDate(value, checkDigit) {
     result.month = value.substring(2, 4);
     result.day = value.substring(4, 6);
     result.isValid = check(value, checkDigit);
+    if (!result.isValid) {
+        result.error = 'Check digit "' + checkDigit + '" not valid';
+    }
+    if (result.month < 1 || result.month > 12) {
+        result.error = 'Month "' + result.month + '" not valid';
+    }
+    if (result.day < 1 || result.day > 31) {
+        result.error = 'Day "' + result.day + '" not valid';
+    }
     return result;
 }
 
 function parseCountry(value) {
     var country = COUNTRIES[value];
-    return {
+    var result = {
         code: value,
-        name: country
+        name: country,
+        isValid: true
     };
+    if (!country) {
+        result.isValid = false;
+        result.error = 'The country code "' + value + '" is unknown';
+    }
+    return result;
 }
 
 function check(string, value) {
-
     var code = 0;
     var factors = [7, 3, 1];
     for (var i = 0; i < string.length; i++) {

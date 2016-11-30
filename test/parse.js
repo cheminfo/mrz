@@ -10,8 +10,8 @@ describe('check parse', function () {
     var result = parse(MRZ);
     it('Check result', function () {
         result.logs.length.should.equal(2);
-        result.value.firstname.should.equal('ANNA MARIA');
-        result.value.nationality.code = 'UTO';
-        (result.value.isValid).should.be.equal(true);
+        result.firstname.should.equal('ANNA MARIA');
+        result.nationality.code = 'UTO';
+        (result.isValid).should.be.equal(true);
     });
 });

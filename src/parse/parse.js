@@ -4,9 +4,8 @@ var parseTD1 = require('./td1');
 var parseTD3 = require('./td3');
 
 module.exports = function parse(text) {
-    var logs = [];
     var lines = text.split(/[\r\n]+/);
-    var result;
+    var result = {logs: []};
     switch (lines.length) {
         case 2:
             result = parseTD3(lines);
@@ -15,7 +14,7 @@ module.exports = function parse(text) {
             result = parseTD1(lines);
             break;
         default:
-            logs.push('We need 2 or 3 lines');
+            result.logs.push('We need 2 or 3 lines');
     }
     return result;
 };

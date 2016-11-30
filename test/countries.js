@@ -1,6 +1,6 @@
 'use strict';
 
-const COUNTRIES = require('../src/util/countries.js');
+const COUNTRIES = require('../src/generated/countries.js');
 
 describe('check countries', function () {
     it('Number of countries', function () {

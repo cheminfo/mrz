@@ -16,4 +16,4 @@ result.push("'use strict'");
 result.push('const COUNTRIES=' + JSON.stringify(countriesObject) + ';');
 result.push('module.exports=COUNTRIES;');
 
-FS.writeFileSync(__dirname + '/../src/util/countries.js', result.join('\r\n'));
+FS.writeFileSync(__dirname + '/../src/generated/countries.js', result.join('\r\n'));

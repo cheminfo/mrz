@@ -4,4 +4,3 @@ logs
 *.log
 npm-debug.log*
 coverage
-src/util/countries.js
