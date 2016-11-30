@@ -1,7 +1,7 @@
 'use strict';
 
 
-const COUNTRIES = require('./util/countries');
+const COUNTRIES = require('./generated/countries');
 const parse = require('./parse/parse');
 
 
