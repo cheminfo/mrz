@@ -6,7 +6,8 @@ var {
     parseCountry,
     parseDate,
     parseSex,
-    parseDocumentNumber
+    parseDocumentNumber,
+    parseDocumentType
 } = require('./utils');
 
 module.exports = function parseTD3(lines) {
@@ -24,10 +25,7 @@ module.exports = function parseTD3(lines) {
         logs.push('Second line does not have 44 symbols');
     }
     result.format = 'TD3';
-    result.documentType = {
-        code: first[0],
-        type: parseText(first[1])
-    };
+    result.documentType = parseDocumentType(first.substring(0, 2));
     result.issuingCountry = parseCountry(parseText(first, 2, 5));
     result.lastname = parseText(first, 5, 50).replace(/ {2}.*/, '');
     result.firstname = parseText(first, 5, 50).replace(/.* {2}/, '');

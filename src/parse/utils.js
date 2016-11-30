@@ -9,6 +9,37 @@ function parseDocumentNumber(value, checkDigit) {
     };
 }
 
+function parseDocumentType(code) {
+    var result = {
+        code: code.substring(0, 1),
+        label: '',
+        type: parseText(code.substring(1, 2)),
+        isValid: true
+    };
+    switch (result.code) {
+        case 'P':
+            result.label = 'Passport';
+            break;
+        case 'I':
+            result.label = 'Identity card';
+            break;
+        case 'A':
+            result.label = '';
+            break;
+        case 'C':
+            result.label = '';
+            break;
+        default:
+            result.isValid = false;
+            result.error = 'Document type must be either P, I, A or C';
+    }
+    if (result.type === 'V') {
+        result.isValid = false;
+        result.error = 'Document type (second symbol) may not be V';
+    }
+    return result;
+}
+
 function parseSex(value) {
     var label = '';
     if (value === '') label = 'Unknown';
@@ -82,5 +113,6 @@ module.exports = {
     parseCountry,
     parseDate,
     parseSex,
-    parseDocumentNumber
+    parseDocumentNumber,
+    parseDocumentType
 };

@@ -6,7 +6,8 @@ var {
     parseCountry,
     parseDate,
     parseSex,
-    parseDocumentNumber
+    parseDocumentNumber,
+    parseDocumentType
 } = require('./utils');
 
 
@@ -31,10 +32,7 @@ module.exports = function parseTD1(lines) {
     }
 
     result.format = 'TD3';
-    result.documentType = {
-        code: first[0],
-        type: parseText(first[1])
-    };
+    result.documentType = parseDocumentType(first.substring(0, 2));
     result.issuingCountry = parseCountry(parseText(first, 2, 5));
     result.documentNumber = parseDocumentNumber(parseText(first, 5, 14), first.substr(14, 1));
     result.optional1 = parseText(first, 15, 30);
