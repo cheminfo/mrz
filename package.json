@@ -1,6 +1,6 @@
 {
   "name": "mrz",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Create and parse MRZ (Machine Readable Zone) in TD1 and TD3 format",
   "main": "./src/index.js",
   "files": [
