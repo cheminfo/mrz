@@ -2,7 +2,18 @@
 
 const COUNTRIES = require('../generated/countries');
 
-function parseDocumentNumber(value, checkDigit) {
+
+/*
+Parsing document number
+The number may be splited (TD1 format)
+ */
+
+function parseDocumentNumber(value, checkDigit, optional) {
+    if (checkDigit==='<' && optional) {
+        optional=optional.replace(/<.*/,'');
+        value+=optional.substring(0,optional.length-1);
+        checkDigit=optional.charAt(optional.length-1);
+    }
     var result = {
         value,
         isValid: check(value, checkDigit)
