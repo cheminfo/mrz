@@ -36,7 +36,7 @@ module.exports = function parseTD1(lines) {
     result.issuingCountry = parseCountry(parseText(first, 2, 5));
     result.optional1 = parseText(first, 15, 30);
     result.documentNumber = parseDocumentNumber(parseText(first, 5, 14), first.substr(14, 1), result.optional1);
-    
+
 
     result.birthDate = parseDate(parseText(second, 0, 6), second.substr(6, 1));
     result.sex = parseSex(second.substr(7, 1));

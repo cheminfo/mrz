@@ -9,10 +9,10 @@ The number may be splited (TD1 format)
  */
 
 function parseDocumentNumber(value, checkDigit, optional) {
-    if (checkDigit==='<' && optional) {
-        optional=optional.replace(/<.*/,'');
-        value+=optional.substring(0,optional.length-1);
-        checkDigit=optional.charAt(optional.length-1);
+    if (checkDigit === '<' && optional) {
+        optional = optional.replace(/<.*/, '');
+        value += optional.substring(0, optional.length - 1);
+        checkDigit = optional.charAt(optional.length - 1);
     }
     var result = {
         value,
@@ -21,7 +21,7 @@ function parseDocumentNumber(value, checkDigit, optional) {
     if (!result.isValid) {
         result.error = 'Check digit "' + checkDigit + '" not valid';
     }
-
+    return result;
 }
 
 function parseDocumentType(code) {
