@@ -3,8 +3,8 @@
 module.exports = function parseSex(source) {
     var value = '';
     if (source === '') value = 'Unknown';
-    if (source === 'M') value = 'Masculin';
-    if (source === 'F') value = 'Féminin';
+    if (source === 'M') value = 'Male';
+    if (source === 'F') value = 'Female';
     var result = {
         source,
         label:'Sex',

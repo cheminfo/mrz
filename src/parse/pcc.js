@@ -9,32 +9,27 @@ var parseCountry=require('../util/parseCountry');
 var parseBirthdayDate=require('../util/parseBirthdayDate');
 var parseNumber = require('../util/parseNumber');
 var checkSeparator = require('../util/checkSeparator');
-
+var totalCheck=require('../util/totalCheck');
 
 module.exports = function parseTD1(lines) {
-    var result = {isValid: true};
-    var logs = [];
-    logs.push('Parsing PCC format');
+    var result = {
+        format: 'PCC',
+        error: []    
+    };
     var first = lines[0];
     if (first.length !== 9) {
-        result.isValid = false;
-        logs.push('First line does not have 9 symbols');
+        result.error.push('First line does not have 9 symbols');
     }
     var second = lines[1];
     if (second.length !== 30) {
-        result.isValid = false;
-        logs.push('Second line does not have 30 symbols');
+        result.error.push('Second line does not have 30 symbols');
     }
     var third = lines[2];
     if (third.length !== 30) {
-        result.isValid = false;
-        logs.push('Third line does not have 30 symbols');
+        result.error.push('Third line does not have 30 symbols');
     }
 
     result.documentNumber = parsePCCDocumentNumber(first);
-
-
-    result.format = 'PCC';
     result.documentType = parsePCCDocumentType(second.substring(0, 2));
     result.issuingCountry = parseCountry(parseText(second, 2, 5));
     result.nipCode = parseNumber(second.substring(5, 14));
@@ -43,12 +38,9 @@ module.exports = function parseTD1(lines) {
     result.birthDate = parseBirthdayDate(parseText(second, 19, 25), false);
     checkSeparator(second, 25, 30);
     
-
     result.lastname = parseText(third, 0, 30).replace(/ {2}.*/, '');
     result.firstname = parseText(third, 0, 30).replace(/.* {2}/, '');
-
-    logs.push('PCC parse completed');
-
-    result.logs = logs;
+    totalCheck(result);
+    
     return result;
 };
