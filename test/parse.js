@@ -46,3 +46,20 @@ D231458907UTO7408122F1204159<<<<<<<6`;
     });
 });
 
+
+describe.only('check PCC parse', function () {
+
+    const MRZ = `AAA001D<<
+FACHE305142128097<<800126<<<<<
+MARCHAND<<FABIENNE<<<<<<<<<<<<`;
+
+    var result = parse(MRZ);
+    console.log(result);
+    it('Check result', function () {
+        result.logs.length.should.equal(2);
+        result.firstname.should.equal('FABIENNE');
+        result.issuingCountry.code.should.equal('CHE');
+        result.documentNumber.value.should.equal('AAA001D');
+        
+    });
+});
