@@ -11,7 +11,7 @@ module.exports = function parseSex(source) {
         value,
         error: []
     };
-    if (!label) {
+    if (!value) {
         result.error.push(`The sex "${source}" is incorrect. Allowed values: M, F or <.`);
     }
     return result;

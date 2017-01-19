@@ -5,7 +5,7 @@ module.exports = function parseNumber(source) {
         error: [],
         source
     };
-    if (! string.match(/^[0-9]+$/)) {
+    if (! source.match(/^[0-9]+$/)) {
         result.error.push('It may only be composed of numbers');
     }
 

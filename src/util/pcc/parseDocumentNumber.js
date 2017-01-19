@@ -1,31 +1,7 @@
 'use strict';
 
 
-
-
-
-
-
-function parsePCCDocumentType(code) {
-    var result = {
-        label: '',
-        type: code,
-        isValid: true
-    };
-    switch (result.code) {
-        case 'FA':
-            result.label = 'Swiss driving license';
-            break;
-        default:
-            result.isValid = false;
-            result.error = 'Swiss driving license must have a document type "FA"';
-    }
-    return result;
-}
-
-
-
-function parsePCCDocumentNumber(value) { // swiss driving license number
+module.exports = function parseDocumentNumber(value) { // swiss driving license number
     var first = value.substring(0,3);
     var second = value.substring(3,6);
     var language=value.charAt(6);
@@ -71,37 +47,3 @@ function parsePCCDocumentNumber(value) { // swiss driving license number
     }
     return result;
 }
-
-
-
-function checkSeparator(string) {
-    if (string.match(/^<*$/)) {
-        return {
-            isValid: true
-        }
-    }
-    return {
-        isValid: false,
-        error: 'The separator must be composed only by "<"'
-    }
-}
-
-
-
-function parseText(text, from, to) {
-    return text.substring(from, to).replace(/<+$/g, '').replace(/</g, ' ');
-}
-
-module.exports = {
-    check,
-    parseText,
-    parseCountry,
-    parseDate,
-    parseSex,
-    parseDocumentNumber,
-    parseDocumentType,
-    parsePCCDocumentNumber,
-    parsePCCDocumentType,
-    checkSeparator,
-    parseNumber
-};

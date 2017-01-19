@@ -1,5 +1,7 @@
 'use strict';
 
+var check=require('./check');
+
 module.exports = function parseDate(value, checkDigit) {
     var result = {
         error: []
@@ -8,7 +10,7 @@ module.exports = function parseDate(value, checkDigit) {
     result.month = value.substring(2, 4);
     result.day = value.substring(4, 6);
     result.description = result.day + '.' + result.month + '.' + result.year;
-    if (checkDigit!==falee && ! check(value, checkDigit)) {
+    if (checkDigit!==false && ! check(value, checkDigit)) {
         result.error.push('Check digit "' + checkDigit + '" not valid');
     }
     if (result.month < 1 || result.month > 12) {

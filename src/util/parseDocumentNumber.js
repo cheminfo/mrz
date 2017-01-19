@@ -1,5 +1,7 @@
 'use strict';
 
+var check=require('./check');
+
 /*
  Parsing document number
  The number may be splited (TD1 format)

@@ -3,7 +3,7 @@
 const parse = require('../src/parse/parse.js');
 
 
-describ.only('check TD1 parse', function () {
+describe.only('check TD1 parse', function () {
 
     const MRZ = `I<UTOD231458907<<<<<<<<<<<<<<<
 7408122F1204159UTO<<<<<<<<<<<6
@@ -11,9 +11,10 @@ ERIKSSON<<ANNA<MARIA<<<<<<<<<<`;
 
     var result = parse(MRZ);
     it('Check result', function () {
-        result.logs.length.should.equal(2);
+        console.log(result);
+        result.error.length.should.equal(0);
         result.firstname.should.equal('ANNA MARIA');
-        result.nationality.code.should.equal('UTO');
+        result.nationality.source.should.equal('UTO');
         (result.isValid).should.be.equal(true);
     });
 });
@@ -54,7 +55,6 @@ FACHE305142128097<<800126<<<<<
 MARCHAND<<FABIENNE<<<<<<<<<<<<`;
 
     var result = parse(MRZ);
-    console.log(result);
     it('Check result', function () {
         result.logs.length.should.equal(2);
         result.firstname.should.equal('FABIENNE');

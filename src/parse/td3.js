@@ -1,14 +1,14 @@
 'use strict';
 
-var {
-    check,
-    parseText,
-    parseCountry,
-    parseDate,
-    parseSex,
-    parseDocumentNumber,
-    parseDocumentType
-} = require('./utils');
+var check=require('../util/check');
+var parseText=require('../util/parseText');
+var parseSex=require('../util/parseSex');
+var parseDocumentNumber=require('../util/parseDocumentNumber');
+var parseDocumentType=require('../util/parseDocumentType');
+var parseCountry=require('../util/parseCountry');
+var parseBirthdayDate=require('../util/parseBirthdayDate');
+var parseExpirationDate=require('../util/parseExpirationDate');
+
 
 module.exports = function parseTD3(lines) {
     var result = {isValid: true};

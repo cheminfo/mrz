@@ -1,14 +1,14 @@
 'use strict';
 
-var {
-    parseText,
-    parseCountry,
-    parseDate,
-    parsePCCDocumentNumber,
-    parsePCCDocumentType,
-    checkSeparator,
-    parseNumber
-} = require('./utils');
+var check=require('../util/check');
+var parseText=require('../util/parseText');
+var parseSex=require('../util/parseSex');
+var parsePCCDocumentNumber=require('../util/pcc/parseDocumentNumber');
+var parsePCCDocumentType=require('../util/pcc/parseDocumentType');
+var parseCountry=require('../util/parseCountry');
+var parseBirthdayDate=require('../util/parseBirthdayDate');
+var parseNumber = require('../util/parseNumber');
+var checkSeparator = require('../util/checkSeparator');
 
 
 module.exports = function parseTD1(lines) {
@@ -40,7 +40,7 @@ module.exports = function parseTD1(lines) {
     result.nipCode = parseNumber(second.substring(5, 14));
     result.version = parseNumber(second.substring(14, 17));
     checkSeparator(second, 17, 19);
-    result.birthDate = parseDate(parseText(second, 19, 25), false);
+    result.birthDate = parseBirthdayDate(parseText(second, 19, 25), false);
     checkSeparator(second, 25, 30);
     
 
