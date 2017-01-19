@@ -3,7 +3,7 @@
 const parse = require('../src/parse/parse.js');
 
 
-describe('check TD1 parse', function () {
+describ.only('check TD1 parse', function () {
 
     const MRZ = `I<UTOD231458907<<<<<<<<<<<<<<<
 7408122F1204159UTO<<<<<<<<<<<6
@@ -47,7 +47,7 @@ D231458907UTO7408122F1204159<<<<<<<6`;
 });
 
 
-describe.only('check PCC parse', function () {
+describe('check PCC parse', function () {
 
     const MRZ = `AAA001D<<
 FACHE305142128097<<800126<<<<<
