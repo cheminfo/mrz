@@ -45,6 +45,22 @@ D231458907UTO7408122F1204159<<<<<<<6`;
     });
 });
 
+describe('check TD3 parse', function () {
+
+    const MRZ = `P<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<
+L898902C36UTO7408122F1204159ZE184226B<<<<<10`;
+
+    var result = parse(MRZ);
+    it('Check result', function () {
+        result.error.length.should.equal(2);
+        result.firstname.value.should.equal('ANNA MARIA');
+        result.lastname.value.should.equal('ERIKSSON');
+        result.nationality.source.should.equal('UTO');
+        result.documentNumber.value.should.equal('L898902C3');
+        (result.isValid).should.be.equal(false);
+    });
+});
+
 
 describe('check PCC parse', function () {
 

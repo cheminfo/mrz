@@ -16,7 +16,7 @@ module.exports = function parseDocumentNumber(source, checkDigit, optional) {
     var result = {
         source,
         label: 'Document number',
-        value: source,
+        value: source.replace(/<*$/, ''),
         error: []
     };
     if (!check(source, checkDigit)) {
