@@ -82,7 +82,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var parseTD1 = __webpack_require__(3);
-	var parseTD2 = __webpack_require__(20);
+	var parseTD2 = __webpack_require__(19);
 	var parseTD3 = __webpack_require__(21);
 	var parsePCC = __webpack_require__(23);
 
@@ -118,23 +118,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var globalCheck=__webpack_require__(4);
-	var parseText=__webpack_require__(6);
-	var parseSex=__webpack_require__(8);
-	var parseDocumentNumber=__webpack_require__(9);
-	var parseDocumentType=__webpack_require__(10);
-	var parseNationality=__webpack_require__(11);
-	var parseIssuingCountry=__webpack_require__(13);
-	var parseBirthdayDate=__webpack_require__(14);
-	var parseExpirationDate=__webpack_require__(16);
-	var finalAnalysis=__webpack_require__(17);
-	var parseFirstname=__webpack_require__(18);
-	var parseLastname=__webpack_require__(19);
+	var globalCheck = __webpack_require__(4);
+	var parseText = __webpack_require__(6);
+	var parseSex = __webpack_require__(8);
+	var parseDocumentNumber = __webpack_require__(9);
+	var parseDocumentType = __webpack_require__(10);
+	var parseNationality = __webpack_require__(11);
+	var parseIssuingCountry = __webpack_require__(13);
+	var parseBirthdayDate = __webpack_require__(14);
+	var finalAnalysis = __webpack_require__(16);
+	var parseFirstname = __webpack_require__(17);
+	var parseLastname = __webpack_require__(18);
 
 	module.exports = function parseTD1(lines) {
 	    var result = {
 	        format: 'TD1',
-	        error:[]
+	        error: []
 	    };
 	    var first = lines[0];
 	    var second = lines[1];
@@ -178,9 +177,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	var check = __webpack_require__(5);
 
 	module.exports = function globalCheck(source, value) {
-	    var checkResult=check(source,value);
-	    var error=[];
-	    if (! checkResult) {
+	    var checkResult = check(source, value);
+	    var error = [];
+	    if (!checkResult) {
 	        error.push('Check digit error.');
 	    }
 	    return {
@@ -188,8 +187,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        source,
 	        label: 'Global check digit',
 	        error
-	    }
-	}
+	    };
+	};
+
 
 /***/ },
 /* 5 */
@@ -209,7 +209,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        code += charCode;
 	    }
 	    return code % 10 === Number(value);
-	}
+	};
+
 
 /***/ },
 /* 6 */
@@ -217,20 +218,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var cleanText=__webpack_require__(7);
+	var cleanText = __webpack_require__(7);
 
-	module.exports = function parseText(label, source, regexp=/^[0-9A-Z<]+$/) {
-	    var result={
+	module.exports = function parseText(label, source, regexp = /^[0-9A-Z<]+$/) {
+	    var result = {
 	        source,
 	        label,
 	        value: cleanText(source),
-	        error:[]
+	        error: []
 	    };
-	    if (! source.match(regexp)) {
-	        result.error.push('It must match the following regexp: '+regexp);
+	    if (!source.match(regexp)) {
+	        result.error.push('It must match the following regexp: ' + regexp);
 	    }
 	    return result;
 	};
+
 
 /***/ },
 /* 7 */
@@ -240,7 +242,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = function cleanText(string) {
 	    return string.replace(/<+$/g, '').replace(/</g, ' ');
-	}
+	};
+
 
 /***/ },
 /* 8 */
@@ -251,23 +254,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = function parseSex(source) {
 	    var result = {
 	        source,
-	        label:'Sex',
+	        label: 'Sex',
 	        error: []
 	    };
-	    switch(source) {
+	    switch (source) {
 	        case '<':
 	            result.value = 'Unknown';
-	            break
+	            break;
 	        case 'M':
 	            result.value = 'Male';
-	            break
+	            break;
 	        case 'F':
 	            result.value = 'Female';
-	            break
+	            break;
 	        default:
 	            result.error.push(`The sex "${source}" is incorrect. Allowed values: M, F or <.`);
 	    }
-	    
+
 	    return result;
 	};
 
@@ -278,7 +281,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var check=__webpack_require__(5);
+	var check = __webpack_require__(5);
 
 	/*
 	 Parsing document number
@@ -293,9 +296,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    var result = {
 	        source,
-	        label:'Document number',
+	        label: 'Document number',
 	        value: source,
-	        error:[]
+	        error: []
 	    };
 	    if (!check(source, checkDigit)) {
 	        result.push('Check digit "' + checkDigit + '" not valid');
@@ -313,14 +316,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = function parseDocumentType(source) {
 	    var code = source.substring(0, 1);
-	    var type = source.substring(1, 2).replace('<','');
-	 
+	    var type = source.substring(1, 2).replace('<', '');
+
 	    var result = {
 	        source,
 	        label: 'Document type',
 	        error: []
 	    };
-	    
+
 	    switch (code) {
 	        case 'P':
 	            result.value = 'Passport';
@@ -337,11 +340,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        default:
 	            result.error.push('Document type must be either P, I, A or C');
 	    }
-	    if (type=== 'V') {
+	    if (type === 'V') {
 	        result.error.push('Document type (second symbol) may not be V');
 	    }
 	    return result;
-	}
+	};
+
 
 /***/ },
 /* 11 */
@@ -349,13 +353,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var parseCountry=__webpack_require__(12);
+	var parseCountry = __webpack_require__(12);
 
 	module.exports = function parseIssuingCountry(value) {
 	    var result = parseCountry(value);
-	    result.label='Nationality';
+	    result.label = 'Nationality';
 	    return result;
 	};
+
 
 /***/ },
 /* 12 */
@@ -386,13 +391,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var parseCountry=__webpack_require__(12);
+	var parseCountry = __webpack_require__(12);
 
 	module.exports = function parseIssuingCountry(value) {
 	    var result = parseCountry(value);
-	    result.label='Issuing country';
+	    result.label = 'Issuing country';
 	    return result;
 	};
+
 
 /***/ },
 /* 14 */
@@ -400,13 +406,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var parseDate=__webpack_require__(15);
+	var parseDate = __webpack_require__(15);
 
 	module.exports = function parseBirthdayDateDate(value, checkDigit) {
 	    var result = parseDate(value, checkDigit);
-	    result.label='Birthday date';
+	    result.label = 'Birthday date';
 	    return result;
 	};
+
 
 /***/ },
 /* 15 */
@@ -414,7 +421,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var check=__webpack_require__(5);
+	var check = __webpack_require__(5);
 
 	module.exports = function parseDate(value, checkDigit) {
 	    var result = {
@@ -424,7 +431,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    result.month = value.substring(2, 4);
 	    result.day = value.substring(4, 6);
 	    result.value = result.day + '.' + result.month + '.' + result.year;
-	    if (checkDigit!==false && ! check(value, checkDigit)) {
+	    if (checkDigit !== false && !check(value, checkDigit)) {
 	        result.error.push('Check digit "' + checkDigit + '" not valid');
 	    }
 	    if (result.month < 1 || result.month > 12) {
@@ -436,22 +443,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return result;
 	};
 
+
 /***/ },
 /* 16 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var parseDate=__webpack_require__(15);
-
-	module.exports = function parseExpirationDate(value, checkDigit) {
-	    var result = parseDate(value, checkDigit);
-	    result.label='Expiration date';
-	    return result;
-	};
-
-/***/ },
-/* 17 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -463,21 +457,44 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	module.exports = function globalCheck(result) {
-	    result.isValid=true;
+	    result.isValid = true;
+	    result.logs = [];
 	    for (var key of Object.keys(result)) {
-	        if (result[key] instanceof Object && ! Array.isArray(result[key])) {
-	            if (result[key].error && result[key].error.length>0) {
-	                result[key].isValid=false;
-	                result.isValid=false;
+	        if (result[key] instanceof Object && !Array.isArray(result[key])) {
+	            if (result[key].error && result[key].error.length > 0) {
+	                result[key].isValid = false;
+	                result.isValid = false;
 	                for (var err of result[key].error) {
-	                    result.error.push(result[key].label+': '+err);
+	                    result.error.push(result[key].label + ': ' + err);
 	                }
 	            } else {
-	                result[key].isValid=true;
+	                result[key].isValid = true;
 	            }
+	            result.logs.push(
+	                Object.assign({}, result[key], {field: key})
+	            );
 	        }
 	    }
+
+	    // we will also create the result as a table call 'logs'
+
+
 	};
+
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var parseText = __webpack_require__(6);
+
+	module.exports = function parseFirstname(label, source) {
+	    var result = parseText('Firstname', source.replace(/<{2}.*/, ''), /^[A-Z<]+<*$/);
+	    return result;
+	};
+
 
 /***/ },
 /* 18 */
@@ -485,10 +502,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var parseText=__webpack_require__(6);
+	var parseText = __webpack_require__(6);
 
 	module.exports = function parseFirstname(label, source) {
-	    var result = parseText('Firstname', source.replace(/<{2}.*/, ''), /^[A-Z<]+<*$/);
+	    var result = parseText('Lastname', source.replace(/.*?<{2}/, ''), /^[A-Z<]+<*$/);
 	    return result;
 	};
 
@@ -499,31 +516,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var parseText=__webpack_require__(6);
-
-	module.exports = function parseFirstname(label, source) {
-	    var result = parseText('Lastname', source.replace(/.*?<{2}/, ''), /^[A-Z<]+<*$/);
-	    return result;
-	};
-
-
-/***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var globalCheck=__webpack_require__(4);
-	var parseSex=__webpack_require__(8);
-	var parseDocumentNumber=__webpack_require__(9);
-	var parseDocumentType=__webpack_require__(10);
-	var parseNationality=__webpack_require__(11);
-	var parseIssuingCountry=__webpack_require__(13);
-	var parseBirthdayDate=__webpack_require__(14);
-	var parseExpirationDate=__webpack_require__(16);
-	var finalAnalysis=__webpack_require__(17);
-	var parseFirstname=__webpack_require__(18);
-	var parseLastname=__webpack_require__(19);
+	var globalCheck = __webpack_require__(4);
+	var parseSex = __webpack_require__(8);
+	var parseDocumentNumber = __webpack_require__(9);
+	var parseDocumentType = __webpack_require__(10);
+	var parseNationality = __webpack_require__(11);
+	var parseIssuingCountry = __webpack_require__(13);
+	var parseBirthdayDate = __webpack_require__(14);
+	var parseExpirationDate = __webpack_require__(20);
+	var finalAnalysis = __webpack_require__(16);
+	var parseFirstname = __webpack_require__(17);
+	var parseLastname = __webpack_require__(18);
 
 	module.exports = function parseTD3(lines) {
 	    var result = {
@@ -533,7 +536,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var first = lines[0];
 	    var second = lines[1];
-	    
+
 	    if (first.length !== 36) {
 	        result.error.push('First line does not have 36 symbols');
 	    }
@@ -553,7 +556,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    result.globalCheck = globalCheck(second.substring(0, 10) + second.substring(13, 20) + second.substring(21, 35), second.substr(35, 1));
 	    finalAnalysis(result);
-	    
+
+	    return result;
+	};
+
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var parseDate = __webpack_require__(15);
+
+	module.exports = function parseExpirationDate(value, checkDigit) {
+	    var result = parseDate(value, checkDigit);
+	    result.label = 'Expiration date';
 	    return result;
 	};
 
@@ -564,17 +582,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var globalCheck=__webpack_require__(4);
-	var parseSex=__webpack_require__(8);
-	var parseDocumentNumber=__webpack_require__(9);
-	var parseDocumentType=__webpack_require__(10);
-	var parseCountry=__webpack_require__(12);
-	var parseBirthdayDate=__webpack_require__(14);
-	var parseExpirationDate=__webpack_require__(16);
-	var finalAnalysis=__webpack_require__(17);
-	var parseFirstname=__webpack_require__(18);
-	var parseLastname=__webpack_require__(19);
-	var parsePersonalNumber=__webpack_require__(22);
+	var globalCheck = __webpack_require__(4);
+	var parseSex = __webpack_require__(8);
+	var parseDocumentNumber = __webpack_require__(9);
+	var parseDocumentType = __webpack_require__(10);
+	var parseCountry = __webpack_require__(12);
+	var parseBirthdayDate = __webpack_require__(14);
+	var parseExpirationDate = __webpack_require__(20);
+	var finalAnalysis = __webpack_require__(16);
+	var parseFirstname = __webpack_require__(17);
+	var parseLastname = __webpack_require__(18);
+	var parsePersonalNumber = __webpack_require__(22);
 
 	module.exports = function parseTD3(lines) {
 	    var result = {
@@ -594,14 +612,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    result.firstname = parseLastname('Firstname', first.substring(5, 50));
 	    result.documentNumber = parseDocumentNumber(second.substring(0, 9), second.substr(9, 1));
 	    result.nationality = parseCountry(second.substring(10, 13));
-	    result.birthDate = parseDate(second.substring(13, 19), second.substr(19, 1));
+	    result.birthDate = parseBirthdayDate(second.substring(13, 19), second.substr(19, 1));
 
 	    if (second.length !== 44) {
 	        result.error.push('Second line does not have 44 symbols');
 	    }
 	    result.sex = parseSex(second.substring(20, 21));
-	    result.expirationDate = parseDate(second.substring(21, 27), second.substr(27, 1));
-	    result.personalNumber = parsePersonalNumber( second.substring(28, 42));
+	    result.expirationDate = parseExpirationDate(second.substring(21, 27), second.substr(27, 1));
+	    result.personalNumber = parsePersonalNumber(second.substring(28, 42));
 	    result.globalCheck = globalCheck(second.substring(0, 10) + second.substring(13, 20) + second.substring(21, 43), second.substr(43, 1));
 	    finalAnalysis(result);
 
@@ -615,8 +633,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var parseText=__webpack_require__(6);
-	var check=__webpack_require__(5);
+	var parseText = __webpack_require__(6);
+	var check = __webpack_require__(5);
 
 	module.exports = function parseExpirationDate(value, checkDigit) {
 	    var result = parseText('Personal number', value, /^[A-Z<]+<*$/);
@@ -626,28 +644,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return result;
 	};
 
+
 /***/ },
 /* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var check=__webpack_require__(5);
-	var parseSex=__webpack_require__(8);
-	var parsePCCDocumentNumber=__webpack_require__(24);
-	var parsePCCDocumentType=__webpack_require__(25);
-	var parseCountry=__webpack_require__(12);
-	var parseBirthdayDate=__webpack_require__(14);
+	var parsePCCDocumentNumber = __webpack_require__(24);
+	var parsePCCDocumentType = __webpack_require__(25);
+	var parseCountry = __webpack_require__(12);
+	var parseBirthdayDate = __webpack_require__(14);
 	var parseNumber = __webpack_require__(26);
 	var checkSeparator = __webpack_require__(27);
-	var finalAnalysis=__webpack_require__(17);
-	var parseFirstname=__webpack_require__(18);
-	var parseLastname=__webpack_require__(19);
+	var finalAnalysis = __webpack_require__(16);
+	var parseFirstname = __webpack_require__(17);
+	var parseLastname = __webpack_require__(18);
 
 	module.exports = function parseTD1(lines) {
 	    var result = {
 	        format: 'PCC',
-	        error: []    
+	        error: []
 	    };
 	    var first = lines[0];
 	    if (first.length !== 9) {
@@ -665,15 +682,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    result.documentNumber = parsePCCDocumentNumber(first);
 	    result.documentType = parsePCCDocumentType(second.substring(0, 2));
 	    result.issuingCountry = parseCountry(second.substring(2, 5));
-	    result.nipCode = parseNumber('NIP code',second.substring(5, 14));
-	    result.version = parseNumber('Version',second.substring(14, 17));
+	    result.nipCode = parseNumber('NIP code', second.substring(5, 14));
+	    result.version = parseNumber('Version', second.substring(14, 17));
 	    result.separator1 = checkSeparator('Separator second line 18-19', second.substring(17, 19));
 	    result.birthDate = parseBirthdayDate(second.substring(19, 25), false);
 	    result.separator1 = checkSeparator('Separator second line 26-30', second.substring(25, 30));
 	    result.lastname = parseFirstname('Lastname', third.substring(0, 30));
 	    result.firstname = parseLastname('Firstname', third.substring(0, 30));
 	    finalAnalysis(result);
-	    
+
 	    return result;
 	};
 
@@ -686,9 +703,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	module.exports = function parseDocumentNumber(source) { // swiss driving license number
-	    var first = source.substring(0,3);
-	    var second = source.substring(3,6);
-	    var language=source.charAt(6);
+	    var first = source.substring(0, 3);
+	    var second = source.substring(3, 6);
+	    var language = source.charAt(6);
 	    var end = source.substring(7);
 
 	    var result = {
@@ -696,38 +713,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	        source,
 	        error: []
 	    };
-	    if (! first.match(/^[A-Z]{3}$/)) {
+	    if (!first.match(/^[A-Z]{3}$/)) {
 	        result.error.push(`The document number "${source}" is incorrect. Need to start by 3 uppercase letters.`);
-	        return;
 	    }
-	    if (! second.match(/^[0-9]{3}$/)) {
+	    if (!second.match(/^[0-9]{3}$/)) {
 	        result.error.push(`The document number "${source}" is incorrect. Need to have 3 digits in position 3, 4 and 5.`);
-	        return;
 	    }
 	    if (end !== '<<') {
 	        result.error.push(`The document number "${source}" is incorrect. Need to end with <<.`);
-	        return;
 	    }
+	    var languageDescription;
 	    switch (language) {
 	        case 'D':
-	            var languageDescription='German';
+	            languageDescription = 'German';
 	            break;
 	        case 'F':
-	            var languageDescription='French';
+	            languageDescription = 'French';
 	            break;
 	        case 'I':
-	            var languageDescription='Italian';
+	            languageDescription = 'Italian';
 	            break;
 	        case 'R':
-	            var languageDescription='Romansh';
+	            languageDescription = 'Romansh';
 	            break;
 	        default:
 	            result.error.push(`The document number "${source}" is incorrect. Language ${language} unknown.`);
-	            return;
 	    }
-	    result.value=first+second+' - language: '+languageDescription;
+	    result.value = first + second + ' - language: ' + languageDescription;
 	    return result;
-	}
+	};
+
 
 /***/ },
 /* 25 */
@@ -759,17 +774,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	module.exports = function parseNumber(label, source) {
-	    var result={
+	    var result = {
 	        error: [],
 	        label,
 	        source
 	    };
-	    if (! source.match(/^[0-9]+$/)) {
+	    if (!source.match(/^[0-9]+$/)) {
 	        result.error.push('It may only be composed of numbers');
 	    }
 
 	    return result;
 	};
+
 
 /***/ },
 /* 27 */
@@ -783,11 +799,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        error: [],
 	        label
 	    };
-	    if (! source.match(/^<*$/)) {
+	    if (!source.match(/^<*$/)) {
 	        result.error.push('The separator must be composed only by "<"');
 	    }
 	    return result;
 	};
+
 
 /***/ }
 /******/ ])
