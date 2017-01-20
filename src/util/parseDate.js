@@ -4,7 +4,8 @@ var check = require('./check');
 
 module.exports = function parseDate(value, checkDigit) {
     var result = {
-        error: []
+        error: [],
+        source: value
     };
     result.year = value.substring(0, 2);
     result.month = value.substring(2, 4);
