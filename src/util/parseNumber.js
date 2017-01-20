@@ -1,8 +1,9 @@
 'use strict';
 
-module.exports = function parseNumber(source) {
+module.exports = function parseNumber(label, source) {
     var result={
         error: [],
+        label,
         source
     };
     if (! source.match(/^[0-9]+$/)) {

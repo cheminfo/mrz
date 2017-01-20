@@ -1,18 +1,17 @@
 'use strict';
 
-module.exports = function parseDocumentType(code) {
+module.exports = function parseDocumentType(source) {
     var result = {
-        label: '',
-        type: code,
-        isValid: true
+        label: 'Document type',
+        source,
+        error: []
     };
-    switch (result.code) {
+    switch (result.source) {
         case 'FA':
-            result.label = 'Swiss driving license';
+            result.value = 'Swiss driving license';
             break;
         default:
-            result.isValid = false;
-            result.error = 'Swiss driving license must have a document type "FA"';
+            result.error.push('Swiss driving license must have a document type "FA"');
     }
     return result;
-}
+};

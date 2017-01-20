@@ -1,7 +1,6 @@
 'use strict';
 
 var check=require('../util/check');
-var parseText=require('../util/parseText');
 var parseSex=require('../util/parseSex');
 var parsePCCDocumentNumber=require('../util/pcc/parseDocumentNumber');
 var parsePCCDocumentType=require('../util/pcc/parseDocumentType');
@@ -9,7 +8,9 @@ var parseCountry=require('../util/parseCountry');
 var parseBirthdayDate=require('../util/parseBirthdayDate');
 var parseNumber = require('../util/parseNumber');
 var checkSeparator = require('../util/checkSeparator');
-var totalCheck=require('../util/totalCheck');
+var finalAnalysis=require('../util/totalCheck');
+var parseFirstname=require('../util/parseFirstname');
+var parseLastname=require('../util/parseLastname');
 
 module.exports = function parseTD1(lines) {
     var result = {
@@ -31,16 +32,15 @@ module.exports = function parseTD1(lines) {
 
     result.documentNumber = parsePCCDocumentNumber(first);
     result.documentType = parsePCCDocumentType(second.substring(0, 2));
-    result.issuingCountry = parseCountry(parseText(second, 2, 5));
-    result.nipCode = parseNumber(second.substring(5, 14));
-    result.version = parseNumber(second.substring(14, 17));
-    checkSeparator(second, 17, 19);
-    result.birthDate = parseBirthdayDate(parseText(second, 19, 25), false);
-    checkSeparator(second, 25, 30);
-    
-    result.lastname = parseText(third, 0, 30).replace(/ {2}.*/, '');
-    result.firstname = parseText(third, 0, 30).replace(/.* {2}/, '');
-    totalCheck(result);
+    result.issuingCountry = parseCountry(second.substring(2, 5));
+    result.nipCode = parseNumber('NIP code',second.substring(5, 14));
+    result.version = parseNumber('Version',second.substring(14, 17));
+    result.separator1 = checkSeparator('Separator second line 18-19', second.substring(17, 19));
+    result.birthDate = parseBirthdayDate(second.substring(19, 25), false);
+    result.separator1 = checkSeparator('Separator second line 26-30', second.substring(25, 30));
+    result.lastname = parseFirstname('Lastname', third.substring(0, 30));
+    result.firstname = parseLastname('Firstname', third.substring(0, 30));
+    finalAnalysis(result);
     
     return result;
 };

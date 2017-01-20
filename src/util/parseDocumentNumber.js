@@ -16,7 +16,7 @@ module.exports = function parseDocumentNumber(source, checkDigit, optional) {
     var result = {
         source,
         label:'Document number',
-        description: source,
+        value: source,
         error:[]
     };
     if (!check(source, checkDigit)) {

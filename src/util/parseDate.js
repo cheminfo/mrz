@@ -9,7 +9,7 @@ module.exports = function parseDate(value, checkDigit) {
     result.year = value.substring(0, 2);
     result.month = value.substring(2, 4);
     result.day = value.substring(4, 6);
-    result.description = result.day + '.' + result.month + '.' + result.year;
+    result.value = result.day + '.' + result.month + '.' + result.year;
     if (checkDigit!==false && ! check(value, checkDigit)) {
         result.error.push('Check digit "' + checkDigit + '" not valid');
     }

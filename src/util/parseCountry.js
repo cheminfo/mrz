@@ -6,7 +6,7 @@ module.exports = function parseCountry(source) {
     var country = COUNTRIES[source];
     var result = {
         source,
-        description: country,
+        value: country || source,
         label: 'Country',
         error: []
     };
