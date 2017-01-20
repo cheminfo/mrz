@@ -185,6 +185,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return {
 	        ifValid: checkResult,
 	        source,
+	        value: (checkResult) ? 'valid' : 'non valid',
 	        label: 'Global check digit',
 	        error
 	    };
@@ -297,7 +298,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var result = {
 	        source,
 	        label: 'Document number',
-	        value: source,
+	        value: source.replace(/<*$/, ''),
 	        error: []
 	    };
 	    if (!check(source, checkDigit)) {
@@ -637,8 +638,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var check = __webpack_require__(5);
 
 	module.exports = function parseExpirationDate(value, checkDigit) {
-	    var result = parseText('Personal number', value, /^[A-Z<]+<*$/);
-	    if (!check(value, checkDigit)) {
+	    var result = parseText('Personal number', value, /^[A-Z0-9<]+<*$/);
+	    if (checkDigit && !check(value, checkDigit)) {
 	        result.error.push('Check digit "' + checkDigit + '" not valid');
 	    }
 	    return result;
