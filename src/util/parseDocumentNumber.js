@@ -1,6 +1,6 @@
 'use strict';
 
-var check=require('./check');
+var check = require('./check');
 
 /*
  Parsing document number
@@ -15,9 +15,9 @@ module.exports = function parseDocumentNumber(source, checkDigit, optional) {
     }
     var result = {
         source,
-        label:'Document number',
+        label: 'Document number',
         value: source,
-        error:[]
+        error: []
     };
     if (!check(source, checkDigit)) {
         result.push('Check digit "' + checkDigit + '" not valid');

@@ -1,9 +1,9 @@
 'use strict';
 
-var parseCountry=require('./parseCountry');
+var parseCountry = require('./parseCountry');
 
 module.exports = function parseIssuingCountry(value) {
     var result = parseCountry(value);
-    result.label='Nationality';
+    result.label = 'Nationality';
     return result;
 };

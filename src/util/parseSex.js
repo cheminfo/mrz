@@ -3,22 +3,22 @@
 module.exports = function parseSex(source) {
     var result = {
         source,
-        label:'Sex',
+        label: 'Sex',
         error: []
     };
-    switch(source) {
+    switch (source) {
         case '<':
             result.value = 'Unknown';
-            break
+            break;
         case 'M':
             result.value = 'Male';
-            break
+            break;
         case 'F':
             result.value = 'Female';
-            break
+            break;
         default:
             result.error.push(`The sex "${source}" is incorrect. Allowed values: M, F or <.`);
     }
-    
+
     return result;
 };

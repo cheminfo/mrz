@@ -12,4 +12,4 @@ module.exports = function check(string, value) {
         code += charCode;
     }
     return code % 10 === Number(value);
-}
+};

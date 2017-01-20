@@ -3,14 +3,14 @@
 
 module.exports = function parseDocumentType(source) {
     var code = source.substring(0, 1);
-    var type = source.substring(1, 2).replace('<','');
- 
+    var type = source.substring(1, 2).replace('<', '');
+
     var result = {
         source,
         label: 'Document type',
         error: []
     };
-    
+
     switch (code) {
         case 'P':
             result.value = 'Passport';
@@ -27,8 +27,8 @@ module.exports = function parseDocumentType(source) {
         default:
             result.error.push('Document type must be either P, I, A or C');
     }
-    if (type=== 'V') {
+    if (type === 'V') {
         result.error.push('Document type (second symbol) may not be V');
     }
     return result;
-}
+};

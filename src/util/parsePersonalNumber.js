@@ -1,7 +1,7 @@
 'use strict';
 
-var parseText=require('./parseText');
-var check=require('./check');
+var parseText = require('./parseText');
+var check = require('./check');
 
 module.exports = function parseExpirationDate(value, checkDigit) {
     var result = parseText('Personal number', value, /^[A-Z<]+<*$/);

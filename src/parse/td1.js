@@ -1,22 +1,21 @@
 'use strict';
 
-var globalCheck=require('../util/globalCheck');
-var parseText=require('../util/parseText');
-var parseSex=require('../util/parseSex');
-var parseDocumentNumber=require('../util/parseDocumentNumber');
-var parseDocumentType=require('../util/parseDocumentType');
-var parseNationality=require('../util/parseNationality');
-var parseIssuingCountry=require('../util/parseIssuingCountry');
-var parseBirthdayDate=require('../util/parseBirthdayDate');
-var parseExpirationDate=require('../util/parseExpirationDate');
-var finalAnalysis=require('../util/totalCheck');
-var parseFirstname=require('../util/parseFirstname');
-var parseLastname=require('../util/parseLastname');
+var globalCheck = require('../util/globalCheck');
+var parseText = require('../util/parseText');
+var parseSex = require('../util/parseSex');
+var parseDocumentNumber = require('../util/parseDocumentNumber');
+var parseDocumentType = require('../util/parseDocumentType');
+var parseNationality = require('../util/parseNationality');
+var parseIssuingCountry = require('../util/parseIssuingCountry');
+var parseBirthdayDate = require('../util/parseBirthdayDate');
+var finalAnalysis = require('../util/totalCheck');
+var parseFirstname = require('../util/parseFirstname');
+var parseLastname = require('../util/parseLastname');
 
 module.exports = function parseTD1(lines) {
     var result = {
         format: 'TD1',
-        error:[]
+        error: []
     };
     var first = lines[0];
     var second = lines[1];

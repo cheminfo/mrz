@@ -6,7 +6,7 @@ module.exports = function checkSeparator(label, source) {
         error: [],
         label
     };
-    if (! source.match(/^<*$/)) {
+    if (!source.match(/^<*$/)) {
         result.error.push('The separator must be composed only by "<"');
     }
     return result;

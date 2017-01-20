@@ -1,16 +1,16 @@
 'use strict';
 
-var globalCheck=require('../util/globalCheck');
-var parseSex=require('../util/parseSex');
-var parseDocumentNumber=require('../util/parseDocumentNumber');
-var parseDocumentType=require('../util/parseDocumentType');
-var parseNationality=require('../util/parseNationality');
-var parseIssuingCountry=require('../util/parseIssuingCountry');
-var parseBirthdayDate=require('../util/parseBirthdayDate');
-var parseExpirationDate=require('../util/parseExpirationDate');
-var finalAnalysis=require('../util/totalCheck');
-var parseFirstname=require('../util/parseFirstname');
-var parseLastname=require('../util/parseLastname');
+var globalCheck = require('../util/globalCheck');
+var parseSex = require('../util/parseSex');
+var parseDocumentNumber = require('../util/parseDocumentNumber');
+var parseDocumentType = require('../util/parseDocumentType');
+var parseNationality = require('../util/parseNationality');
+var parseIssuingCountry = require('../util/parseIssuingCountry');
+var parseBirthdayDate = require('../util/parseBirthdayDate');
+var parseExpirationDate = require('../util/parseExpirationDate');
+var finalAnalysis = require('../util/totalCheck');
+var parseFirstname = require('../util/parseFirstname');
+var parseLastname = require('../util/parseLastname');
 
 module.exports = function parseTD3(lines) {
     var result = {
@@ -20,7 +20,7 @@ module.exports = function parseTD3(lines) {
 
     var first = lines[0];
     var second = lines[1];
-    
+
     if (first.length !== 36) {
         result.error.push('First line does not have 36 symbols');
     }
@@ -40,6 +40,6 @@ module.exports = function parseTD3(lines) {
 
     result.globalCheck = globalCheck(second.substring(0, 10) + second.substring(13, 20) + second.substring(21, 35), second.substr(35, 1));
     finalAnalysis(result);
-    
+
     return result;
 };
