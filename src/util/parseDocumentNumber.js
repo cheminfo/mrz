@@ -20,7 +20,7 @@ module.exports = function parseDocumentNumber(source, checkDigit, optional) {
         error: []
     };
     if (!check(source, checkDigit)) {
-        result.push('Check digit "' + checkDigit + '" not valid');
+        result.error.push('Check digit "' + checkDigit + '" not valid');
     }
     return result;
 };
