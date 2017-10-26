@@ -6,18 +6,25 @@
   [![David deps][david-image]][david-url]
   [![npm download][download-image]][download-url]
   
-Create and parse MRZ (Machine Readable Zone) in TD1 and TD3 format
+Parse MRZ (Machine Readable Zone) in TD1, TD2, TD3 or CH driving licence format
 
 ## Installation
 
 `$ npm install mrz`
 
-## [API Documentation](https://cheminfo-js.github.io/mrz/)
-
 ## Example
 
 ```js
-const mrzTools = require('mrz');
+
+const parse = require('mrz').parse;
+
+let mrz = `I<UTOD23145890<1233<<<<<<<<<<<
+7408122F1204159UTO<<<<<<<<<<<6
+ERIKSSON<<ANNA<MARIA<<<<<<<<<<`;
+
+var result = parse(mrz);
+console.log(result);
+
 ```
 
 Or test it in [Runkit](https://runkit.com/npm/mrz)
