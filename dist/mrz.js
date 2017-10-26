@@ -1,3 +1,9 @@
+/**
+ * mrz - Create and parse MRZ (Machine Readable Zone) in TD1 and TD3 format
+ * @version v1.0.0
+ * @link https://github.com/cheminfo-js/mrz#readme
+ * @license MIT
+ */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -169,65 +175,23 @@ We will also combine all the errors  ...
 module.exports = function globalCheck(result) {
     result.isValid = true;
     result.logs = [];
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-        for (var _iterator = Object.keys(result)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var key = _step.value;
-
-            if (result[key] instanceof Object && !Array.isArray(result[key])) {
-                if (result[key].error && result[key].error.length > 0) {
-                    result[key].isValid = false;
-                    result.isValid = false;
-                    var _iteratorNormalCompletion2 = true;
-                    var _didIteratorError2 = false;
-                    var _iteratorError2 = undefined;
-
-                    try {
-                        for (var _iterator2 = result[key].error[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                            var err = _step2.value;
-
-                            result.error.push(result[key].label + ': ' + err);
-                        }
-                    } catch (err) {
-                        _didIteratorError2 = true;
-                        _iteratorError2 = err;
-                    } finally {
-                        try {
-                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                                _iterator2.return();
-                            }
-                        } finally {
-                            if (_didIteratorError2) {
-                                throw _iteratorError2;
-                            }
-                        }
-                    }
-                } else {
-                    result[key].isValid = true;
+    for (var key of Object.keys(result)) {
+        if (result[key] instanceof Object && !Array.isArray(result[key])) {
+            if (result[key].error && result[key].error.length > 0) {
+                result[key].isValid = false;
+                result.isValid = false;
+                for (var err of result[key].error) {
+                    result.error.push(result[key].label + ': ' + err);
                 }
-                result.logs.push(Object.assign({}, result[key], { field: key }));
+            } else {
+                result[key].isValid = true;
             }
-        }
-
-        // we will also create the result as a table call 'logs'
-
-    } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-    } finally {
-        try {
-            if (!_iteratorNormalCompletion && _iterator.return) {
-                _iterator.return();
-            }
-        } finally {
-            if (_didIteratorError) {
-                throw _iteratorError;
-            }
+            result.logs.push(Object.assign({}, result[key], { field: key }));
         }
     }
+
+    // we will also create the result as a table call 'logs'
+
 };
 
 /***/ }),
@@ -872,3 +836,4 @@ module.exports = function checkSeparator(label, source) {
 /***/ })
 /******/ ]);
 });
+//# sourceMappingURL=mrz.js.map
