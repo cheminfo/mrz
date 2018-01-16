@@ -5,9 +5,9 @@ var parseTD2 = require('./td2');
 var parseTD3 = require('./td3');
 var parsePCC = require('./pcc');
 
-module.exports = function parse(text, options = {}) {
-  const lines = text.split(/[\r\n]+/);
-  let result = { logs: [] };
+module.exports = function parse(text) {
+  var lines = text.split(/[\r\n]+/);
+  var result = { logs: [] };
   switch (lines.length) {
     case 2:
       if (lines[0].length < 41) {
@@ -17,8 +17,7 @@ module.exports = function parse(text, options = {}) {
       }
       break;
     case 3:
-      if (lines[0].length < 15) {
-        // in fact it should be 9
+      if (lines[0].length < 15) { // in fact it should be 9
         result = parsePCC(lines);
       } else {
         result = parseTD1(lines);
@@ -28,23 +27,5 @@ module.exports = function parse(text, options = {}) {
     default:
       result.logs.push('We need 2 or 3 lines');
   }
-
-  if (options.debug) {
-    return result;
-  }
-
-  const simpleResult = {
-    values: {},
-    errors: []
-  };
-
-  for (let key in result) {
-    if (result[key].error) simpleResult.errors.push(...result[key].error);
-    if (result[key].value !== undefined) {
-      simpleResult.values[key] = result[key].value;
-    }
-  }
-  simpleResult.isValid = result.isValid;
-
-  return simpleResult;
+  return result;
 };

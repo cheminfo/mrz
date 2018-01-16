@@ -11,7 +11,7 @@ module.exports = function globalCheck(source, value) {
   return {
     ifValid: checkResult,
     source,
-    value: checkResult ? 'valid' : 'non valid',
+    value: (checkResult) ? 'valid' : 'non valid',
     label: 'Global check digit',
     error
   };
