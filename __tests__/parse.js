@@ -23,7 +23,6 @@ describe('check TD1 parse extended document number', function () {
 ERIKSSON<<ANNA<MARIA<<<<<<<<<<`;
 
   var result = parse(MRZ);
-  console.log(result);
   it('Check result', function () {
     result.documentNumber.value.should.equal('D23145890123');
     result.documentNumber.isValid.should.be.equal(true);
