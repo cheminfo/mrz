@@ -1,6 +1,6 @@
 /**
  * mrz - Create and parse MRZ (Machine Readable Zone) in TD1 and TD3 format
- * @version v1.0.1
+ * @version v1.0.2
  * @link https://github.com/cheminfo-js/mrz#readme
  * @license MIT
  */
