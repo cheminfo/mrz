@@ -1,6 +1,6 @@
 /**
  * mrz - Create and parse MRZ (Machine Readable Zone) in TD1 and TD3 format
- * @version v1.0.2
+ * @version v1.0.3
  * @link https://github.com/cheminfo-js/mrz#readme
  * @license MIT
  */
@@ -460,7 +460,7 @@ var parseTD2 = __webpack_require__(20);
 var parseTD3 = __webpack_require__(21);
 var parsePCC = __webpack_require__(23);
 
-module.exports = function parse(text, options = {}) {
+module.exports = function parse(text) {
   var lines = text.split(/[\r\n]+/);
   var result = { logs: [] };
   switch (lines.length) {
@@ -483,25 +483,7 @@ module.exports = function parse(text, options = {}) {
     default:
       result.logs.push('We need 2 or 3 lines');
   }
-
-  if (options.debug) {
-    return result;
-  }
-
-  var simpleResult = {
-    values: {},
-    errors: []
-  };
-
-  for (var key in result) {
-    if (result[key].error) simpleResult.errors.push(...result[key].error);
-    if (result[key].value !== undefined) {
-      simpleResult.values[key] = result[key].value;
-    }
-  }
-  simpleResult.isValid = result.isValid;
-
-  return simpleResult;
+  return result;
 };
 
 /***/ }),
