@@ -1,11 +1,11 @@
 # mrz
 
-  [![NPM version][npm-image]][npm-url]
-  [![build status][travis-image]][travis-url]
-  [![Test coverage][coveralls-image]][coveralls-url]
-  [![David deps][david-image]][david-url]
-  [![npm download][download-image]][download-url]
-  
+[![NPM version][npm-image]][npm-url]
+[![build status][travis-image]][travis-url]
+[![Test coverage][coveralls-image]][coveralls-url]
+[![David deps][david-image]][david-url]
+[![npm download][download-image]][download-url]
+
 Parse MRZ (Machine Readable Zone) in TD1, TD2, TD3 or CH driving licence format
 
 ## Installation
@@ -15,7 +15,6 @@ Parse MRZ (Machine Readable Zone) in TD1, TD2, TD3 or CH driving licence format
 ## Example
 
 ```js
-
 const parse = require('mrz').parse;
 
 let mrz = `I<UTOD23145890<1233<<<<<<<<<<<
@@ -24,10 +23,19 @@ ERIKSSON<<ANNA<MARIA<<<<<<<<<<`;
 
 var result = parse(mrz);
 console.log(result);
-
 ```
 
 Or test it in [Runkit](https://runkit.com/npm/mrz)
+
+## Specifications
+
+## TD1, TD2 and TD3
+
+https://www.icao.int/publications/pages/publication.aspx?docnum=9303
+
+## Swiss driving license
+
+<!-- TODO add link -->
 
 ## License
 

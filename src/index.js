@@ -6,6 +6,6 @@ const parse = require('./parse/parse');
 
 
 module.exports = {
-    COUNTRIES,
-    parse
+  COUNTRIES,
+  parse
 };
