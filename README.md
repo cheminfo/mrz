@@ -15,7 +15,7 @@ Parse MRZ (Machine Readable Zone) in TD1, TD2, TD3 or CH driving licence format
 ## Example
 
 ```js
-const parse = require('mrz').parse;
+const parse = require("mrz").parse;
 
 let mrz = `I<UTOD23145890<1233<<<<<<<<<<<
 7408122F1204159UTO<<<<<<<<<<<6
@@ -35,7 +35,7 @@ https://www.icao.int/publications/pages/publication.aspx?docnum=9303
 
 ## Swiss driving license
 
-<!-- TODO add link -->
+http://www.astra2.admin.ch/media/pdfpub/2003-10-15_2262_f.pdf
 
 ## License
 
