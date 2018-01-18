@@ -1,45 +1,19 @@
 'use strict';
 
-var globalCheck = require('../util/globalCheck');
-var parseSex = require('../util/parseSex');
-var parseDocumentNumber = require('../util/parseDocumentNumber');
-var parseDocumentType = require('../util/parseDocumentType');
-var parseCountry = require('../util/parseCountry');
-var parseBirthdayDate = require('../util/parseBirthdayDate');
-var parseExpirationDate = require('../util/parseExpirationDate');
-var finalAnalysis = require('../util/totalCheck');
-var parseFirstname = require('../util/parseFirstname');
-var parseLastname = require('../util/parseLastname');
-var parsePersonalNumber = require('../util/parsePersonalNumber');
+const { getAnnotations, completeResult } = require('../util/fields');
+const { td3: td3Fields } = require('./fields');
 
-module.exports = function parseTD3(lines) {
-  var result = {
-    error: [],
-    format: 'TD3'
+module.exports = function parseTD1(lines) {
+  lines.forEach((line) => {
+    if (line.length !== 44) {
+      throw new Error('each line should have a length of 30 in TD1');
+    }
+  });
+  const result = {
+    format: 'TD3',
+    annotations: getAnnotations(lines, td3Fields)
   };
 
-  var first = lines[0];
-  var second = lines[1];
-
-  if (first.length !== 44) {
-    result.error.push('First line does not have 44 symbols');
-  }
-  result.documentType = parseDocumentType(first.substring(0, 2));
-  result.issuingCountry = parseCountry(first.substring(2, 5));
-  result.lastname = parseFirstname('Lastname', first.substring(5, 50));
-  result.firstname = parseLastname('Firstname', first.substring(5, 50));
-  result.documentNumber = parseDocumentNumber(second.substring(0, 9), second.substr(9, 1));
-  result.nationality = parseCountry(second.substring(10, 13));
-  result.birthDate = parseBirthdayDate(second.substring(13, 19), second.substr(19, 1));
-
-  if (second.length !== 44) {
-    result.error.push('Second line does not have 44 symbols');
-  }
-  result.sex = parseSex(second.substring(20, 21));
-  result.expirationDate = parseExpirationDate(second.substring(21, 27), second.substr(27, 1));
-  result.personalNumber = parsePersonalNumber(second.substring(28, 42));
-  result.globalCheck = globalCheck(second.substring(0, 10) + second.substring(13, 20) + second.substring(21, 43), second.substr(43, 1));
-  finalAnalysis(result);
-
+  completeResult(result);
   return result;
 };

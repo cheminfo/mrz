@@ -5,9 +5,11 @@ var parseTD2 = require('./td2');
 var parseTD3 = require('./td3');
 var parsePCC = require('./pcc');
 
-module.exports = function parse(text, options = {}) {
-  const lines = text.split(/[\r\n]+/);
-  let result = { logs: [] };
+module.exports = function parse(lines) {
+  let result = {};
+  if (typeof lines === 'string') {
+    lines = lines.split(/[\r\n]+/);
+  }
   switch (lines.length) {
     case 2:
       if (lines[0].length < 41) {
@@ -26,25 +28,8 @@ module.exports = function parse(text, options = {}) {
 
       break;
     default:
-      result.logs.push('We need 2 or 3 lines');
+      throw new Error('input must be an array of 2 or 3 elements');
   }
 
-  if (options.debug) {
-    return result;
-  }
-
-  const simpleResult = {
-    values: {},
-    errors: []
-  };
-
-  for (let key in result) {
-    if (result[key].error) simpleResult.errors.push(...result[key].error);
-    if (result[key].value !== undefined) {
-      simpleResult.values[key] = result[key].value;
-    }
-  }
-  simpleResult.isValid = result.isValid;
-
-  return simpleResult;
+  return result;
 };

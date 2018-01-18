@@ -2,17 +2,10 @@
 
 var check = require('./check');
 
-module.exports = function globalCheck(source, value) {
-  var checkResult = check(source, value);
-  var error = [];
-  if (!checkResult) {
-    error.push('Check digit error.');
+module.exports = function globalCheck(checkDigit, ...sources) {
+  const source = sources.join('');
+  if (!check(source, checkDigit)) {
+    throw new Error('global check digit');
   }
-  return {
-    ifValid: checkResult,
-    source,
-    value: checkResult ? 'valid' : 'non valid',
-    label: 'Global check digit',
-    error
-  };
+  return checkDigit;
 };

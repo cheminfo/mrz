@@ -1,16 +1,10 @@
 'use strict';
 
-var cleanText = require('./cleanText');
+const cleanText = require('./cleanText');
 
-module.exports = function parseText(label, source, regexp = /^[0-9A-Z<]+$/) {
-  var result = {
-    source,
-    label,
-    value: cleanText(source),
-    error: []
-  };
+module.exports = function parseText(source, regexp = /^[0-9A-Z<]+$/) {
   if (!source.match(regexp)) {
-    result.error.push(`It must match the following regexp: ${regexp}`);
+    throw new Error(`it must match the following regexp: ${regexp}`);
   }
-  return result;
+  return cleanText(source);
 };

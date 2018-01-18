@@ -1,24 +1,16 @@
 'use strict';
 
-var check = require('./check');
+module.exports = function parseDate(value) {
+  const year = value.substring(0, 2);
+  const month = value.substring(2, 4);
+  const day = value.substring(4, 6);
 
-module.exports = function parseDate(value, checkDigit) {
-  var result = {
-    error: [],
-    source: value
-  };
-  result.year = value.substring(0, 2);
-  result.month = value.substring(2, 4);
-  result.day = value.substring(4, 6);
-  result.value = `${result.day}.${result.month}.${result.year}`;
-  if (checkDigit !== false && !check(value, checkDigit)) {
-    result.error.push(`Check digit "${checkDigit}" not valid`);
+  if (month < 1 || month > 12) {
+    throw new Error(`Month "${month}" not valid`);
   }
-  if (result.month < 1 || result.month > 12) {
-    result.error.push(`Month "${result.month}" not valid`);
+  if (day < 1 || day > 31) {
+    throw new Error(`Day "${day}" not valid`);
   }
-  if (result.day < 1 || result.day > 31) {
-    result.error.push(`Day "${result.day}" not valid`);
-  }
-  return result;
+
+  return `${day}.${month}.${year}`;
 };
