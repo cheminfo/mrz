@@ -1,12 +1,14 @@
 'use strict';
 
 const { getAnnotations, completeResult } = require('./fieldHelper');
-const { TD2: TD2Fields } = require('./fields');
+const TD2Fields = require('./td2Fields');
 
 module.exports = function parseTD1(lines) {
-  lines.forEach((line) => {
+  lines.forEach((line, index) => {
     if (line.length !== 36) {
-      throw new Error('each line should have a length of 36 in TD2');
+      throw new Error(
+        `invalid number of characters for line ${index + 1}. Must be 36 for TD2`
+      );
     }
   });
   const result = {

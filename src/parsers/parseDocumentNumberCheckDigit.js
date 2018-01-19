@@ -10,8 +10,6 @@ module.exports = function (checkDigit, source, optional) {
     checkDigit = optional.charAt(optional.length - 1);
   }
 
-  if (!check(source, checkDigit)) {
-    throw new Error(`document number check digit "${checkDigit}" not valid`);
-  }
+  check(source, checkDigit);
   return checkDigit;
 };

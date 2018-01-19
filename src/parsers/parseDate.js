@@ -6,10 +6,10 @@ module.exports = function parseDate(value) {
   const day = value.substring(4, 6);
 
   if (month < 1 || month > 12) {
-    throw new Error(`Month "${month}" not valid`);
+    throw new Error(`invalid date month: ${month}`);
   }
   if (day < 1 || day > 31) {
-    throw new Error(`Day "${day}" not valid`);
+    throw new Error(`invalid date day: ${day}`);
   }
 
   return `${day}.${month}.${year}`;

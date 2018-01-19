@@ -2,7 +2,9 @@
 
 module.exports = function checkSeparator(source) {
   if (!source.match(/^<*$/)) {
-    throw new Error('The separator must be composed only by "<"');
+    throw new Error(
+      `invalid separator: ${source}. Must be composed only of "<"`
+    );
   }
   return source;
 };

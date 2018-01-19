@@ -3,8 +3,8 @@
 const check = require('./check');
 
 module.exports = function (checkDigit, value) {
-  if (checkDigit !== false && !check(value, checkDigit)) {
-    throw new Error(`Check digit "${checkDigit}" not valid`);
+  if (checkDigit !== false) {
+    check(value, checkDigit);
   }
   return checkDigit;
 };

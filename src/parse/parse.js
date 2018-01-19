@@ -6,30 +6,42 @@ var parseTD3 = require('./td3');
 var parsePCC = require('./pcc');
 
 module.exports = function parse(lines) {
-  let result = {};
   if (typeof lines === 'string') {
     lines = lines.split(/[\r\n]+/);
   }
+  if (!Array.isArray(lines)) {
+    throw new TypeError('input must be an array or string');
+  }
+  for (const line of lines) {
+    if (!line.match(/[A-Z0-9<]+/)) {
+      throw new TypeError(
+        'lines must be composed of only alphanumerical characters and "<"'
+      );
+    }
+  }
   switch (lines.length) {
     case 2:
-      if (lines[0].length < 41) {
-        result = parseTD2(lines);
-      } else {
-        result = parseTD3(lines);
+    case 3: {
+      switch (lines[0].length) {
+        case 30:
+          return parseTD1(lines);
+        case 36:
+          return parseTD2(lines);
+        case 44:
+          return parseTD3(lines);
+        case 9:
+          return parsePCC(lines);
+        default:
+          throw new Error(
+            'unrecognized document type. First line of input must have 30 (TD1), 36 (TD2), 44 (TD3) or 9 (Swiss Driving License) characters'
+          );
       }
-      break;
-    case 3:
-      if (lines[0].length < 15) {
-        // in fact it should be 9
-        result = parsePCC(lines);
-      } else {
-        result = parseTD1(lines);
-      }
-
-      break;
+    }
     default:
-      throw new Error('input must be an array of 2 or 3 elements');
+      throw new Error(
+        `unrecognized document type. Input must have two or three lines, found${
+          lines.length
+        }`
+      );
   }
-
-  return result;
 };

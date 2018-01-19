@@ -9,19 +9,23 @@ module.exports = function parseDocumentNumber(source) {
   var language = source.charAt(6);
   var end = source.substring(7);
 
-  if (!first.match(/^[A-Z]{3}$/)) {
+  if (!first.match(/^[A-Z0-9]{3}$/)) {
     throw new Error(
-      `The document number "${source}" is incorrect. Need to start by 3 uppercase letters.`
+      `invalid document number: ${
+        source
+      }. Must start with three alphanumeric digits`
     );
   }
   if (!second.match(/^[0-9]{3}$/)) {
     throw new Error(
-      `The document number "${source}" is incorrect. Need to have 3 digits in position 3, 4 and 5.`
+      `invalid document number: ${
+        source
+      }. Must have numeric digits in positions 4, 5 and 6`
     );
   }
   if (end !== '<<') {
     throw new Error(
-      `The document number "${source}" is incorrect. Need to end with <<.`
+      `invalid document number: ${source}. Must end with <<`
     );
   }
 

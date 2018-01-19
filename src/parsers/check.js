@@ -11,5 +11,8 @@ module.exports = function check(string, value) {
     charCode *= factors[i % 3];
     code += charCode;
   }
-  return code % 10 === Number(value);
+  code %= 10;
+  if (code !== Number(value)) {
+    throw new Error(`invalid check digit: ${value}. Must be ${code}`);
+  }
 };

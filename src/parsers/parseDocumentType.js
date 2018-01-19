@@ -5,7 +5,9 @@ module.exports = function parseDocumentType(source) {
   var type = source.substring(1, 2).replace('<', '');
 
   if (type === 'V') {
-    throw new Error('Document type (second symbol) may not be V');
+    throw new Error(
+      `invalid document type: ${source}.Second symbol may not be V`
+    );
   }
 
   switch (code) {
@@ -18,6 +20,10 @@ module.exports = function parseDocumentType(source) {
     case 'C':
       return '';
     default:
-      throw new Error('Document type must be either P, I, A or C');
+      throw new Error(
+        `invalid document type: ${
+          source
+        }.First symbol must be P, I, A or C`
+      );
   }
 };

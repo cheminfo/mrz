@@ -3,14 +3,13 @@
 module.exports = function (language) {
   switch (language) {
     case 'D':
-      return 'german';
     case 'F':
-      return 'french';
     case 'I':
-      return 'italian';
     case 'R':
-      return 'romansh';
+      return language;
     default:
-      throw new Error(`language ${language} unknown.`);
+      throw new Error(
+        `invalid language code: ${language}. Must be D, F, I or R`
+      );
   }
 };

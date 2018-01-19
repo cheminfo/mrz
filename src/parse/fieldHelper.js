@@ -11,7 +11,9 @@ module.exports = {
     for (let i = 0; i < result.annotations.length; i++) {
       const annotation = result.annotations[i];
       if (!annotation.valid) valid = false;
-      result.fields[annotation.field] = annotation.parsed;
+      if (annotation.field) {
+        result.fields[annotation.field] = annotation.parsed;
+      }
     }
     result.valid = valid;
   },

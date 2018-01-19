@@ -2,15 +2,13 @@
 
 module.exports = function parseSex(source) {
   switch (source) {
-    case '<':
-      return 'unknown';
     case 'M':
       return 'male';
     case 'F':
       return 'female';
+    case '<':
+      return 'unknown';
     default:
-      throw new Error(
-        `The sex "${source}" is incorrect. Allowed values: M, F or <.`
-      );
+      throw new Error(`invalid gender: ${source}. Must be M, F or <.`);
   }
 };
