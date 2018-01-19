@@ -1,5 +1,5 @@
 'use strict';
-require('should');
+
 const parse = require('../parse.js');
 
 describe('check TD1 parse', function () {

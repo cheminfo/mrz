@@ -1,6 +1,5 @@
 'use strict';
 
-require('should');
 const COUNTRIES = require('../countries.js');
 
 describe('check countries', function () {
