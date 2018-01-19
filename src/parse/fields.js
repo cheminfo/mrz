@@ -3,72 +3,78 @@
 const documentNumberTemplate = {
   label: 'Document number',
   field: 'documentNumber',
-  parser: require('../util/parseDocumentNumber')
+  parser: require('../parsers/parseDocumentNumber')
 };
 
 const documentNumberCheckDigitTemplate = {
   label: 'Document number check digit',
   field: 'documentNumberCheckDigit',
-  parser: require('../util/parseDocumentNumberCheckDigit')
+  parser: require('../parsers/parseDocumentNumberCheckDigit')
+};
+
+const documentTypeTemplate = {
+  label: 'Document type',
+  field: 'documentType',
+  parser: require('../parsers/parseDocumentType')
 };
 
 const nationalityTemplate = {
   label: 'Nationality',
   field: 'nationality',
-  parser: require('../util/parseCountry')
+  parser: require('../parsers/parseCountry')
 };
 
 const genderTemplate = {
   label: 'Gender',
   field: 'gender',
-  parser: require('../util/parseSex')
+  parser: require('../parsers/parseSex')
 };
 
 const expirationDateTemplate = {
   label: 'Expiration date',
   field: 'expirationDate',
-  parser: require('../util/parseDate')
+  parser: require('../parsers/parseDate')
 };
 
 const globalCheckTemplate = {
   label: 'Global check digit',
   field: 'globalCheckDigit',
-  parser: require('../util/globalCheck')
+  parser: require('../parsers/globalCheck')
 };
 
 const birthDateCheckDigitTemplate = {
   label: 'Birth date check digit',
   field: 'birthDateCheckDigit',
-  parser: require('../util/parseDateCheckDigit')
+  parser: require('../parsers/parseDateCheckDigit')
 };
 
 const birthDateTemplate = {
   label: 'Birth date',
   field: 'birthDate',
-  parser: require('../util/parseDate')
+  parser: require('../parsers/parseDate')
 };
 
 const firstnameTemplate = {
   label: 'First name',
   field: 'firstname',
-  parser: require('../util/parseFirstname')
+  parser: require('../parsers/parseFirstname')
 };
 
 const lastnameTemplate = {
   label: 'Last name',
   field: 'lastname',
-  parser: require('../util/parseLastname')
+  parser: require('../parsers/parseLastname')
 };
 
 const issuingCountryTemplate = {
   label: 'Issuing country',
   field: 'issuingCountry',
-  parser: require('../util/parseCountry')
+  parser: require('../parsers/parseCountry')
 };
 
 module.exports = {
   // TODO: parse optional field (handle overflowing document number)
-  td1: [
+  TD1: [
     {
       ...expirationDateTemplate,
       line: 1,
@@ -88,7 +94,7 @@ module.exports = {
           line: 1
         }
       ],
-      parser: require('../util/parseDateCheckDigit')
+      parser: require('../parsers/parseDateCheckDigit')
     },
     {
       ...genderTemplate,
@@ -116,12 +122,10 @@ module.exports = {
       ]
     },
     {
-      label: 'Document type',
-      field: 'documentType',
+      ...documentTypeTemplate,
       line: 0,
       start: 0,
-      end: 2,
-      parser: require('../util/parseDocumentType')
+      end: 2
     },
     {
       ...issuingCountryTemplate,
@@ -189,7 +193,7 @@ module.exports = {
       line: 1,
       start: 18,
       end: 29,
-      parser: require('../util/parseText')
+      parser: require('../parsers/parseText')
     },
     {
       ...globalCheckTemplate,
@@ -220,7 +224,7 @@ module.exports = {
       ]
     }
   ],
-  td2: [
+  TD2: [
     {
       ...firstnameTemplate,
       start: 5,
@@ -282,12 +286,10 @@ module.exports = {
       end: 21
     },
     {
-      label: 'Document type',
-      field: 'documentType',
+      ...documentTypeTemplate,
       line: 0,
       start: 0,
-      end: 2,
-      parser: require('../util/parseDocumentType')
+      end: 2
     },
     {
       ...issuingCountryTemplate,
@@ -333,7 +335,7 @@ module.exports = {
           line: 1
         }
       ],
-      parser: require('../util/parseDateCheckDigit')
+      parser: require('../parsers/parseDateCheckDigit')
     },
     {
       label: 'Global check digit',
@@ -358,17 +360,15 @@ module.exports = {
           end: 35
         }
       ],
-      parser: require('../util/globalCheck')
+      parser: require('../parsers/globalCheck')
     }
   ],
-  td3: [
+  TD3: [
     {
-      label: 'Document type',
-      field: 'documentType',
+      ...documentTypeTemplate,
       line: 0,
       start: 0,
-      end: 2,
-      parser: require('../util/parseDocumentType')
+      end: 2
     },
     {
       ...firstnameTemplate,
@@ -425,7 +425,7 @@ module.exports = {
       start: 28,
       end: 42,
       line: 1,
-      parser: require('../util/parsePersonalNumber')
+      parser: require('../parsers/parsePersonalNumber')
     },
     {
       ...birthDateTemplate,
@@ -474,6 +474,86 @@ module.exports = {
           end: 43
         }
       ]
+    }
+  ],
+  PCC: [
+    {
+      ...firstnameTemplate,
+      line: 2,
+      start: 0,
+      end: 30
+    },
+    {
+      ...lastnameTemplate,
+      line: 2,
+      start: 0,
+      end: 30
+    },
+    {
+      ...issuingCountryTemplate,
+      line: 1,
+      start: 2,
+      end: 5
+    },
+    {
+      ...documentTypeTemplate,
+      parser: require('../parsers/pcc/parseDocumentType'),
+      line: 1,
+      start: 0,
+      end: 2
+    },
+    {
+      label: 'Language',
+      field: 'language',
+      line: 0,
+      start: 6,
+      end: 7,
+      parser: require('../parsers/pcc/parseLanguage')
+    },
+    {
+      ...documentNumberTemplate,
+      parser: require('../parsers/pcc/parseDocumentNumber'),
+      line: 0,
+      start: 0,
+      end: 10
+    },
+    {
+      label: 'separator 1',
+      field: 'separator1',
+      parser: require('../parsers/pcc/checkSeparator'),
+      line: 1,
+      start: 17,
+      end: 19
+    },
+    {
+      label: 'separator 2',
+      field: 'separator2',
+      parser: require('../parsers/pcc/checkSeparator'),
+      line: 1,
+      start: 25,
+      end: 30
+    },
+    {
+      label: 'NIP Code',
+      field: 'nipCode',
+      parser: require('../parsers/parseNumber'),
+      line: 1,
+      start: 5,
+      end: 14
+    },
+    {
+      label: 'Version',
+      field: 'version',
+      parser: require('../parsers/parseNumber'),
+      line: 1,
+      start: 14,
+      end: 17
+    },
+    {
+      ...birthDateTemplate,
+      line: 1,
+      start: 19,
+      end: 25
     }
   ]
 };

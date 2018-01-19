@@ -98,22 +98,30 @@ describe('check TD3 parse', function () {
     expect(result.fields.birthDate).toEqual('12.08.74');
     expect(result.fields.issuingCountry).toBeNull();
     expect(result.fields.globalCheckDigit).toEqual('0');
-    // expect(errors).toHaveLength(2);
-    // expect(result.valid).toEqual(false);
+    expect(errors).toHaveLength(2);
+    expect(result.valid).toEqual(false);
   });
 });
 
-describe.skip('check PCC parse', function () {
+describe('check swiss driving license parse', function () {
   const MRZ = `AAA001D<<
 FACHE305142128097<<800126<<<<<
 MARCHAND<<FABIENNE<<<<<<<<<<<<`;
 
   var result = parse(MRZ, { debug: true });
   it('Check result', function () {
-    result.error.length.should.equal(0);
-    result.firstname.value.should.equal('FABIENNE');
-    result.issuingCountry.source.should.equal('CHE');
-    result.issuingCountry.value.should.equal('Switzerland');
-    result.documentNumber.source.should.equal('AAA001D<<');
+    expect(result.valid).toEqual(true);
+    expect(result.annotations.filter((a) => !a.valid)).toHaveLength(0);
+    expect(result.fields.firstname).toEqual('FABIENNE');
+    expect(result.fields.lastname).toEqual('MARCHAND');
+    expect(result.fields.issuingCountry).toEqual('Switzerland');
+    expect(result.fields.language).toEqual('german');
+    expect(result.fields.documentNumber).toEqual('AAA001D');
+    expect(result.fields.documentType).toEqual('FA');
+    expect(result.fields.separator1).toEqual('<<');
+    expect(result.fields.separator2).toEqual('<<<<<');
+    expect(result.fields.birthDate).toEqual('26.01.80');
+    expect(result.fields.version).toEqual('097');
+    expect(result.fields.nipCode).toEqual('305142128');
   });
 });

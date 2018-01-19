@@ -2,6 +2,15 @@
 
 module.exports = function(fieldOptions) {
   const { parser, ...result } = fieldOptions;
+  if (
+    !fieldOptions.line === undefined ||
+    !fieldOptions.start === undefined ||
+    !fieldOptions.end === undefined ||
+    !fieldOptions.parser
+  ) {
+    console.log(fieldOptions);
+    throw new Error('field must have a line, start, stop and parser');
+  }
   return function(lines) {
     const source = getText(lines, fieldOptions);
     let related = fieldOptions.related || [];
