@@ -1,6 +1,6 @@
 'use strict';
 require('should');
-const parse = require('../src/parse/parse.js');
+const parse = require('../parse.js');
 
 describe('check TD1 parse', function () {
   const MRZ = [
