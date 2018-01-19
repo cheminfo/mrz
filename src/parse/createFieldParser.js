@@ -1,20 +1,20 @@
 'use strict';
 
-module.exports = function(fieldOptions) {
-  const { parser, ...result } = fieldOptions;
+module.exports = function (fieldOptions) {
+  const result = Object.assign({}, fieldOptions, { parser: undefined });
+  const parser = fieldOptions.parser;
   if (
     !fieldOptions.line === undefined ||
     !fieldOptions.start === undefined ||
     !fieldOptions.end === undefined ||
     !fieldOptions.parser
   ) {
-    console.log(fieldOptions);
     throw new Error('field must have a line, start, stop and parser');
   }
-  return function(lines) {
+  return function (lines) {
     const source = getText(lines, fieldOptions);
     let related = fieldOptions.related || [];
-    related = related.map(r => getText(lines, r));
+    related = related.map((r) => getText(lines, r));
 
     try {
       let parsed = parser(source, ...related);

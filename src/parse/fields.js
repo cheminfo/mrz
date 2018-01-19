@@ -36,6 +36,12 @@ const expirationDateTemplate = {
   parser: require('../parsers/parseDate')
 };
 
+const expirationDateCheckDigitTemplate = {
+  label: 'Expiration date check digit',
+  field: 'expirationDateCheckDigit',
+  parser: require('../parsers/parseDateCheckDigit')
+};
+
 const globalCheckTemplate = {
   label: 'Global check digit',
   field: 'globalCheckDigit',
@@ -73,17 +79,13 @@ const issuingCountryTemplate = {
 };
 
 module.exports = {
-  // TODO: parse optional field (handle overflowing document number)
   TD1: [
-    {
-      ...expirationDateTemplate,
+    Object.assign({}, expirationDateTemplate, {
       line: 1,
       start: 8,
       end: 14
-    },
-    {
-      label: 'Expiration date check digit',
-      field: 'expirationDateCheckDigit',
+    }),
+    Object.assign({}, expirationDateCheckDigitTemplate, {
       line: 1,
       start: 14,
       end: 15,
@@ -93,23 +95,19 @@ module.exports = {
           end: 14,
           line: 1
         }
-      ],
-      parser: require('../parsers/parseDateCheckDigit')
-    },
-    {
-      ...genderTemplate,
+      ]
+    }),
+    Object.assign({}, genderTemplate, {
       line: 1,
       start: 7,
       end: 8
-    },
-    {
-      ...birthDateTemplate,
+    }),
+    Object.assign({}, birthDateTemplate, {
       start: 0,
       end: 6,
       line: 1
-    },
-    {
-      ...birthDateCheckDigitTemplate,
+    }),
+    Object.assign({}, birthDateCheckDigitTemplate, {
       line: 1,
       start: 6,
       end: 7,
@@ -120,39 +118,33 @@ module.exports = {
           line: 1
         }
       ]
-    },
-    {
-      ...documentTypeTemplate,
+    }),
+    Object.assign({}, documentTypeTemplate, {
       line: 0,
       start: 0,
       end: 2
-    },
-    {
-      ...issuingCountryTemplate,
+    }),
+    Object.assign({}, issuingCountryTemplate, {
       start: 2,
       end: 5,
       line: 0
-    },
-    {
-      ...firstnameTemplate,
+    }),
+    Object.assign({}, firstnameTemplate, {
       start: 0,
       end: 30,
       line: 2
-    },
-    {
-      ...lastnameTemplate,
+    }),
+    Object.assign({}, lastnameTemplate, {
       start: 0,
       end: 30,
       line: 2
-    },
-    {
-      ...nationalityTemplate,
+    }),
+    Object.assign({}, nationalityTemplate, {
       start: 15,
       end: 18,
       line: 1
-    },
-    {
-      ...documentNumberTemplate,
+    }),
+    Object.assign({}, documentNumberTemplate, {
       start: 5,
       end: 14,
       line: 0,
@@ -168,9 +160,8 @@ module.exports = {
           end: 30
         }
       ]
-    },
-    {
-      ...documentNumberCheckDigitTemplate,
+    }),
+    Object.assign(documentNumberCheckDigitTemplate, {
       start: 14,
       end: 15,
       line: 0,
@@ -186,7 +177,7 @@ module.exports = {
           end: 30
         }
       ]
-    },
+    }),
     {
       label: 'Optional field 2',
       field: 'optional2',
@@ -195,8 +186,7 @@ module.exports = {
       end: 29,
       parser: require('../parsers/parseText')
     },
-    {
-      ...globalCheckTemplate,
+    Object.assign({}, globalCheckTemplate, {
       line: 1,
       start: 29,
       end: 30,
@@ -222,29 +212,25 @@ module.exports = {
           end: 29
         }
       ]
-    }
+    })
   ],
   TD2: [
-    {
-      ...firstnameTemplate,
+    Object.assign({}, firstnameTemplate, {
       start: 5,
       end: 36,
       line: 0
-    },
-    {
-      ...lastnameTemplate,
+    }),
+    Object.assign({}, lastnameTemplate, {
       start: 5,
       end: 36,
       line: 0
-    },
-    {
-      ...nationalityTemplate,
+    }),
+    Object.assign({}, nationalityTemplate, {
       start: 10,
       end: 13,
       line: 1
-    },
-    {
-      ...documentNumberTemplate,
+    }),
+    Object.assign({}, documentNumberTemplate, {
       start: 0,
       end: 9,
       line: 1,
@@ -260,9 +246,8 @@ module.exports = {
           end: 35
         }
       ]
-    },
-    {
-      ...documentNumberCheckDigitTemplate,
+    }),
+    Object.assign({}, documentNumberCheckDigitTemplate, {
       start: 9,
       end: 10,
       line: 1,
@@ -278,33 +263,28 @@ module.exports = {
           end: 35
         }
       ]
-    },
-    {
-      ...genderTemplate,
+    }),
+    Object.assign({}, genderTemplate, {
       line: 1,
       start: 20,
       end: 21
-    },
-    {
-      ...documentTypeTemplate,
+    }),
+    Object.assign({}, documentTypeTemplate, {
       line: 0,
       start: 0,
       end: 2
-    },
-    {
-      ...issuingCountryTemplate,
+    }),
+    Object.assign({}, issuingCountryTemplate, {
       start: 2,
       end: 5,
       line: 0
-    },
-    {
-      ...birthDateTemplate,
+    }),
+    Object.assign({}, birthDateTemplate, {
       line: 1,
       start: 13,
       end: 19
-    },
-    {
-      ...birthDateCheckDigitTemplate,
+    }),
+    Object.assign({}, birthDateCheckDigitTemplate, {
       line: 1,
       start: 19,
       end: 20,
@@ -315,16 +295,13 @@ module.exports = {
           end: 19
         }
       ]
-    },
-    {
-      ...expirationDateTemplate,
+    }),
+    Object.assign({}, expirationDateTemplate, {
       line: 1,
       start: 21,
       end: 27
-    },
-    {
-      label: 'Expiration date check digit',
-      field: 'expirationDateCheckDigit',
+    }),
+    Object.assign({}, expirationDateCheckDigitTemplate, {
       line: 1,
       start: 27,
       end: 28,
@@ -334,12 +311,9 @@ module.exports = {
           end: 27,
           line: 1
         }
-      ],
-      parser: require('../parsers/parseDateCheckDigit')
-    },
-    {
-      label: 'Global check digit',
-      field: 'globalCheckDigit',
+      ]
+    }),
+    Object.assign({}, globalCheckTemplate, {
       line: 1,
       start: 35,
       end: 36,
@@ -359,37 +333,31 @@ module.exports = {
           start: 21,
           end: 35
         }
-      ],
-      parser: require('../parsers/globalCheck')
-    }
+      ]
+    })
   ],
   TD3: [
-    {
-      ...documentTypeTemplate,
+    Object.assign({}, documentTypeTemplate, {
       line: 0,
       start: 0,
       end: 2
-    },
-    {
-      ...firstnameTemplate,
+    }),
+    Object.assign({}, firstnameTemplate, {
       start: 5,
       end: 50,
       line: 0
-    },
-    {
-      ...lastnameTemplate,
+    }),
+    Object.assign({}, lastnameTemplate, {
       start: 5,
       end: 50,
       line: 0
-    },
-    {
-      ...documentNumberTemplate,
+    }),
+    Object.assign({}, documentNumberTemplate, {
       line: 1,
       start: 0,
       end: 9
-    },
-    {
-      ...documentNumberCheckDigitTemplate,
+    }),
+    Object.assign({}, documentNumberCheckDigitTemplate, {
       line: 1,
       start: 9,
       end: 10,
@@ -400,25 +368,22 @@ module.exports = {
           end: 9
         }
       ]
-    },
-    {
-      ...nationalityTemplate,
+    }),
+    Object.assign({}, nationalityTemplate, {
       line: 1,
       start: 10,
       end: 13
-    },
-    {
-      ...genderTemplate,
+    }),
+    Object.assign({}, genderTemplate, {
       line: 1,
       start: 20,
       end: 21
-    },
-    {
-      ...expirationDateTemplate,
+    }),
+    Object.assign({}, expirationDateTemplate, {
       line: 1,
       start: 21,
       end: 27
-    },
+    }),
     {
       label: 'Personal number',
       field: 'personalNumber',
@@ -427,14 +392,12 @@ module.exports = {
       line: 1,
       parser: require('../parsers/parsePersonalNumber')
     },
-    {
-      ...birthDateTemplate,
+    Object.assign({}, birthDateTemplate, {
       line: 1,
       start: 13,
       end: 19
-    },
-    {
-      ...birthDateCheckDigitTemplate,
+    }),
+    Object.assign({}, birthDateCheckDigitTemplate, {
       line: 1,
       start: 19,
       end: 20,
@@ -445,15 +408,13 @@ module.exports = {
           end: 19
         }
       ]
-    },
-    {
-      ...issuingCountryTemplate,
+    }),
+    Object.assign({}, issuingCountryTemplate, {
       line: 0,
       start: 2,
       end: 5
-    },
-    {
-      ...globalCheckTemplate,
+    }),
+    Object.assign({}, globalCheckTemplate, {
       start: 43,
       end: 44,
       line: 1,
@@ -474,34 +435,30 @@ module.exports = {
           end: 43
         }
       ]
-    }
+    })
   ],
   PCC: [
-    {
-      ...firstnameTemplate,
+    Object.assign({}, firstnameTemplate, {
       line: 2,
       start: 0,
       end: 30
-    },
-    {
-      ...lastnameTemplate,
+    }),
+    Object.assign({}, lastnameTemplate, {
       line: 2,
       start: 0,
       end: 30
-    },
-    {
-      ...issuingCountryTemplate,
+    }),
+    Object.assign({}, issuingCountryTemplate, {
       line: 1,
       start: 2,
       end: 5
-    },
-    {
-      ...documentTypeTemplate,
+    }),
+    Object.assign({}, documentTypeTemplate, {
       parser: require('../parsers/pcc/parseDocumentType'),
       line: 1,
       start: 0,
       end: 2
-    },
+    }),
     {
       label: 'Language',
       field: 'language',
@@ -510,13 +467,12 @@ module.exports = {
       end: 7,
       parser: require('../parsers/pcc/parseLanguage')
     },
-    {
-      ...documentNumberTemplate,
+    Object.assign({}, documentNumberTemplate, {
       parser: require('../parsers/pcc/parseDocumentNumber'),
       line: 0,
       start: 0,
       end: 10
-    },
+    }),
     {
       label: 'separator 1',
       field: 'separator1',
@@ -549,11 +505,10 @@ module.exports = {
       start: 14,
       end: 17
     },
-    {
-      ...birthDateTemplate,
+    Object.assign({}, birthDateTemplate, {
       line: 1,
       start: 19,
       end: 25
-    }
+    })
   ]
 };
