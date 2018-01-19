@@ -1,6 +1,6 @@
 {
   "name": "mrz",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "Create and parse MRZ (Machine Readable Zone) in TD1 and TD3 format",
   "main": "./src/index.js",
   "files": [
@@ -38,9 +38,9 @@
   "devDependencies": {
     "cheminfo-tools": "^1.20.2",
     "eslint": "^4.15.0",
-    "eslint-config-cheminfo": "^1.12.0",
-    "eslint-plugin-jest": "^21.6.2",
-    "jest": "^22.1.1",
+    "eslint-config-cheminfo": "^1.14.0",
+    "eslint-plugin-jest": "^21.7.0",
+    "jest": "^22.1.3",
     "should": "^11.1.0"
   }
 }
