@@ -6,34 +6,84 @@
 [![David deps][david-image]][david-url]
 [![npm download][download-image]][download-url]
 
-Parse MRZ (Machine Readable Zone) in TD1, TD2, TD3 or CH driving licence format
+Parse MRZ (Machine Readable Zone) from identity documents.
 
 ## Installation
 
-`$ npm install mrz`
+`$ npm install --save mrz`
 
 ## Example
 
 ```js
-const parse = require("mrz").parse;
+const parse = require('mrz').parse;
 
-let mrz = `I<UTOD23145890<1233<<<<<<<<<<<
-7408122F1204159UTO<<<<<<<<<<<6
-ERIKSSON<<ANNA<MARIA<<<<<<<<<<`;
+let mrz = [
+  'I<UTOD23145890<1233<<<<<<<<<<<',
+  '7408122F1204159UTO<<<<<<<<<<<6',
+  'ERIKSSON<<ANNA<MARIA<<<<<<<<<<'
+];
 
 var result = parse(mrz);
 console.log(result);
 ```
 
-Or test it in [Runkit](https://runkit.com/npm/mrz)
+## API
+
+### parse(mrz)
+
+Parses the provided MRZ. The argument can be an array of lines of a single string
+including line breaks. This function throws an error if the input is in an
+unsupported format. It will never throw an error when there are invalid fields
+in the MRZ. Instead, the `result.valid` value will be `false` and
+details about the invalid fields can be found in `result.details`.
+
+#### result.format
+
+String identifying the format of the parsed MRZ. Supported formats are:
+
+* TD1 (identity card with three MRZ lines)
+* TD2 (identity card with two MRZ lines)
+* TD3 (passport)
+* SWISS_DRIVING_LICENSE
+
+#### result.valid
+
+`true` if all fields are valid. `false` otherwise.
+
+#### result.fields
+
+Object mapping field names to their respective value. The value is set to `null`
+if it is invalid.
+
+#### result.details
+
+Array of objects describing all parsed fields. Its structure is:
+
+* label {string}
+* field {string} - Name of the field in `result.fields`.
+* value {string} - Value of the field or `null`.
+* valid {boolean}
+* ranges {Array} - Array of ranges that are necessary to compute this field.
+  Ranges are objects with `line`, `start`, `end` and `raw`.
+* line {number} - Index of the line where the field is located.
+* start {number} - Index of the start of the field in `line`.
+* end {number} - Index of the end of the field in `line`.
+
+### formats
+
+Static mapping of supported formats.
+
+### countries
+
+Static mapping of country code to country name.
 
 ## Specifications
 
-## TD1, TD2 and TD3
+### TD1, TD2 and TD3
 
 https://www.icao.int/publications/pages/publication.aspx?docnum=9303
 
-## Swiss driving license
+### Swiss driving license
 
 http://www.astra2.admin.ch/media/pdfpub/2003-10-15_2262_f.pdf
 

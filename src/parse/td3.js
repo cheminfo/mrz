@@ -1,6 +1,6 @@
 'use strict';
 
-const { getResult } = require('./fieldHelper');
+const getResult = require('./getResult');
 const { TD3 } = require('../formats');
 const TD3Fields = require('./td3Fields');
 

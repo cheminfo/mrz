@@ -16,6 +16,7 @@ for (var country of countries.split(/[\r\n]+/).sort()) {
 var result = [];
 result.push("'use strict'");
 result.push(`const countries=${JSON.stringify(countriesObject)};`);
+result.push('Object.freeze(countries);');
 result.push('module.exports=countries;');
 
 fs.writeFileSync(

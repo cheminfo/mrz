@@ -32,4 +32,4 @@ function getResult(format, lines, fieldParsers) {
   return result;
 }
 
-module.exports = { getResult };
+module.exports = getResult;

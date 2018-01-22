@@ -1,6 +1,6 @@
 'use strict';
 
-const { getResult } = require('./fieldHelper');
+const getResult = require('./getResult');
 const { SWISS_DRIVING_LICENSE } = require('../formats');
 const PCCFields = require('./pccFields');
 
