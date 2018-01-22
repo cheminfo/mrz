@@ -47,7 +47,7 @@ describe('parse Swiss Driving License', () => {
       issuingState: 'CHE',
       pinCode: '305142128',
       versionNumber: '097',
-      birthDate: '26.01.80',
+      birthDate: '800126',
       firstName: 'FABIENNE',
       lastName: 'MARCHAND'
     });

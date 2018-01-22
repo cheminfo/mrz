@@ -25,9 +25,9 @@ describe('parse TD2', () => {
       documentNumberCheckDigit: '7',
       sex: 'female',
       documentCode: 'I',
-      birthDate: '12.08.74',
+      birthDate: '740812',
       birthDateCheckDigit: '2',
-      expirationDate: '15.04.12',
+      expirationDate: '120415',
       expirationDateCheckDigit: '9',
       compositeCheckDigit: '6',
       optional: ''
