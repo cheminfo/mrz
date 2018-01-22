@@ -1,7 +1,7 @@
 'use strict';
 
 const parseDocumentCode = require('../parsers/parseDocumentCodeId');
-const parseText = require('../parsers/parseText');
+const parseOptional = require('../parsers/parseOptional');
 const {
   documentCodeTemplate,
   issuingStateTemplate,
@@ -71,7 +71,7 @@ module.exports = [
     line: 0,
     start: 15,
     end: 30,
-    parser: parseText
+    parser: parseOptional
   },
   Object.assign({}, birthDateTemplate, {
     start: 0,
@@ -123,7 +123,7 @@ module.exports = [
     line: 1,
     start: 18,
     end: 29,
-    parser: parseText
+    parser: parseOptional
   },
   Object.assign({}, compositeCheckDigitTemplate, {
     line: 1,

@@ -36,8 +36,8 @@ describe('parse TD1', () => {
 
   it('Utopia example', () => {
     const MRZ = [
-      'I<UTOD231458907<<<<<<<<<<<<<<<',
-      '7408122F1204159UTO<<<<<<<<<<<6',
+      'I<UTOD231458907ABC<<<<<<<<<<<<',
+      '7408122F1204159UTO<<<<<<<<<<<1',
       'ERIKSSON<<ANNA<MARIA<<<<<<<<<<'
     ];
 
@@ -56,14 +56,30 @@ describe('parse TD1', () => {
       expirationDate: '120415',
       expirationDateCheckDigit: '9',
       sex: 'female',
-      optional1: '',
+      optional1: 'ABC',
       optional2: '',
-      compositeCheckDigit: '6'
+      compositeCheckDigit: '1'
     });
     expect(result.valid).toEqual(false);
     expect(
       result.details.find((a) => a.field === 'issuingState').valid
     ).toEqual(false);
+
+    const optional1 = result.details.find((a) => a.field === 'optional1');
+    expect(optional1).toMatchObject({
+      value: 'ABC',
+      line: 0,
+      start: 15,
+      end: 18
+    });
+
+    const optional2 = result.details.find((a) => a.field === 'optional2');
+    expect(optional2).toMatchObject({
+      value: '',
+      line: 1,
+      start: 18,
+      end: 18
+    });
   });
 
   it('parse document number', () => {
