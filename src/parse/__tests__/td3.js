@@ -10,7 +10,7 @@ describe('parse TD3', () => {
     ];
 
     const result = parse(MRZ);
-    const errors = result.annotations.filter((a) => !a.valid);
+    const errors = result.details.filter((a) => !a.valid);
     expect(result.fields).toEqual({
       documentType: 'passport',
       firstname: 'ANNA MARIA',

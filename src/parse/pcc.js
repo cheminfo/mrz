@@ -1,6 +1,6 @@
 'use strict';
 
-const { getAnnotations, completeResult } = require('./fieldHelper');
+const { getDetails, completeResult } = require('./fieldHelper');
 const PCCFields = require('./pccFields');
 
 module.exports = function (lines) {
@@ -22,7 +22,7 @@ module.exports = function (lines) {
   }
   const result = {
     format: 'swissDrivingLicence',
-    annotations: getAnnotations(lines, PCCFields)
+    details: getDetails(lines, PCCFields)
   };
 
   completeResult(result);

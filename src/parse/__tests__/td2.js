@@ -10,7 +10,7 @@ describe('parse TD2', () => {
     ];
 
     const result = parse(MRZ);
-    const failed = result.annotations.filter((a) => !a.valid);
+    const failed = result.details.filter((a) => !a.valid);
     expect(failed).toHaveLength(2);
     expect(result.fields).toEqual({
       firstname: 'ANNA MARIA',

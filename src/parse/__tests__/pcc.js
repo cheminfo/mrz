@@ -12,7 +12,7 @@ describe('parse Swiss Driving License', () => {
 
     var result = parse(MRZ, { debug: true });
     expect(result.valid).toEqual(true);
-    expect(result.annotations.filter((a) => !a.valid)).toHaveLength(0);
+    expect(result.details.filter((a) => !a.valid)).toHaveLength(0);
     expect(result.fields).toEqual({
       documentNumber: 'AAA001D',
       language: 'D',

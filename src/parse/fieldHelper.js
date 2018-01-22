@@ -8,8 +8,8 @@ module.exports = {
       result.fields = {};
     }
     let valid = true;
-    for (let i = 0; i < result.annotations.length; i++) {
-      const annotation = result.annotations[i];
+    for (let i = 0; i < result.details.length; i++) {
+      const annotation = result.details[i];
       if (!annotation.valid) valid = false;
       if (annotation.field) {
         result.fields[annotation.field] = annotation.parsed;
@@ -18,12 +18,12 @@ module.exports = {
     result.valid = valid;
   },
 
-  getAnnotations(lines, fields) {
-    const annotations = [];
+  getDetails(lines, fields) {
+    const details = [];
     for (let i = 0; i < fields.length; i++) {
       const parser = createFieldParser(fields[i]);
-      annotations.push(parser(lines));
+      details.push(parser(lines));
     }
-    return annotations;
+    return details;
   }
 };

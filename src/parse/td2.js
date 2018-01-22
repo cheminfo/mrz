@@ -1,6 +1,6 @@
 'use strict';
 
-const { getAnnotations, completeResult } = require('./fieldHelper');
+const { getDetails, completeResult } = require('./fieldHelper');
 const TD2Fields = require('./td2Fields');
 
 module.exports = function parseTD1(lines) {
@@ -13,7 +13,7 @@ module.exports = function parseTD1(lines) {
   });
   const result = {
     format: 'TD2',
-    annotations: getAnnotations(lines, TD2Fields)
+    details: getDetails(lines, TD2Fields)
   };
 
   completeResult(result);

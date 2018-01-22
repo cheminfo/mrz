@@ -12,23 +12,24 @@ describe('parse TD1', () => {
 
     const result = parse(data);
     expect(result).toMatchObject({
-      valid: true,
-      fields: {
-        documentType: 'identity card',
-        issuingCountry: 'Switzerland',
-        documentNumber: 'A1234567',
-        documentNumberCheckDigit: '6',
-        birthDate: '25.10.75',
-        birthDateCheckDigit: '6',
-        gender: 'male',
-        expirationDate: '01.09.20',
-        expirationDateCheckDigit: '8',
-        nationality: 'Switzerland',
-        optional2: '',
-        globalCheckDigit: '8',
-        lastname: 'SMITH',
-        firstname: 'JOHN ALBERT'
-      }
+      valid: true
+    });
+    expect(result.fields).toEqual({
+      documentType: 'identity card',
+      issuingCountry: 'Switzerland',
+      documentNumber: 'A1234567',
+      documentNumberCheckDigit: '6',
+      birthDate: '25.10.75',
+      birthDateCheckDigit: '6',
+      gender: 'male',
+      expirationDate: '01.09.20',
+      expirationDateCheckDigit: '8',
+      nationality: 'Switzerland',
+      optional1: '',
+      optional2: '',
+      globalCheckDigit: '8',
+      lastname: 'SMITH',
+      firstname: 'JOHN ALBERT'
     });
   });
 
@@ -40,7 +41,7 @@ describe('parse TD1', () => {
     ];
 
     const result = parse(MRZ);
-    expect(result.annotations.filter((a) => !a.valid)).toHaveLength(2);
+    expect(result.details.filter((a) => !a.valid)).toHaveLength(2);
     expect(result.fields).toEqual({
       firstname: 'ANNA MARIA',
       lastname: 'ERIKSSON',
@@ -60,7 +61,7 @@ describe('parse TD1', () => {
     });
     expect(result.valid).toEqual(false);
     expect(
-      result.annotations.find((a) => a.field === 'issuingCountry').valid
+      result.details.find((a) => a.field === 'issuingCountry').valid
     ).toEqual(false);
   });
 
