@@ -2,7 +2,7 @@
 
 var check = require('./check');
 
-module.exports = function globalCheck(checkDigit, ...sources) {
+module.exports = function parseCompositeCheckDigit(checkDigit, ...sources) {
   const source = sources.join('');
   check(source, checkDigit);
   return checkDigit;

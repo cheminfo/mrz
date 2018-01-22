@@ -1,18 +1,18 @@
 'use strict';
 
-const parseDocumentNumber = require('../parsers/pcc/parseDocumentNumber');
-const parseLanguage = require('../parsers/pcc/parseLanguage');
-const parseDocumentType = require('../parsers/pcc/parseDocumentType');
-const parseIssuingCountry = require('../parsers/pcc/parseIssuingCountry');
+const parseDocumentNumber = require('../parsers/swissDrivingLicense/parseDocumentNumber');
+const parseLanguageCode = require('../parsers/swissDrivingLicense/parseLanguageCode');
+const parseDocumentCode = require('../parsers/swissDrivingLicense/parseDocumentCode');
+const parseIssuingState = require('../parsers/swissDrivingLicense/parseIssuingState');
 const parseNumber = require('../parsers/parseNumber');
-const checkSeparator = require('../parsers/pcc/checkSeparator');
+const checkSeparator = require('../parsers/swissDrivingLicense/checkSeparator');
 const {
   documentNumberTemplate,
-  documentTypeTemplate,
-  issuingCountryTemplate,
+  documentCodeTemplate,
+  issuingStateTemplate,
   birthDateTemplate,
-  lastnameTemplate,
-  firstnameTemplate
+  lastNameTemplate,
+  firstNameTemplate
 } = require('./fieldTemplates');
 const createFieldParser = require('./createFieldParser');
 
@@ -25,23 +25,23 @@ module.exports = [
   }),
   {
     label: 'Language code',
-    field: 'language',
+    field: 'languageCode',
     line: 0,
     start: 6,
     end: 7,
-    parser: parseLanguage
+    parser: parseLanguageCode
   },
-  Object.assign({}, documentTypeTemplate, {
+  Object.assign({}, documentCodeTemplate, {
     line: 1,
     start: 0,
     end: 2,
-    parser: parseDocumentType
+    parser: parseDocumentCode
   }),
-  Object.assign({}, issuingCountryTemplate, {
+  Object.assign({}, issuingStateTemplate, {
     line: 1,
     start: 2,
     end: 5,
-    parser: parseIssuingCountry
+    parser: parseIssuingState
   }),
   {
     label: 'PIN code',
@@ -80,12 +80,12 @@ module.exports = [
     end: 30,
     parser: checkSeparator
   },
-  Object.assign({}, lastnameTemplate, {
+  Object.assign({}, lastNameTemplate, {
     line: 2,
     start: 0,
     end: 30
   }),
-  Object.assign({}, firstnameTemplate, {
+  Object.assign({}, firstNameTemplate, {
     line: 2,
     start: 0,
     end: 30

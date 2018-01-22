@@ -25,7 +25,7 @@ describe('parse Swiss Driving License', () => {
     });
     expect(result.details[result.details.length - 1]).toEqual({
       label: 'First name',
-      field: 'firstname',
+      field: 'firstName',
       value: 'FABIENNE',
       valid: true,
       ranges: [
@@ -42,14 +42,14 @@ describe('parse Swiss Driving License', () => {
     });
     expect(result.fields).toEqual({
       documentNumber: 'AAA001D',
-      language: 'D',
-      documentType: 'FA',
-      issuingCountry: 'Switzerland',
+      languageCode: 'D',
+      documentCode: 'FA',
+      issuingState: 'Switzerland',
       pinCode: '305142128',
       versionNumber: '097',
       birthDate: '26.01.80',
-      firstname: 'FABIENNE',
-      lastname: 'MARCHAND'
+      firstName: 'FABIENNE',
+      lastName: 'MARCHAND'
     });
   });
 });

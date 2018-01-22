@@ -16,21 +16,21 @@ describe('parse TD1', () => {
       valid: true
     });
     expect(result.fields).toEqual({
-      documentType: 'identity card',
-      issuingCountry: 'Switzerland',
+      documentCode: 'ID',
+      issuingState: 'Switzerland',
       documentNumber: 'A1234567',
       documentNumberCheckDigit: '6',
       birthDate: '25.10.75',
       birthDateCheckDigit: '6',
-      gender: 'male',
+      sex: 'male',
       expirationDate: '01.09.20',
       expirationDateCheckDigit: '8',
       nationality: 'Switzerland',
       optional1: '',
       optional2: '',
-      globalCheckDigit: '8',
-      lastname: 'SMITH',
-      firstname: 'JOHN ALBERT'
+      compositeCheckDigit: '8',
+      lastName: 'SMITH',
+      firstName: 'JOHN ALBERT'
     });
   });
 
@@ -44,25 +44,25 @@ describe('parse TD1', () => {
     const result = parse(MRZ);
     expect(result.details.filter((a) => !a.valid)).toHaveLength(2);
     expect(result.fields).toEqual({
-      firstname: 'ANNA MARIA',
-      lastname: 'ERIKSSON',
+      firstName: 'ANNA MARIA',
+      lastName: 'ERIKSSON',
       nationality: null,
-      issuingCountry: null,
-      documentType: 'identity card',
+      issuingState: null,
+      documentCode: 'I',
       documentNumber: 'D23145890',
       documentNumberCheckDigit: '7',
       birthDate: '12.08.74',
       birthDateCheckDigit: '2',
       expirationDate: '15.04.12',
       expirationDateCheckDigit: '9',
-      gender: 'female',
+      sex: 'female',
       optional1: '',
       optional2: '',
-      globalCheckDigit: '6'
+      compositeCheckDigit: '6'
     });
     expect(result.valid).toEqual(false);
     expect(
-      result.details.find((a) => a.field === 'issuingCountry').valid
+      result.details.find((a) => a.field === 'issuingState').valid
     ).toEqual(false);
   });
 

@@ -1,12 +1,12 @@
 'use strict';
 
-const parseLanguage = require('./parseLanguage');
+const parseLanguageCode = require('./parseLanguageCode');
 
 module.exports = function parseDocumentNumber(source) {
   // swiss driving license number
   var first = source.substring(0, 3);
   var second = source.substring(3, 6);
-  var language = source.charAt(6);
+  var languageCode = source.charAt(6);
   var end = source.substring(7);
 
   if (!first.match(/^[A-Z0-9]{3}$/)) {
@@ -23,8 +23,8 @@ module.exports = function parseDocumentNumber(source) {
     throw new Error(`invalid document number: ${source}. Must end with <<`);
   }
 
-  // calling this method to throw if language invalid
-  parseLanguage(language);
+  // calling this method to throw if languageCode invalid
+  parseLanguageCode(languageCode);
   return {
     value: source.substring(0, 7),
     start: 0,

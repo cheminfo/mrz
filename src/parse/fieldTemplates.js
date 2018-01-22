@@ -12,22 +12,21 @@ const documentNumberCheckDigitTemplate = {
   parser: require('../parsers/parseDocumentNumberCheckDigit')
 };
 
-const documentTypeTemplate = {
-  label: 'Document type',
-  field: 'documentType',
-  parser: require('../parsers/parseDocumentType')
+const documentCodeTemplate = {
+  label: 'Document code',
+  field: 'documentCode'
 };
 
 const nationalityTemplate = {
   label: 'Nationality',
   field: 'nationality',
-  parser: require('../parsers/parseCountry')
+  parser: require('../parsers/parseState')
 };
 
-const genderTemplate = {
-  label: 'Gender',
-  field: 'gender',
-  parser: require('../parsers/parseGender')
+const sexTemplate = {
+  label: 'Sex',
+  field: 'sex',
+  parser: require('../parsers/parseSex')
 };
 
 const expirationDateTemplate = {
@@ -42,10 +41,10 @@ const expirationDateCheckDigitTemplate = {
   parser: require('../parsers/parseDateCheckDigit')
 };
 
-const globalCheckTemplate = {
-  label: 'Global check digit',
-  field: 'globalCheckDigit',
-  parser: require('../parsers/globalCheck')
+const compositeCheckDigitTemplate = {
+  label: 'Composite check digit',
+  field: 'compositeCheckDigit',
+  parser: require('../parsers/parseCompositeCheckDigit')
 };
 
 const birthDateTemplate = {
@@ -60,36 +59,36 @@ const birthDateCheckDigitTemplate = {
   parser: require('../parsers/parseDateCheckDigit')
 };
 
-const firstnameTemplate = {
+const firstNameTemplate = {
   label: 'First name',
-  field: 'firstname',
-  parser: require('../parsers/parseFirstname')
+  field: 'firstName',
+  parser: require('../parsers/parseFirstName')
 };
 
-const lastnameTemplate = {
+const lastNameTemplate = {
   label: 'Last name',
-  field: 'lastname',
-  parser: require('../parsers/parseLastname')
+  field: 'lastName',
+  parser: require('../parsers/parseLastName')
 };
 
-const issuingCountryTemplate = {
-  label: 'Issuing country',
-  field: 'issuingCountry',
-  parser: require('../parsers/parseCountry')
+const issuingStateTemplate = {
+  label: 'Issuing state',
+  field: 'issuingState',
+  parser: require('../parsers/parseState')
 };
 
 module.exports = {
   documentNumberTemplate,
   documentNumberCheckDigitTemplate,
-  documentTypeTemplate,
+  documentCodeTemplate,
   nationalityTemplate,
-  genderTemplate,
+  sexTemplate,
   expirationDateTemplate,
   expirationDateCheckDigitTemplate,
   birthDateTemplate,
   birthDateCheckDigitTemplate,
-  globalCheckTemplate,
-  firstnameTemplate,
-  lastnameTemplate,
-  issuingCountryTemplate
+  compositeCheckDigitTemplate,
+  firstNameTemplate,
+  lastNameTemplate,
+  issuingStateTemplate
 };

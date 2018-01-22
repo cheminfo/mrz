@@ -2,7 +2,7 @@
 
 var parseText = require('./parseText');
 
-module.exports = function (source) {
+module.exports = function parsePersonalNumber(source) {
   const value = parseText(source, /^[A-Z0-9<]+<*$/);
   return {
     value,

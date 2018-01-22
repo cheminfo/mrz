@@ -74,9 +74,9 @@ Array of objects describing all parsed fields. Its structure is:
 
 Static mapping of supported formats.
 
-### countries
+### states
 
-Static mapping of country code to country name.
+Static mapping of state code to state name.
 
 ## Specifications
 

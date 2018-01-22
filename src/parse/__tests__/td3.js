@@ -16,21 +16,21 @@ describe('parse TD3', () => {
     });
     const errors = result.details.filter((a) => !a.valid);
     expect(result.fields).toEqual({
-      documentType: 'passport',
-      firstname: 'ANNA MARIA',
-      lastname: 'ERIKSSON',
+      documentCode: 'P',
+      firstName: 'ANNA MARIA',
+      lastName: 'ERIKSSON',
       documentNumber: 'L898902C3',
       documentNumberCheckDigit: '6',
       nationality: null,
-      gender: 'female',
+      sex: 'female',
       expirationDate: '15.04.12',
       expirationDateCheckDigit: '9',
       personalNumber: 'ZE184226B',
       personalNumberCheckDigit: '1',
       birthDate: '12.08.74',
       birthDateCheckDigit: '2',
-      issuingCountry: null,
-      globalCheckDigit: '0'
+      issuingState: null,
+      compositeCheckDigit: '0'
     });
 
     const personalNumberDetails = result.details.find(

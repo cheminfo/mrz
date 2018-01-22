@@ -3,7 +3,11 @@
 var check = require('./check');
 const cleanText = require('./cleanText');
 
-module.exports = function (checkDigit, source, optional) {
+module.exports = function parseDocumentNumberCheckDigit(
+  checkDigit,
+  source,
+  optional
+) {
   if (checkDigit === '<' && optional) {
     optional = cleanText(optional);
     source = `${source}<${optional.substring(0, optional.length - 1)}`;

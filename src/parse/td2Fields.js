@@ -1,40 +1,42 @@
 'use strict';
 
+const parseDocumentCode = require('../parsers/parseDocumentCodeId');
 const parseText = require('../parsers/parseText');
 const {
-  documentTypeTemplate,
-  issuingCountryTemplate,
-  firstnameTemplate,
-  lastnameTemplate,
+  documentCodeTemplate,
+  issuingStateTemplate,
+  firstNameTemplate,
+  lastNameTemplate,
   documentNumberTemplate,
   documentNumberCheckDigitTemplate,
   nationalityTemplate,
   birthDateTemplate,
   birthDateCheckDigitTemplate,
-  genderTemplate,
+  sexTemplate,
   expirationDateTemplate,
   expirationDateCheckDigitTemplate,
-  globalCheckTemplate
+  compositeCheckDigitTemplate
 } = require('./fieldTemplates');
 const createFieldParser = require('./createFieldParser');
 
 module.exports = [
-  Object.assign({}, documentTypeTemplate, {
+  Object.assign({}, documentCodeTemplate, {
     line: 0,
     start: 0,
-    end: 2
+    end: 2,
+    parser: parseDocumentCode
   }),
-  Object.assign({}, issuingCountryTemplate, {
+  Object.assign({}, issuingStateTemplate, {
     line: 0,
     start: 2,
     end: 5
   }),
-  Object.assign({}, lastnameTemplate, {
+  Object.assign({}, lastNameTemplate, {
     line: 0,
     start: 5,
     end: 36
   }),
-  Object.assign({}, firstnameTemplate, {
+  Object.assign({}, firstNameTemplate, {
     line: 0,
     start: 5,
     end: 36
@@ -95,7 +97,7 @@ module.exports = [
       }
     ]
   }),
-  Object.assign({}, genderTemplate, {
+  Object.assign({}, sexTemplate, {
     line: 1,
     start: 20,
     end: 21
@@ -125,7 +127,7 @@ module.exports = [
     end: 35,
     parser: parseText
   },
-  Object.assign({}, globalCheckTemplate, {
+  Object.assign({}, compositeCheckDigitTemplate, {
     line: 1,
     start: 35,
     end: 36,

@@ -17,19 +17,19 @@ describe('parse TD2', () => {
     });
     expect(failed).toHaveLength(2);
     expect(result.fields).toEqual({
-      firstname: 'ANNA MARIA',
-      lastname: 'ERIKSSON',
+      firstName: 'ANNA MARIA',
+      lastName: 'ERIKSSON',
       nationality: null,
-      issuingCountry: null,
+      issuingState: null,
       documentNumber: 'D23145890',
       documentNumberCheckDigit: '7',
-      gender: 'female',
-      documentType: 'identity card',
+      sex: 'female',
+      documentCode: 'I',
       birthDate: '12.08.74',
       birthDateCheckDigit: '2',
       expirationDate: '15.04.12',
       expirationDateCheckDigit: '9',
-      globalCheckDigit: '6',
+      compositeCheckDigit: '6',
       optional: ''
     });
     expect(result.valid).toEqual(false);
