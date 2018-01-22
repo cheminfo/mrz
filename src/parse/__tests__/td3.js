@@ -50,4 +50,30 @@ describe('parse TD3', () => {
     expect(errors).toHaveLength(2);
     expect(result.valid).toEqual(false);
   });
+
+  it('German example', () => {
+    const MRZ = [
+      'P<D<<MUSTERMANN<<ERIKA<<<<<<<<<<<<<<<<<<<<<<',
+      'C01X0006H1D<<6408125F1710319<<<<<<<<<<<<<<<0'
+    ];
+
+    const result = parse.TD3(MRZ);
+    expect(result.fields).toEqual({
+      documentCode: 'P',
+      issuingState: 'D',
+      lastName: 'MUSTERMANN',
+      firstName: 'ERIKA',
+      documentNumber: 'C01X0006H',
+      documentNumberCheckDigit: '1',
+      nationality: 'D',
+      birthDate: '12.08.64',
+      birthDateCheckDigit: '5',
+      sex: 'female',
+      expirationDate: '31.10.17',
+      expirationDateCheckDigit: '9',
+      personalNumber: '',
+      personalNumberCheckDigit: '<',
+      compositeCheckDigit: '0'
+    });
+  });
 });

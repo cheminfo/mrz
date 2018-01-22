@@ -10,7 +10,9 @@ module.exports = function parseTD3(lines) {
   lines.forEach((line, index) => {
     if (line.length !== 44) {
       throw new Error(
-        `invalid number of characters for line ${index + 1}. Must be 44 for TD3`
+        `invalid number of characters for line ${index + 1}: ${
+          line.length
+        }. Must be 44 for TD3`
       );
     }
   });

@@ -17,7 +17,7 @@ describe('parse TD1', () => {
     });
     expect(result.fields).toEqual({
       documentCode: 'ID',
-      issuingState: 'Switzerland',
+      issuingState: 'CHE',
       documentNumber: 'A1234567',
       documentNumberCheckDigit: '6',
       birthDate: '25.10.75',
@@ -25,7 +25,7 @@ describe('parse TD1', () => {
       sex: 'male',
       expirationDate: '01.09.20',
       expirationDateCheckDigit: '8',
-      nationality: 'Switzerland',
+      nationality: 'CHE',
       optional1: '',
       optional2: '',
       compositeCheckDigit: '8',

@@ -44,7 +44,7 @@ describe('parse Swiss Driving License', () => {
       documentNumber: 'AAA001D',
       languageCode: 'D',
       documentCode: 'FA',
-      issuingState: 'Switzerland',
+      issuingState: 'CHE',
       pinCode: '305142128',
       versionNumber: '097',
       birthDate: '26.01.80',

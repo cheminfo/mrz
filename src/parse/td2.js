@@ -10,7 +10,9 @@ module.exports = function parseTD2(lines) {
   lines.forEach((line, index) => {
     if (line.length !== 36) {
       throw new Error(
-        `invalid number of characters for line ${index + 1}. Must be 36 for TD2`
+        `invalid number of characters for line ${index + 1}: ${
+          line.length
+        }. Must be 36 for TD2`
       );
     }
   });

@@ -54,7 +54,7 @@ String identifying the format of the parsed MRZ. Supported formats are:
 
 Object mapping field names to their respective value. The value is set to `null`
 if it is invalid. The value may be different than the raw value. For example
-`result.fields.nationality` may be "Switzerland" when the raw value was "CHE".
+`result.fields.sex` will be "male" when the raw value was "M".
 
 #### result.details
 
