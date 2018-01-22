@@ -14,7 +14,9 @@ describe('parse TD3', () => {
       valid: false,
       format: 'TD3'
     });
+    expect(result.valid).toBe(false);
     const errors = result.details.filter((a) => !a.valid);
+    expect(errors).toHaveLength(2);
     expect(result.fields).toEqual({
       documentCode: 'P',
       firstName: 'ANNA MARIA',
@@ -47,8 +49,17 @@ describe('parse TD3', () => {
       end: 37
     });
 
-    expect(errors).toHaveLength(2);
-    expect(result.valid).toEqual(false);
+    expect(errors[0]).toEqual({
+      label: 'Issuing state',
+      field: 'issuingState',
+      value: null,
+      valid: false,
+      ranges: [{ line: 0, start: 2, end: 5, raw: 'UTO' }],
+      line: 0,
+      start: 2,
+      end: 5,
+      error: 'invalid state code: UTO'
+    });
   });
 
   it('German example', () => {
@@ -58,6 +69,7 @@ describe('parse TD3', () => {
     ];
 
     const result = parse.TD3(MRZ);
+    expect(result.valid).toBe(true);
     expect(result.fields).toEqual({
       documentCode: 'P',
       issuingState: 'D',

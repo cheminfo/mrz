@@ -42,14 +42,14 @@ module.exports = function (fieldOptions) {
         raw: getText(lines, range)
       }))
     };
+    const range = result.ranges[0];
+    result.line = range.line;
+    result.start = range.start;
+    result.end = range.end;
     try {
       let parsed = fieldOptions.parser(source, ...related);
       result.value = typeof parsed === 'object' ? parsed.value : parsed;
       result.valid = true;
-      const range = result.ranges[0];
-      result.line = range.line;
-      result.start = range.start;
-      result.end = range.end;
       if (typeof parsed === 'object') {
         result.start = range.start + parsed.start;
         result.end = range.start + parsed.end;
