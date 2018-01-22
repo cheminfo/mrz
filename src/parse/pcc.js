@@ -1,6 +1,6 @@
 'use strict';
 
-const { getDetails, completeResult } = require('./fieldHelper');
+const { getResult } = require('./fieldHelper');
 const PCCFields = require('./pccFields');
 
 module.exports = function (lines) {
@@ -20,11 +20,5 @@ module.exports = function (lines) {
       'invalid number of characters for line 3. Must be 30 for Swiss Driving License'
     );
   }
-  const result = {
-    format: 'swissDrivingLicence',
-    details: getDetails(lines, PCCFields)
-  };
-
-  completeResult(result);
-  return result;
+  return getResult('swissDrivingLicense', lines, PCCFields);
 };

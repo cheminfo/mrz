@@ -29,6 +29,20 @@ describe('parse TD3', () => {
       globalCheckDigit: '0'
     });
 
+    const personalNumberDetails = result.details.find(
+      (d) => d.field === 'personalNumber'
+    );
+    expect(personalNumberDetails).toEqual({
+      label: 'Personal number',
+      field: 'personalNumber',
+      value: 'ZE184226B',
+      valid: true,
+      ranges: [{ line: 1, start: 28, end: 42, raw: 'ZE184226B<<<<<' }],
+      line: 1,
+      start: 28,
+      end: 37
+    });
+
     expect(errors).toHaveLength(2);
     expect(result.valid).toEqual(false);
   });

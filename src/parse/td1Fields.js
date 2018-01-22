@@ -16,6 +16,7 @@ const {
   lastnameTemplate,
   firstnameTemplate
 } = require('./fieldTemplates');
+const createFieldParser = require('./createFieldParser');
 
 module.exports = [
   Object.assign({}, documentTypeTemplate, {
@@ -159,4 +160,4 @@ module.exports = [
     start: 0,
     end: 30
   })
-];
+].map(createFieldParser);

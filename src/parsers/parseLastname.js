@@ -3,5 +3,10 @@
 var parseText = require('./parseText');
 
 module.exports = function parseFirstname(source) {
-  return parseText(source.replace(/<{2}.*/, ''), /^[A-Z<]+<*$/);
+  const parsed = parseText(source.replace(/<{2}.*/, ''), /^[A-Z<]+<*$/);
+  return {
+    value: parsed,
+    start: 0,
+    end: parsed.length
+  };
 };

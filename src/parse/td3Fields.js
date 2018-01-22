@@ -17,6 +17,7 @@ const {
   expirationDateCheckDigitTemplate,
   globalCheckTemplate
 } = require('./fieldTemplates');
+const createFieldParser = require('./createFieldParser');
 
 module.exports = [
   Object.assign({}, documentTypeTemplate, {
@@ -145,4 +146,4 @@ module.exports = [
       }
     ]
   })
-];
+].map(createFieldParser);

@@ -72,6 +72,23 @@ describe('parse TD1', () => {
       'ERIKSSON<<ANNA<MARIA<<<<<<<<<<'
     ];
     const result = parse(MRZ);
+    const documentNumberDetails = result.details.find(
+      (d) => d.field === 'documentNumber'
+    );
+    expect(documentNumberDetails).toEqual({
+      label: 'Document number',
+      field: 'documentNumber',
+      value: 'D23145890123',
+      valid: true,
+      ranges: [
+        { line: 0, start: 5, end: 14, raw: 'D23145890' },
+        { line: 0, start: 14, end: 15, raw: '<' },
+        { line: 0, start: 15, end: 30, raw: '1233<<<<<<<<<<<' }
+      ],
+      line: 0,
+      start: 5,
+      end: 18
+    });
     expect(result.fields.documentNumber).toEqual('D23145890123');
     expect(result.fields.documentNumberCheckDigit).toEqual('3');
   });

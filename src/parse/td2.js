@@ -1,6 +1,6 @@
 'use strict';
 
-const { getDetails, completeResult } = require('./fieldHelper');
+const { getResult } = require('./fieldHelper');
 const TD2Fields = require('./td2Fields');
 
 module.exports = function parseTD1(lines) {
@@ -11,11 +11,5 @@ module.exports = function parseTD1(lines) {
       );
     }
   });
-  const result = {
-    format: 'TD2',
-    details: getDetails(lines, TD2Fields)
-  };
-
-  completeResult(result);
-  return result;
+  return getResult('TD2', lines, TD2Fields);
 };
