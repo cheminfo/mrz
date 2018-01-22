@@ -2,6 +2,7 @@
 
 const parseDocumentCode = require('../parsers/parseDocumentCodeId');
 const parseOptional = require('../parsers/parseOptional');
+const parseDocumentNumberOptional = require('../parsers/parseDocumentNumberOptional');
 const {
   documentCodeTemplate,
   issuingStateTemplate,
@@ -71,7 +72,19 @@ module.exports = [
     line: 0,
     start: 15,
     end: 30,
-    parser: parseOptional
+    related: [
+      {
+        line: 0,
+        start: 5,
+        end: 14
+      },
+      {
+        line: 0,
+        start: 14,
+        end: 15
+      }
+    ],
+    parser: parseDocumentNumberOptional
   },
   Object.assign({}, birthDateTemplate, {
     start: 0,

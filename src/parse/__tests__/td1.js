@@ -32,6 +32,16 @@ describe('parse TD1', () => {
       lastName: 'SMITH',
       firstName: 'JOHN ALBERT'
     });
+
+    const optional1Details = result.details.find(
+      (f) => f.field === 'optional1'
+    );
+    expect(optional1Details).toMatchObject({
+      value: '',
+      line: 0,
+      start: 15,
+      end: 15
+    });
   });
 
   it('Utopia example', () => {
@@ -84,8 +94,8 @@ describe('parse TD1', () => {
 
   it('parse document number', () => {
     const MRZ = [
-      'I<UTOD23145890<1240<<<<<<<<<<<',
-      '7408122F1204159UTO<<<<<<<<<<<0',
+      'I<UTOD23145890<1240<XYZ<<<<<<<',
+      '7408122F1204159UTO<<<<<<<<<<<8',
       'ERIKSSON<<ANNA<MARIA<<<<<<<<<<'
     ];
     const result = parse(MRZ);
@@ -102,7 +112,7 @@ describe('parse TD1', () => {
       ranges: [
         { line: 0, start: 5, end: 14, raw: 'D23145890' },
         { line: 0, start: 14, end: 15, raw: '<' },
-        { line: 0, start: 15, end: 30, raw: '1240<<<<<<<<<<<' }
+        { line: 0, start: 15, end: 30, raw: '1240<XYZ<<<<<<<' }
       ],
       line: 0,
       start: 5,

@@ -5,8 +5,9 @@ const cleanText = require('./cleanText');
 module.exports = function parseDocumentNumber(source, checkDigit, optional) {
   let end, value;
   if (checkDigit === '<' && optional) {
-    optional = cleanText(optional);
-    value = source + optional.substring(0, optional.length - 1);
+    const firstFiller = optional.indexOf('<');
+    const tail = optional.substring(0, firstFiller - 1);
+    value = source + tail;
     end = value.length + 1;
   } else {
     value = cleanText(source);

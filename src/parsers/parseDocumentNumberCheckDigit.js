@@ -1,7 +1,6 @@
 'use strict';
 
 var check = require('./check');
-const cleanText = require('./cleanText');
 
 module.exports = function parseDocumentNumberCheckDigit(
   checkDigit,
@@ -9,14 +8,15 @@ module.exports = function parseDocumentNumberCheckDigit(
   optional
 ) {
   if (checkDigit === '<' && optional) {
-    optional = cleanText(optional);
-    source = `${source}<${optional.substring(0, optional.length - 1)}`;
-    checkDigit = optional.charAt(optional.length - 1);
+    const firstFiller = optional.indexOf('<');
+    const tail = optional.substring(0, firstFiller - 1);
+    source = `${source}<${tail}`;
+    checkDigit = optional.charAt(firstFiller - 1);
     check(source, checkDigit);
     return {
       value: checkDigit,
-      start: optional.length,
-      end: optional.length + 1
+      start: firstFiller,
+      end: firstFiller + 1
     };
   } else {
     check(source, checkDigit);
