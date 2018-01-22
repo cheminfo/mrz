@@ -1,6 +1,6 @@
 'use strict';
 
-const STATES = require('../generated/countries');
+const STATES = require('../generated/states');
 
 module.exports = function parseState(source) {
   var state = STATES[source];
