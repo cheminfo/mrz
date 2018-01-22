@@ -21,5 +21,5 @@ result.push('module.exports=countries;');
 
 fs.writeFileSync(
   `${__dirname}/../src/generated/countries.js`,
-  result.join('\r\n')
+  result.join('\n')
 );
