@@ -12,6 +12,7 @@ describe('parse TD1', () => {
 
     const result = parse(data);
     expect(result).toMatchObject({
+      format: 'TD1',
       valid: true
     });
     expect(result.fields).toEqual({

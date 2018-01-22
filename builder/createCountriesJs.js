@@ -15,8 +15,8 @@ for (var country of countries.split(/[\r\n]+/).sort()) {
 
 var result = [];
 result.push("'use strict'");
-result.push(`const COUNTRIES=${JSON.stringify(countriesObject)};`);
-result.push('module.exports=COUNTRIES;');
+result.push(`const countries=${JSON.stringify(countriesObject)};`);
+result.push('module.exports=countries;');
 
 fs.writeFileSync(
   `${__dirname}/../src/generated/countries.js`,

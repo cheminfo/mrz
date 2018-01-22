@@ -1,9 +1,11 @@
 'use strict';
 
-const COUNTRIES = require('./generated/countries');
+const countries = require('./generated/countries');
+const formats = require('./formats');
 const parse = require('./parse/parse');
 
 module.exports = {
-  COUNTRIES,
+  countries,
+  formats,
   parse
 };

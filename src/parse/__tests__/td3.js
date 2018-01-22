@@ -10,6 +10,10 @@ describe('parse TD3', () => {
     ];
 
     const result = parse(MRZ);
+    expect(result).toMatchObject({
+      valid: false,
+      format: 'TD3'
+    });
     const errors = result.details.filter((a) => !a.valid);
     expect(result.fields).toEqual({
       documentType: 'passport',
