@@ -68,29 +68,41 @@ describe('parse TD1', () => {
 
   it('parse document number', () => {
     const MRZ = [
-      'I<UTOD23145890<1233<<<<<<<<<<<',
-      '7408122F1204159UTO<<<<<<<<<<<6',
+      'I<UTOD23145890<1240<<<<<<<<<<<',
+      '7408122F1204159UTO<<<<<<<<<<<0',
       'ERIKSSON<<ANNA<MARIA<<<<<<<<<<'
     ];
     const result = parse(MRZ);
+    expect(result.valid).toBe(false);
+    expect(result.details.filter((f) => !f.valid)).toHaveLength(2);
     const documentNumberDetails = result.details.find(
       (d) => d.field === 'documentNumber'
     );
     expect(documentNumberDetails).toEqual({
       label: 'Document number',
       field: 'documentNumber',
-      value: 'D23145890123',
+      value: 'D23145890124',
       valid: true,
       ranges: [
         { line: 0, start: 5, end: 14, raw: 'D23145890' },
         { line: 0, start: 14, end: 15, raw: '<' },
-        { line: 0, start: 15, end: 30, raw: '1233<<<<<<<<<<<' }
+        { line: 0, start: 15, end: 30, raw: '1240<<<<<<<<<<<' }
       ],
       line: 0,
       start: 5,
       end: 18
     });
-    expect(result.fields.documentNumber).toEqual('D23145890123');
-    expect(result.fields.documentNumberCheckDigit).toEqual('3');
+    expect(result.fields.documentNumber).toEqual('D23145890124');
+    expect(result.fields.documentNumberCheckDigit).toEqual('0');
+
+    const documentNumberCheckDigitDetails = result.details.find(
+      (d) => d.field === 'documentNumberCheckDigit'
+    );
+    expect(documentNumberCheckDigitDetails).toMatchObject({
+      line: 0,
+      start: 18,
+      end: 19,
+      value: '0'
+    });
   });
 });
