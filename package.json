@@ -1,10 +1,9 @@
 {
   "name": "mrz",
   "version": "2.0.0",
-  "description": "Create and parse MRZ (Machine Readable Zone) in TD1 and TD3 format",
+  "description": "Parse MRZ (Machine Readable Zone) from identity documents",
   "main": "./src/index.js",
   "files": [
-    "runkit.js",
     "src"
   ],
   "scripts": {
@@ -14,20 +13,23 @@
     "test-coverage": "jest --coverage",
     "test-travis": "npm run test-coverage && npm run eslint",
     "test-only": "jest",
-    "build": "npm run buildCountries && cheminfo build",
-    "prepublish": "npm run buildCountries",
-    "buildCountries": "node builder/createCountriesJs.js"
+    "build": "npm run buildStates && cheminfo build",
+    "prepublish": "npm run buildStates",
+    "buildStates": "node builder/createStatesJs.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/cheminfo-js/mrz.git"
   },
   "keywords": [
+    "mrz",
     "machine",
-    "learning",
-    "data",
-    "mining",
-    "datamining"
+    "readable",
+    "zone",
+    "identity",
+    "documents",
+    "card",
+    "passport"
   ],
   "author": "Luc Patiny <luc@patiny.com>",
   "license": "MIT",
