@@ -59,6 +59,12 @@ const birthDateCheckDigitTemplate = {
   parser: require('../parsers/parseDateCheckDigit')
 };
 
+const issueDateTemplate = {
+  label: 'Issue date',
+  field: 'issueDate',
+  parser: require('../parsers/parseDate')
+};
+
 const firstNameTemplate = {
   label: 'First name',
   field: 'firstName',
@@ -87,6 +93,7 @@ module.exports = {
   expirationDateCheckDigitTemplate,
   birthDateTemplate,
   birthDateCheckDigitTemplate,
+  issueDateTemplate,
   compositeCheckDigitTemplate,
   firstNameTemplate,
   lastNameTemplate,

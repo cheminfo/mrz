@@ -7,6 +7,11 @@ const TD2Fields = require('./td2Fields');
 
 module.exports = function parseTD2(lines) {
   lines = checkLines(lines);
+  if (lines.length !== 2) {
+    throw new Error(
+      `invalid number of lines: ${lines.length}: Must be 2 for ${TD2}`
+    );
+  }
   lines.forEach((line, index) => {
     if (line.length !== 36) {
       throw new Error(

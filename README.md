@@ -45,6 +45,7 @@ String identifying the format of the parsed MRZ. Supported formats are:
 * TD2 (identity card with two MRZ lines)
 * TD3 (passport)
 * SWISS_DRIVING_LICENSE
+* FRENCH_NATIONAL_ID
 
 #### result.valid
 
@@ -87,6 +88,10 @@ https://www.icao.int/publications/pages/publication.aspx?docnum=9303
 ### Swiss driving license
 
 http://www.astra2.admin.ch/media/pdfpub/2003-10-15_2262_f.pdf
+
+### French national id
+
+https://fr.wikipedia.org/wiki/Carte_nationale_d%27identit%C3%A9_en_France#Codage_Bande_MRZ_(lecture_optique)
 
 ## License
 

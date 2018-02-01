@@ -7,6 +7,11 @@ const TD3Fields = require('./td3Fields');
 
 module.exports = function parseTD3(lines) {
   lines = checkLines(lines);
+  if (lines.length !== 2) {
+    throw new Error(
+      `invalid number of lines: ${lines.length}: Must be 2 for ${TD3}`
+    );
+  }
   lines.forEach((line, index) => {
     if (line.length !== 44) {
       throw new Error(

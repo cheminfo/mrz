@@ -7,6 +7,13 @@ const swissDrivingLicenseFields = require('./swissDrivingLicenseFields');
 
 module.exports = function parseSwissDrivingLicense(lines) {
   lines = checkLines(lines);
+  if (lines.length !== 3) {
+    throw new Error(
+      `invalid number of lines: ${
+        lines.length
+      }: Must be 3 for ${SWISS_DRIVING_LICENSE}`
+    );
+  }
   if (lines[0].length !== 9) {
     throw new Error(
       `invalid number of characters for line 1: ${
