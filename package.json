@@ -1,6 +1,6 @@
 {
   "name": "mrz",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Parse MRZ (Machine Readable Zone) from identity documents",
   "main": "./src/index.js",
   "files": [
@@ -38,10 +38,10 @@
   },
   "homepage": "https://github.com/cheminfo-js/mrz#readme",
   "devDependencies": {
-    "cheminfo-tools": "^1.20.2",
-    "eslint": "^4.16.0",
+    "cheminfo-tools": "^1.20.3",
+    "eslint": "^4.19.1",
     "eslint-config-cheminfo": "^1.15.1",
-    "eslint-plugin-jest": "^21.7.0",
-    "jest": "^22.1.4"
+    "eslint-plugin-jest": "^21.22.0",
+    "jest": "^22.4.4"
   }
 }
