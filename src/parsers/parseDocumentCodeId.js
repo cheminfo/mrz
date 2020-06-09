@@ -2,7 +2,7 @@
 
 module.exports = function parseDocumentCodeId(source) {
   const first = source.charAt(0);
-  if (first !== 'A' && first !== 'C' && first !== 'I' && source !== 'R') {
+  if (first !== 'A' && first !== 'C' && first !== 'I' && first !== 'R') {
     throw new Error(
       `invalid document code: ${source}. First character must be A, C, R or I`
     );
