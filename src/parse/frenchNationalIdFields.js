@@ -59,7 +59,7 @@ module.exports = [
   },
   Object.assign({}, documentNumberTemplate, {
     line: 1,
-    start: 7,
+    start: 0,
     end: 12
   }),
   Object.assign({}, documentNumberCheckDigitTemplate, {
