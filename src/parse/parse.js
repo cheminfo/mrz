@@ -7,6 +7,14 @@ const parsers = require('./parsers');
 function parseMRZ(lines) {
   lines = checkLines(lines);
   switch (lines.length) {
+    case 1:{
+      if (lines[0].match(/^D[1PN<]FRA/)) {
+        return parsers.FRENCH_DRIVING_LICENSE(lines);
+      }
+      throw new Error(
+        'unrecognized document format. Input must match pattern /^D[1PN<]FRA/ (French Driving License)'
+      );
+    }
     case 2:
     case 3: {
       switch (lines[0].length) {

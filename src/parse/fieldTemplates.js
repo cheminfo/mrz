@@ -83,6 +83,11 @@ const issuingStateTemplate = {
   parser: require('../parsers/parseState')
 };
 
+const bapConfigurationTemplate = {
+  label: 'BAP configuration',
+  field: 'bapConfiguration'
+};
+
 module.exports = {
   documentNumberTemplate,
   documentNumberCheckDigitTemplate,
@@ -97,5 +102,6 @@ module.exports = {
   compositeCheckDigitTemplate,
   firstNameTemplate,
   lastNameTemplate,
-  issuingStateTemplate
+  issuingStateTemplate,
+  bapConfigurationTemplate
 };
