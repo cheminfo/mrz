@@ -8,11 +8,11 @@ function parseMRZ(lines) {
   lines = checkLines(lines);
   switch (lines.length) {
     case 1:{
-      if (lines[0].match(/^D[1,P,N,<]FRA/)) {
-        return parsers.FRENCH_DRIVING_LICENCE(lines);
+      if (lines[0].match(/^D[1PN<]FRA/)) {
+        return parsers.FRENCH_DRIVING_LICENSE(lines);
       }
       throw new Error(
-        'unrecognized document format. Input must match pattern /^D[1,P,N,<]FRA/ (French Driving License)'
+        'unrecognized document format. Input must match pattern /^D[1PN<]FRA/ (French Driving License)'
       );
     }
     case 2:
