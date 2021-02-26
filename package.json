@@ -7,19 +7,18 @@
     "src"
   ],
   "scripts": {
-    "eslint": "eslint builder src",
+    "eslint": "eslint .",
     "eslint-fix": "npm run eslint -- --fix",
-    "test": "npm run test-only && npm run eslint",
+    "test": "npm run test-coverage && npm run eslint",
     "test-coverage": "jest --coverage",
-    "test-travis": "npm run test-coverage && npm run eslint",
     "test-only": "jest",
-    "build": "npm run buildStates && cheminfo build",
-    "prepublish": "npm run buildStates",
+    "build": "npm run buildStates && cheminfo-build",
+    "prepublishOnly": "npm run buildStates",
     "buildStates": "node builder/createStatesJs.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cheminfo-js/mrz.git"
+    "url": "https://github.com/cheminfo/mrz.git"
   },
   "keywords": [
     "mrz",
@@ -34,14 +33,13 @@
   "author": "Luc Patiny <luc@patiny.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cheminfo-js/mrz/issues"
+    "url": "https://github.com/cheminfo/mrz/issues"
   },
-  "homepage": "https://github.com/cheminfo-js/mrz#readme",
+  "homepage": "https://github.com/cheminfo/mrz#readme",
   "devDependencies": {
-    "cheminfo-tools": "^1.20.3",
-    "eslint": "^4.19.1",
-    "eslint-config-cheminfo": "^1.15.1",
-    "eslint-plugin-jest": "^21.22.0",
-    "jest": "^22.4.4"
+    "cheminfo-build": "^1.1.9",
+    "eslint": "^7.20.0",
+    "eslint-config-cheminfo": "^5.2.3",
+    "jest": "^26.6.3"
   }
 }

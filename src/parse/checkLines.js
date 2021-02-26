@@ -10,7 +10,7 @@ function checkLines(lines) {
   for (const line of lines) {
     if (!line.match(/[A-Z0-9<]+/)) {
       throw new TypeError(
-        'lines must be composed of only alphanumerical characters and "<"'
+        'lines must be composed of only alphanumerical characters and "<"',
       );
     }
   }

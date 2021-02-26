@@ -6,18 +6,18 @@ describe('parse TD3', () => {
   it('Utopia example', function () {
     const MRZ = [
       'P<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<',
-      'L898902C36UTO7408122F1204159ZE184226B<<<<<10'
+      'L898902C36UTO7408122F1204159ZE184226B<<<<<10',
     ];
 
     const result = parse(MRZ);
     expect(result).toMatchObject({
       valid: false,
-      format: 'TD3'
+      format: 'TD3',
     });
     expect(result.valid).toBe(false);
     const errors = result.details.filter((a) => !a.valid);
     expect(errors).toHaveLength(2);
-    expect(result.fields).toEqual({
+    expect(result.fields).toStrictEqual({
       documentCode: 'P',
       firstName: 'ANNA MARIA',
       lastName: 'ERIKSSON',
@@ -32,13 +32,13 @@ describe('parse TD3', () => {
       birthDate: '740812',
       birthDateCheckDigit: '2',
       issuingState: null,
-      compositeCheckDigit: '0'
+      compositeCheckDigit: '0',
     });
 
     const personalNumberDetails = result.details.find(
-      (d) => d.field === 'personalNumber'
+      (d) => d.field === 'personalNumber',
     );
-    expect(personalNumberDetails).toEqual({
+    expect(personalNumberDetails).toStrictEqual({
       label: 'Personal number',
       field: 'personalNumber',
       value: 'ZE184226B',
@@ -46,10 +46,10 @@ describe('parse TD3', () => {
       ranges: [{ line: 1, start: 28, end: 42, raw: 'ZE184226B<<<<<' }],
       line: 1,
       start: 28,
-      end: 37
+      end: 37,
     });
 
-    expect(errors[0]).toEqual({
+    expect(errors[0]).toStrictEqual({
       label: 'Issuing state',
       field: 'issuingState',
       value: null,
@@ -58,19 +58,19 @@ describe('parse TD3', () => {
       line: 0,
       start: 2,
       end: 5,
-      error: 'invalid state code: UTO'
+      error: 'invalid state code: UTO',
     });
   });
 
   it('German example', () => {
     const MRZ = [
       'P<D<<MUSTERMANN<<ERIKA<<<<<<<<<<<<<<<<<<<<<<',
-      'C01X0006H1D<<6408125F1710319<<<<<<<<<<<<<<<0'
+      'C01X0006H1D<<6408125F1710319<<<<<<<<<<<<<<<0',
     ];
 
     const result = parse.TD3(MRZ);
     expect(result.valid).toBe(true);
-    expect(result.fields).toEqual({
+    expect(result.fields).toStrictEqual({
       documentCode: 'P',
       issuingState: 'D',
       lastName: 'MUSTERMANN',
@@ -85,7 +85,7 @@ describe('parse TD3', () => {
       expirationDateCheckDigit: '9',
       personalNumber: '',
       personalNumberCheckDigit: '<',
-      compositeCheckDigit: '0'
+      compositeCheckDigit: '0',
     });
   });
 });

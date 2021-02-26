@@ -8,14 +8,14 @@ const states = fs
   .filter((c) => c !== '' && c.charAt(0) !== '#');
 
 const statesObject = {};
-for (var state of states) {
+for (let state of states) {
   const split = state.split(' ');
   statesObject[split[split.length - 1]] = split
     .slice(0, split.length - 2)
     .join(' ');
 }
 
-var result = [];
+let result = [];
 result.push("'use strict';");
 result.push(`const states = ${JSON.stringify(statesObject, null, 2)};`);
 result.push('Object.freeze(states);');

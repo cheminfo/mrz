@@ -9,7 +9,7 @@ module.exports = function parseLanguageCode(languageCode) {
       return languageCode;
     default:
       throw new Error(
-        `invalid languageCode code: ${languageCode}. Must be D, F, I or R`
+        `invalid languageCode code: ${languageCode}. Must be D, F, I or R`,
       );
   }
 };

@@ -1,16 +1,14 @@
 # mrz
 
 [![NPM version][npm-image]][npm-url]
-[![build status][travis-image]][travis-url]
-[![Test coverage][coveralls-image]][coveralls-url]
-[![David deps][david-image]][david-url]
+[![build status][ci-image]][ci-url]
 [![npm download][download-image]][download-url]
 
 Parse MRZ (Machine Readable Zone) from identity documents.
 
 ## Installation
 
-`$ npm install --save mrz`
+`$ npm install mrz`
 
 ## Example
 
@@ -20,7 +18,7 @@ const parse = require('mrz').parse;
 let mrz = [
   'I<UTOD23145890<1233<<<<<<<<<<<',
   '7408122F1204159UTO<<<<<<<<<<<6',
-  'ERIKSSON<<ANNA<MARIA<<<<<<<<<<'
+  'ERIKSSON<<ANNA<MARIA<<<<<<<<<<',
 ];
 
 var result = parse(mrz);
@@ -41,11 +39,11 @@ details about the invalid fields can be found in `result.details`.
 
 String identifying the format of the parsed MRZ. Supported formats are:
 
-* TD1 (identity card with three MRZ lines)
-* TD2 (identity card with two MRZ lines)
-* TD3 (passport)
-* SWISS_DRIVING_LICENSE
-* FRENCH_NATIONAL_ID
+- TD1 (identity card with three MRZ lines)
+- TD2 (identity card with two MRZ lines)
+- TD3 (passport)
+- SWISS_DRIVING_LICENSE
+- FRENCH_NATIONAL_ID
 
 #### result.valid
 
@@ -61,15 +59,15 @@ if it is invalid. The value may be different than the raw value. For example
 
 Array of objects describing all parsed fields. Its structure is:
 
-* label {string} - Full english term for the field.
-* field {string} - Name of the field in `result.fields`.
-* value {string} - Value of the field or `null`.
-* valid {boolean}
-* ranges {Array} - Array of ranges that are necessary to compute this field.
+- label {string} - Full english term for the field.
+- field {string} - Name of the field in `result.fields`.
+- value {string} - Value of the field or `null`.
+- valid {boolean}
+- ranges {Array} - Array of ranges that are necessary to compute this field.
   Ranges are objects with `line`, `start`, `end` and `raw`.
-* line {number} - Index of the line where the field is located.
-* start {number} - Index of the start of the field in `line`.
-* end {number} - Index of the end of the field in `line`.
+- line {number} - Index of the line where the field is located.
+- start {number} - Index of the start of the field in `line`.
+- end {number} - Index of the end of the field in `line`.
 
 ### formats
 
@@ -97,13 +95,9 @@ https://fr.wikipedia.org/wiki/Carte_nationale_d%27identit%C3%A9_en_France#Codage
 
 [MIT](./LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/mrz.svg?style=flat-square
+[npm-image]: https://img.shields.io/npm/v/mrz.svg
 [npm-url]: https://npmjs.org/package/mrz
-[travis-image]: https://img.shields.io/travis/cheminfo-js/mrz/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/cheminfo-js/mrz
-[coveralls-image]: https://img.shields.io/coveralls/cheminfo-js/mrz.svg?style=flat-square
-[coveralls-url]: https://coveralls.io/github/cheminfo-js/mrz
-[david-image]: https://img.shields.io/david/cheminfo-js/mrz.svg?style=flat-square
-[david-url]: https://david-dm.org/cheminfo-js/mrz
-[download-image]: https://img.shields.io/npm/dm/mrz.svg?style=flat-square
+[ci-image]: https://github.com/cheminfo/mrz/workflows/Node.js%20CI/badge.svg?branch=master
+[ci-url]: https://github.com/cheminfo/mrz/actions?query=workflow%3A%22Node.js+CI%22
+[download-image]: https://img.shields.io/npm/dm/mrz.svg
 [download-url]: https://npmjs.org/package/mrz

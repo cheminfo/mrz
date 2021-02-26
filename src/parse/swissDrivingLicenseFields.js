@@ -1,27 +1,28 @@
 'use strict';
 
-const parseDocumentNumber = require('../parsers/swissDrivingLicense/parseDocumentNumber');
-const parseLanguageCode = require('../parsers/swissDrivingLicense/parseLanguageCode');
-const parseDocumentCode = require('../parsers/swissDrivingLicense/parseDocumentCode');
-const parseIssuingState = require('../parsers/swissDrivingLicense/parseIssuingState');
 const parseNumber = require('../parsers/parseNumber');
 const checkSeparator = require('../parsers/swissDrivingLicense/checkSeparator');
+const parseDocumentCode = require('../parsers/swissDrivingLicense/parseDocumentCode');
+const parseDocumentNumber = require('../parsers/swissDrivingLicense/parseDocumentNumber');
+const parseIssuingState = require('../parsers/swissDrivingLicense/parseIssuingState');
+const parseLanguageCode = require('../parsers/swissDrivingLicense/parseLanguageCode');
+
+const createFieldParser = require('./createFieldParser');
 const {
   documentNumberTemplate,
   documentCodeTemplate,
   issuingStateTemplate,
   birthDateTemplate,
   lastNameTemplate,
-  firstNameTemplate
+  firstNameTemplate,
 } = require('./fieldTemplates');
-const createFieldParser = require('./createFieldParser');
 
 module.exports = [
   Object.assign({}, documentNumberTemplate, {
     line: 0,
     start: 0,
     end: 9,
-    parser: parseDocumentNumber
+    parser: parseDocumentNumber,
   }),
   {
     label: 'Language code',
@@ -29,19 +30,19 @@ module.exports = [
     line: 0,
     start: 6,
     end: 7,
-    parser: parseLanguageCode
+    parser: parseLanguageCode,
   },
   Object.assign({}, documentCodeTemplate, {
     line: 1,
     start: 0,
     end: 2,
-    parser: parseDocumentCode
+    parser: parseDocumentCode,
   }),
   Object.assign({}, issuingStateTemplate, {
     line: 1,
     start: 2,
     end: 5,
-    parser: parseIssuingState
+    parser: parseIssuingState,
   }),
   {
     label: 'PIN code',
@@ -49,7 +50,7 @@ module.exports = [
     line: 1,
     start: 5,
     end: 14,
-    parser: parseNumber
+    parser: parseNumber,
   },
   {
     label: 'Version number',
@@ -57,7 +58,7 @@ module.exports = [
     line: 1,
     start: 14,
     end: 17,
-    parser: parseNumber
+    parser: parseNumber,
   },
   {
     label: 'Separator 1',
@@ -65,12 +66,12 @@ module.exports = [
     line: 1,
     start: 17,
     end: 19,
-    parser: checkSeparator
+    parser: checkSeparator,
   },
   Object.assign({}, birthDateTemplate, {
     line: 1,
     start: 19,
-    end: 25
+    end: 25,
   }),
   {
     label: 'Separator 2',
@@ -78,16 +79,16 @@ module.exports = [
     line: 1,
     start: 25,
     end: 30,
-    parser: checkSeparator
+    parser: checkSeparator,
   },
   Object.assign({}, lastNameTemplate, {
     line: 2,
     start: 0,
-    end: 30
+    end: 30,
   }),
   Object.assign({}, firstNameTemplate, {
     line: 2,
     start: 0,
-    end: 30
-  })
+    end: 30,
+  }),
 ].map(createFieldParser);

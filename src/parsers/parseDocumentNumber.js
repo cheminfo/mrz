@@ -16,6 +16,6 @@ module.exports = function parseDocumentNumber(source, checkDigit, optional) {
   return {
     value,
     start: 0,
-    end
+    end,
   };
 };

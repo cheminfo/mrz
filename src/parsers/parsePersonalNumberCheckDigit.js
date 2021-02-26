@@ -1,11 +1,11 @@
 'use strict';
 
-var check = require('./check');
+let check = require('./check');
 const cleanText = require('./cleanText');
 
 module.exports = function parsePersonalNumberCheckDigit(
   checkDigit,
-  personalNumber
+  personalNumber,
 ) {
   const cleanNumber = cleanText(personalNumber);
   if (cleanNumber === '') {

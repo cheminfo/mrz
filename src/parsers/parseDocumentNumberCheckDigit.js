@@ -1,11 +1,11 @@
 'use strict';
 
-var check = require('./check');
+let check = require('./check');
 
 module.exports = function parseDocumentNumberCheckDigit(
   checkDigit,
   source,
-  optional
+  optional,
 ) {
   if (checkDigit === '<' && optional) {
     const firstFiller = optional.indexOf('<');
@@ -16,7 +16,7 @@ module.exports = function parseDocumentNumberCheckDigit(
     return {
       value: checkDigit,
       start: firstFiller,
-      end: firstFiller + 1
+      end: firstFiller + 1,
     };
   } else {
     check(source, checkDigit);

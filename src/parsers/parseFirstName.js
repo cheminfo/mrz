@@ -1,6 +1,6 @@
 'use strict';
 
-var parseText = require('./parseText');
+let parseText = require('./parseText');
 
 module.exports = function parseFirstName(source) {
   const withoutStart = source.replace(/.*?<{2}/, '');
@@ -9,6 +9,6 @@ module.exports = function parseFirstName(source) {
   return {
     value,
     start,
-    end: start + value.length
+    end: start + value.length,
   };
 };

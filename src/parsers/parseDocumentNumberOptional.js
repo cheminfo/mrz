@@ -1,11 +1,11 @@
 'use strict';
 
-var parseText = require('./parseText');
+let parseText = require('./parseText');
 
 module.exports = function parseDocumentNumberOptional(
   optional,
   documentNumber,
-  checkDigit
+  checkDigit,
 ) {
   if (checkDigit === '<') {
     const firstFiller = optional.indexOf('<');
@@ -13,14 +13,14 @@ module.exports = function parseDocumentNumberOptional(
     return {
       value,
       start: firstFiller + 1,
-      end: firstFiller + 1 + value.length
+      end: firstFiller + 1 + value.length,
     };
   } else {
     const value = parseText(optional);
     return {
       value,
       start: 0,
-      end: 0 + value.length
+      end: 0 + value.length,
     };
   }
 };

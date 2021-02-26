@@ -1,6 +1,6 @@
 'use strict';
 
-var parseText = require('./parseText');
+let parseText = require('./parseText');
 
 module.exports = function parseOptional(source) {
   const value = parseText(source);
@@ -8,6 +8,6 @@ module.exports = function parseOptional(source) {
   return {
     value,
     start: 0,
-    end: 0 + value.length
+    end: 0 + value.length,
   };
 };

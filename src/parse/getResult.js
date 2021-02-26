@@ -27,7 +27,7 @@ function getResult(format, lines, fieldParsers) {
     format,
     details,
     fields: fields.fields,
-    valid: fields.valid
+    valid: fields.valid,
   };
   return result;
 }

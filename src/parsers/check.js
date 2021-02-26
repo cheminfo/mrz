@@ -1,10 +1,10 @@
 'use strict';
 
 module.exports = function check(string, value) {
-  var code = 0;
-  var factors = [7, 3, 1];
-  for (var i = 0; i < string.length; i++) {
-    var charCode = string.charCodeAt(i);
+  let code = 0;
+  let factors = [7, 3, 1];
+  for (let i = 0; i < string.length; i++) {
+    let charCode = string.charCodeAt(i);
     if (charCode === 60) charCode = 0;
     if (charCode >= 65) charCode -= 55;
     if (charCode >= 48) charCode -= 48;

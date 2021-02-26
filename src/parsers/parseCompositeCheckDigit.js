@@ -1,6 +1,6 @@
 'use strict';
 
-var check = require('./check');
+let check = require('./check');
 
 module.exports = function parseCompositeCheckDigit(checkDigit, ...sources) {
   const source = sources.join('');

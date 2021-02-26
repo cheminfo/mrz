@@ -1,7 +1,8 @@
 'use strict';
 
-const checkLines = require('./checkLines');
 const formats = require('../formats');
+
+const checkLines = require('./checkLines');
 const parsers = require('./parsers');
 
 function parseMRZ(lines) {
@@ -26,15 +27,13 @@ function parseMRZ(lines) {
           return parsers.SWISS_DRIVING_LICENSE(lines);
         default:
           throw new Error(
-            'unrecognized document format. First line of input must have 30 (TD1), 36 (TD2 or French National Id), 44 (TD3) or 9 (Swiss Driving License) characters'
+            'unrecognized document format. First line of input must have 30 (TD1), 36 (TD2 or French National Id), 44 (TD3) or 9 (Swiss Driving License) characters',
           );
       }
     }
     default:
       throw new Error(
-        `unrecognized document format. Input must have two or three lines, found${
-          lines.length
-        }`
+        `unrecognized document format. Input must have two or three lines, found${lines.length}`,
       );
   }
 }

@@ -7,15 +7,15 @@ describe('parse TD1', () => {
     const data = [
       'IDCHEA1234567<6<<<<<<<<<<<<<<<',
       '7510256M2009018CHE<<<<<<<<<<<8',
-      'SMITH<<JOHN<ALBERT<<<<<<<<<<<<'
+      'SMITH<<JOHN<ALBERT<<<<<<<<<<<<',
     ];
 
     const result = parse(data);
     expect(result).toMatchObject({
       format: 'TD1',
-      valid: true
+      valid: true,
     });
-    expect(result.fields).toEqual({
+    expect(result.fields).toStrictEqual({
       documentCode: 'ID',
       issuingState: 'CHE',
       documentNumber: 'A1234567',
@@ -30,17 +30,17 @@ describe('parse TD1', () => {
       optional2: '',
       compositeCheckDigit: '8',
       lastName: 'SMITH',
-      firstName: 'JOHN ALBERT'
+      firstName: 'JOHN ALBERT',
     });
 
     const optional1Details = result.details.find(
-      (f) => f.field === 'optional1'
+      (f) => f.field === 'optional1',
     );
     expect(optional1Details).toMatchObject({
       value: '',
       line: 0,
       start: 15,
-      end: 15
+      end: 15,
     });
   });
 
@@ -48,12 +48,12 @@ describe('parse TD1', () => {
     const MRZ = [
       'I<UTOD231458907ABC<<<<<<<<<<<<',
       '7408122F1204159UTO<<<<<<<<<<<1',
-      'ERIKSSON<<ANNA<MARIA<<<<<<<<<<'
+      'ERIKSSON<<ANNA<MARIA<<<<<<<<<<',
     ];
 
     const result = parse(MRZ);
     expect(result.details.filter((a) => !a.valid)).toHaveLength(2);
-    expect(result.fields).toEqual({
+    expect(result.fields).toStrictEqual({
       firstName: 'ANNA MARIA',
       lastName: 'ERIKSSON',
       nationality: null,
@@ -68,19 +68,19 @@ describe('parse TD1', () => {
       sex: 'female',
       optional1: 'ABC',
       optional2: '',
-      compositeCheckDigit: '1'
+      compositeCheckDigit: '1',
     });
-    expect(result.valid).toEqual(false);
+    expect(result.valid).toStrictEqual(false);
     expect(
-      result.details.find((a) => a.field === 'issuingState').valid
-    ).toEqual(false);
+      result.details.find((a) => a.field === 'issuingState').valid,
+    ).toStrictEqual(false);
 
     const optional1 = result.details.find((a) => a.field === 'optional1');
     expect(optional1).toMatchObject({
       value: 'ABC',
       line: 0,
       start: 15,
-      end: 18
+      end: 18,
     });
 
     const optional2 = result.details.find((a) => a.field === 'optional2');
@@ -88,7 +88,7 @@ describe('parse TD1', () => {
       value: '',
       line: 1,
       start: 18,
-      end: 18
+      end: 18,
     });
   });
 
@@ -96,15 +96,15 @@ describe('parse TD1', () => {
     const MRZ = [
       'I<UTOD23145890<1240<XYZ<<<<<<<',
       '7408122F1204159UTO<<<<<<<<<<<8',
-      'ERIKSSON<<ANNA<MARIA<<<<<<<<<<'
+      'ERIKSSON<<ANNA<MARIA<<<<<<<<<<',
     ];
     const result = parse(MRZ);
     expect(result.valid).toBe(false);
     expect(result.details.filter((f) => !f.valid)).toHaveLength(2);
     const documentNumberDetails = result.details.find(
-      (d) => d.field === 'documentNumber'
+      (d) => d.field === 'documentNumber',
     );
-    expect(documentNumberDetails).toEqual({
+    expect(documentNumberDetails).toStrictEqual({
       label: 'Document number',
       field: 'documentNumber',
       value: 'D23145890124',
@@ -112,23 +112,23 @@ describe('parse TD1', () => {
       ranges: [
         { line: 0, start: 5, end: 14, raw: 'D23145890' },
         { line: 0, start: 14, end: 15, raw: '<' },
-        { line: 0, start: 15, end: 30, raw: '1240<XYZ<<<<<<<' }
+        { line: 0, start: 15, end: 30, raw: '1240<XYZ<<<<<<<' },
       ],
       line: 0,
       start: 5,
-      end: 18
+      end: 18,
     });
-    expect(result.fields.documentNumber).toEqual('D23145890124');
-    expect(result.fields.documentNumberCheckDigit).toEqual('0');
+    expect(result.fields.documentNumber).toStrictEqual('D23145890124');
+    expect(result.fields.documentNumberCheckDigit).toStrictEqual('0');
 
     const documentNumberCheckDigitDetails = result.details.find(
-      (d) => d.field === 'documentNumberCheckDigit'
+      (d) => d.field === 'documentNumberCheckDigit',
     );
     expect(documentNumberCheckDigitDetails).toMatchObject({
       line: 0,
       start: 18,
       end: 19,
-      value: '0'
+      value: '0',
     });
   });
 });

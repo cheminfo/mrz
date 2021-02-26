@@ -14,8 +14,8 @@ module.exports = function (fieldOptions) {
     {
       line: fieldOptions.line,
       start: fieldOptions.start,
-      end: fieldOptions.end
-    }
+      end: fieldOptions.end,
+    },
   ];
   if (Array.isArray(fieldOptions.related)) {
     for (const related of fieldOptions.related) {
@@ -39,8 +39,8 @@ module.exports = function (fieldOptions) {
         line: range.line,
         start: range.start,
         end: range.end,
-        raw: getText(lines, range)
-      }))
+        raw: getText(lines, range),
+      })),
     };
     const range = result.ranges[0];
     result.line = range.line;

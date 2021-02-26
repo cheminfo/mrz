@@ -6,13 +6,13 @@ describe('parse French National Id', () => {
   it('valid MRZ', function () {
     const MRZ = [
       'IDFRATEST<NAME<<<<<<<<<<<<<<<<0CHE02',
-      '1710GVA123451ROBERTA<<<<<<<9112311F2'
+      '1710GVA123451ROBERTA<<<<<<<9112311F2',
     ];
-    var result = parse(MRZ);
+    let result = parse(MRZ);
     expect(result.format).toBe('FRENCH_NATIONAL_ID');
-    // expect(result.valid).toEqual(true);
+    // expect(result.valid).toStrictEqual(true);
     expect(result.details.filter((a) => !a.valid)).toHaveLength(0);
-    expect(result.fields).toEqual({
+    expect(result.fields).toStrictEqual({
       documentCode: 'ID',
       issuingState: 'FRA',
       lastName: 'TEST NAME',
@@ -25,7 +25,7 @@ describe('parse French National Id', () => {
       birthDate: '911231',
       birthDateCheckDigit: '1',
       sex: 'female',
-      compositeCheckDigit: '2'
+      compositeCheckDigit: '2',
     });
   });
 });
