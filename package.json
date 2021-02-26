@@ -7,7 +7,7 @@
     "src"
   ],
   "scripts": {
-    "eslint": "eslint .",
+    "eslint": "eslint builder src",
     "eslint-fix": "npm run eslint -- --fix",
     "test": "npm run test-coverage && npm run eslint",
     "test-coverage": "jest --coverage",
@@ -40,6 +40,7 @@
     "cheminfo-build": "^1.1.9",
     "eslint": "^7.20.0",
     "eslint-config-cheminfo": "^5.2.3",
-    "jest": "^26.6.3"
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1"
   }
 }
