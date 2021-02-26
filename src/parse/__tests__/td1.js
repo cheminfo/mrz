@@ -131,4 +131,17 @@ describe('parse TD1', () => {
       value: '0',
     });
   });
+
+  it('No last name', () => {
+    const MRZ = [
+      'I<CHED231458907ABC<<<<<<<<<<<<',
+      '7408122F1204159CHE<<<<<<<<<<<1',
+      '<<ANNA<MARIA<<<<<<<<<<<<<<<<<<',
+    ];
+
+    const result = parse(MRZ);
+    expect(result.valid).toBe(true);
+    expect(result.fields.lastName).toBe('');
+    expect(result.fields.firstName).toBe('ANNA MARIA');
+  });
 });

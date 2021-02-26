@@ -88,4 +88,31 @@ describe('parse TD3', () => {
       compositeCheckDigit: '0',
     });
   });
+
+  it('No last name', () => {
+    const MRZ = [
+      'P<IND<<FIRST<NAME<<<<<<<<<<<<<<<<<<<<<<<<<<<',
+      'C01X0006H1D<<6408125F1710319<<<<<<<<<<<<<<<0',
+    ];
+
+    const result = parse.TD3(MRZ);
+    expect(result.valid).toBe(true);
+    expect(result.fields).toStrictEqual({
+      documentCode: 'P',
+      issuingState: 'IND',
+      lastName: '',
+      firstName: 'FIRST NAME',
+      documentNumber: 'C01X0006H',
+      documentNumberCheckDigit: '1',
+      nationality: 'D',
+      birthDate: '640812',
+      birthDateCheckDigit: '5',
+      sex: 'female',
+      expirationDate: '171031',
+      expirationDateCheckDigit: '9',
+      personalNumber: '',
+      personalNumberCheckDigit: '<',
+      compositeCheckDigit: '0',
+    });
+  });
 });
