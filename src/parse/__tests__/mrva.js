@@ -63,7 +63,7 @@ describe('parse MRV-A', () => {
   it('GBR Example', () => {
     const MRZ = [
       'VBGBROCONNOR<<ENYA<SIOBHAN<<<<<<<<<<<<<<<<<<',
-      '5114278475DOM7510223M1506118<<<<<<<<<<<<<<08',
+      '5114278475DOM7510223M150611808<<<<<<<<<<<<<<',
     ];
 
     const result = parse(MRZ);
@@ -81,7 +81,7 @@ describe('parse MRV-A', () => {
       sex: 'male',
       expirationDate: '150611',
       expirationDateCheckDigit: '8',
-      optionalData: '              08',
+      optionalData: '08',
     });
   });
 });

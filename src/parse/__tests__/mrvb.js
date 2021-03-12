@@ -48,7 +48,7 @@ describe('parse MRV-B', () => {
     });
   });
 
-  it('Hyphenated name', () => {
+  it('Finland visa', () => {
     const MRZ = [
       'V<FINSMITH<JONES<<SUSIE<MARGARET<<<<',
       'L898902C<3USA6908061F9406236ZE184226',
