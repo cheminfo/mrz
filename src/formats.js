@@ -6,6 +6,8 @@ const formats = {
   TD3: 'TD3',
   SWISS_DRIVING_LICENSE: 'SWISS_DRIVING_LICENSE',
   FRENCH_NATIONAL_ID: 'FRENCH_NATIONAL_ID',
+  MRVA: 'MRVA',
+  MRVB: 'MRVB',
 };
 Object.freeze(formats);
 

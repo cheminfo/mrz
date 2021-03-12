@@ -1,6 +1,8 @@
 'use strict';
 
 const parseFrenchNationalId = require('./frenchNationalId');
+const parseMRVA = require('./mrva');
+const parseMRVB = require('./mrvb');
 const parseSwissDrivingLicense = require('./swissDrivingLicense');
 const parseTD1 = require('./td1');
 const parseTD2 = require('./td2');
@@ -12,4 +14,6 @@ module.exports = {
   TD3: parseTD3,
   SWISS_DRIVING_LICENSE: parseSwissDrivingLicense,
   FRENCH_NATIONAL_ID: parseFrenchNationalId,
+  MRVA: parseMRVA,
+  MRVB: parseMRVB,
 };

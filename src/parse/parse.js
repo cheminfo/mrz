@@ -17,12 +17,18 @@ function parseMRZ(lines) {
           const endLine1 = lines[0].substr(30, 36);
           if (endLine1.match(/[0-9]/)) {
             return parsers.FRENCH_NATIONAL_ID(lines);
+          } else if (lines[0].charAt(0) === 'V') {
+            return parsers.MRVB(lines);
           } else {
             return parsers.TD2(lines);
           }
         }
         case 44:
-          return parsers.TD3(lines);
+          if (lines[0].charAt(0) === 'V') {
+            return parsers.MRVA(lines);
+          } else {
+            return parsers.TD3(lines);
+          }
         case 9:
           return parsers.SWISS_DRIVING_LICENSE(lines);
         default:
