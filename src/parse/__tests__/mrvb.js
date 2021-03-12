@@ -33,18 +33,18 @@ describe('parse MRV-B', () => {
       optionalData: '',
     });
 
-    const personalNumberDetails = result.details.find(
-      (d) => d.field === 'nationality',
+    const optionalDataDetails = result.details.find(
+      (d) => d.field === 'optionalData',
     );
-    expect(personalNumberDetails).toStrictEqual({
-      label: 'Nationality',
-      field: 'nationality',
-      value: 'XXX',
+    expect(optionalDataDetails).toStrictEqual({
+      label: 'Optional data',
+      field: 'optionalData',
+      value: '',
       valid: true,
-      ranges: [{ line: 1, start: 10, end: 13, raw: 'XXX' }],
+      ranges: [{ line: 1, start: 28, end: 36, raw: '<<<<<<<<' }],
       line: 1,
-      start: 10,
-      end: 13,
+      start: 28,
+      end: 28,
     });
   });
 
@@ -76,10 +76,10 @@ describe('parse MRV-B', () => {
       optionalData: 'ZE184226',
     });
 
-    const personalNumberDetails = result.details.find(
+    const optionalDataDetails = result.details.find(
       (d) => d.field === 'optionalData',
     );
-    expect(personalNumberDetails).toStrictEqual({
+    expect(optionalDataDetails).toStrictEqual({
       label: 'Optional data',
       field: 'optionalData',
       value: 'ZE184226',
