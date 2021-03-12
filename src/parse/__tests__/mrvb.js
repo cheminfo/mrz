@@ -48,7 +48,7 @@ describe('parse MRV-B', () => {
     });
   });
 
-  it('Finland visa', () => {
+  it('Finland visa optional data', () => {
     const MRZ = [
       'V<FINSMITH<JONES<<SUSIE<MARGARET<<<<',
       'L898902C<3USA6908061F9406236ZE184226',
@@ -74,6 +74,20 @@ describe('parse MRV-B', () => {
       expirationDate: '940623',
       expirationDateCheckDigit: '6',
       optionalData: 'ZE184226',
+    });
+
+    const personalNumberDetails = result.details.find(
+      (d) => d.field === 'optionalData',
+    );
+    expect(personalNumberDetails).toStrictEqual({
+      label: 'Optional data',
+      field: 'optionalData',
+      value: 'ZE184226',
+      valid: true,
+      ranges: [{ line: 1, start: 28, end: 36, raw: 'ZE184226' }],
+      line: 1,
+      start: 28,
+      end: 36,
     });
   });
 });
