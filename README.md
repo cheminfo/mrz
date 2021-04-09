@@ -1,4 +1,5 @@
 # mrz
+
 Parse MRZ (Machine Readable Zone) from identity documents.
 
 <h3 align="center">
