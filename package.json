@@ -9,11 +9,13 @@
   "scripts": {
     "eslint": "eslint builder src",
     "eslint-fix": "npm run eslint -- --fix",
-    "test": "npm run test-coverage && npm run eslint",
+    "test": "npm run test-coverage && npm run eslint && npm run prettier",
     "test-coverage": "jest --coverage",
     "test-only": "jest",
     "build": "npm run buildStates && cheminfo-build",
-    "prepublishOnly": "npm run buildStates",
+    "prepack": "npm run buildStates",
+    "prettier": "prettier --check .",
+    "prettier-write": "prettier --write .",
     "buildStates": "node builder/createStatesJs.js"
   },
   "repository": {
@@ -37,10 +39,10 @@
   },
   "homepage": "https://github.com/cheminfo/mrz#readme",
   "devDependencies": {
-    "cheminfo-build": "^1.1.9",
-    "eslint": "^7.20.0",
-    "eslint-config-cheminfo": "^5.2.3",
+    "cheminfo-build": "^1.1.10",
+    "eslint": "^7.26.0",
+    "eslint-config-cheminfo": "^5.2.4",
     "jest": "^26.6.3",
-    "prettier": "^2.2.1"
+    "prettier": "^2.3.0"
   }
 }

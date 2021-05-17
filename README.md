@@ -12,10 +12,10 @@ Parse MRZ (Machine Readable Zone) from identity documents.
     Maintained by <a href="https://www.zakodium.com">Zakodium</a>
   </p>
 
-  [![NPM version][npm-image]][npm-url]
-  [![build status][ci-image]][ci-url]
-  [![npm download][download-image]][download-url]
-  
+[![NPM version][npm-image]][npm-url]
+[![build status][ci-image]][ci-url]
+[![npm download][download-image]][download-url]
+
 </h3>
 
 ## Installation
