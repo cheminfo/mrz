@@ -275,4 +275,5 @@ Sovereign Military Order of Malta or one of its emissaries _ XOM
 # Part E - Codes for Persons Without a Defined Nationality
 Stateless person, as defined in Article 1 of the 1954 Convention Relating to the Status of Stateless Persons _ XXA
 Refugee, as defined in Article 1 of the 1951 Convention Relating to the Status of Refugees as amended by the 1967 Protocol _ XXB
-Refugee, other than as defined under the code XXB above XXC Person of unspecified nationality, for whom issuing State does not consider it necessary to specify any of the codes XXA, XXB or XXC above, whatever that person’s status may be. This category may include a person who is neither stateless nor a refugee but who is of unknown nationality and legally residing in the State of issue. _ XXX
+Refugee, other than as defined under the code XXB above _ XXC
+Person of unspecified nationality, for whom issuing State does not consider it necessary to specify any of the codes XXA, XXB or XXC above, whatever that person’s status may be. This category may include a person who is neither stateless nor a refugee but who is of unknown nationality and legally residing in the State of issue. _ XXX

@@ -268,7 +268,8 @@ const states = {
   "XOM": "Sovereign Military Order of Malta or one of its emissaries",
   "XXA": "Stateless person, as defined in Article 1 of the 1954 Convention Relating to the Status of Stateless Persons",
   "XXB": "Refugee, as defined in Article 1 of the 1951 Convention Relating to the Status of Refugees as amended by the 1967 Protocol",
-  "XXX": "Refugee, other than as defined under the code XXB above XXC Person of unspecified nationality, for whom issuing State does not consider it necessary to specify any of the codes XXA, XXB or XXC above, whatever that person’s status may be. This category may include a person who is neither stateless nor a refugee but who is of unknown nationality and legally residing in the State of issue."
+  "XXC": "Refugee, other than as defined under the code XXB above",
+  "XXX": "Person of unspecified nationality, for whom issuing State does not consider it necessary to specify any of the codes XXA, XXB or XXC above, whatever that person’s status may be. This category may include a person who is neither stateless nor a refugee but who is of unknown nationality and legally residing in the State of issue."
 };
 Object.freeze(states);
 module.exports = states;

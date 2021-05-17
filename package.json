@@ -7,16 +7,15 @@
     "src"
   ],
   "scripts": {
+    "buildStates": "node builder/createStatesJs.js",
     "eslint": "eslint builder src",
     "eslint-fix": "npm run eslint -- --fix",
     "test": "npm run test-coverage && npm run eslint && npm run prettier",
     "test-coverage": "jest --coverage",
     "test-only": "jest",
     "build": "npm run buildStates && cheminfo-build",
-    "prepack": "npm run buildStates",
     "prettier": "prettier --check .",
-    "prettier-write": "prettier --write .",
-    "buildStates": "node builder/createStatesJs.js"
+    "prettier-write": "prettier --write ."
   },
   "repository": {
     "type": "git",
