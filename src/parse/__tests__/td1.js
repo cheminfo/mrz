@@ -70,10 +70,10 @@ describe('parse TD1', () => {
       optional2: '',
       compositeCheckDigit: '1',
     });
-    expect(result.valid).toStrictEqual(false);
-    expect(
-      result.details.find((a) => a.field === 'issuingState').valid,
-    ).toStrictEqual(false);
+    expect(result.valid).toBe(false);
+    expect(result.details.find((a) => a.field === 'issuingState').valid).toBe(
+      false,
+    );
 
     const optional1 = result.details.find((a) => a.field === 'optional1');
     expect(optional1).toMatchObject({
@@ -118,8 +118,8 @@ describe('parse TD1', () => {
       start: 5,
       end: 18,
     });
-    expect(result.fields.documentNumber).toStrictEqual('D23145890124');
-    expect(result.fields.documentNumberCheckDigit).toStrictEqual('0');
+    expect(result.fields.documentNumber).toBe('D23145890124');
+    expect(result.fields.documentNumberCheckDigit).toBe('0');
 
     const documentNumberCheckDigitDetails = result.details.find(
       (d) => d.field === 'documentNumberCheckDigit',

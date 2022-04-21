@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (fieldOptions) {
+module.exports = function createFieldParser(fieldOptions) {
   checkType(fieldOptions, 'label', 'string');
   if (fieldOptions.field !== null) {
     checkType(fieldOptions, 'field', 'string');

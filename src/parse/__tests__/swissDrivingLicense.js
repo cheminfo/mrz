@@ -3,7 +3,7 @@
 const parse = require('../parse');
 
 describe('parse Swiss Driving License', () => {
-  it('valid MRZ', function () {
+  it('valid MRZ', () => {
     const MRZ = [
       'AAA001D<<',
       'FACHE305142128097<<800126<<<<<',
@@ -11,7 +11,7 @@ describe('parse Swiss Driving License', () => {
     ];
     let result = parse(MRZ);
     expect(result.format).toBe('SWISS_DRIVING_LICENSE');
-    expect(result.valid).toStrictEqual(true);
+    expect(result.valid).toBe(true);
     expect(result.details.filter((a) => !a.valid)).toHaveLength(0);
     expect(result.details[0]).toStrictEqual({
       label: 'Document number',

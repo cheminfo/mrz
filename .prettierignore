@@ -2,3 +2,4 @@ coverage
 src/generated/states.js
 node_modules
 CHANGELOG.md
+dist

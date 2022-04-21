@@ -3,7 +3,7 @@
 const parse = require('../parse');
 
 describe('parse TD2', () => {
-  it('Utopia example', function () {
+  it('Utopia example', () => {
     const MRZ = [
       'I<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<',
       'D231458907UTO7408122F1204159<<<<<<<6',
@@ -32,6 +32,6 @@ describe('parse TD2', () => {
       compositeCheckDigit: '6',
       optional: '',
     });
-    expect(result.valid).toStrictEqual(false);
+    expect(result.valid).toBe(false);
   });
 });

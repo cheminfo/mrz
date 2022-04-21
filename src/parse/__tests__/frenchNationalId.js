@@ -3,7 +3,7 @@
 const parse = require('../parse');
 
 describe('parse French National Id', () => {
-  it('valid MRZ', function () {
+  it('valid MRZ', () => {
     const MRZ = [
       'IDFRATEST<NAME<<<<<<<<<<<<<<<<0CHE02',
       '1710GVA123451ROBERTA<<<<<<<9112311F2',
