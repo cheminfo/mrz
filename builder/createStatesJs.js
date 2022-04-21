@@ -2,18 +2,45 @@
 
 const fs = require('fs');
 
-const states = fs
-  .readFileSync(`${__dirname}/states.txt`, 'utf8')
-  .split(/[\r\n]+/)
-  .filter((c) => c !== '' && c.charAt(0) !== '#');
+function readIsoStates() {
+  const states = fs
+    .readFileSync(`${__dirname}/states-iso3166.tsv`, 'utf8')
+    .split('\n')
+    .filter(
+      (c) =>
+        c !== '' && !c.startsWith('#') && !c.startsWith('English short name'),
+    );
 
-const statesObject = {};
-for (let state of states) {
-  const split = state.split(' ');
-  statesObject[split[split.length - 1]] = split
-    .slice(0, split.length - 2)
-    .join(' ');
+  const statesObject = {};
+  for (let state of states) {
+    const split = state.split('\t');
+    statesObject[split[3]] = split[0];
+  }
+
+  return statesObject;
 }
+
+function readAdditionalStates() {
+  const states = fs
+    .readFileSync(`${__dirname}/states.txt`, 'utf8')
+    .split('\n')
+    .filter((c) => c !== '' && !c.startsWith('#'));
+
+  const statesObject = {};
+  for (let state of states) {
+    const split = state.split(' ');
+    statesObject[split[split.length - 1]] = split
+      .slice(0, split.length - 2)
+      .join(' ');
+  }
+
+  return statesObject;
+}
+
+const statesObject = {
+  ...readIsoStates(),
+  ...readAdditionalStates(),
+};
 
 let result = [];
 result.push("'use strict';");

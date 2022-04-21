@@ -1,1 +1,5 @@
 extends: cheminfo
+env:
+  node: true
+parserOptions:
+  sourceType: script

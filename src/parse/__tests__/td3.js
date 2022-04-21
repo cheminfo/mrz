@@ -3,7 +3,7 @@
 const parse = require('../parse');
 
 describe('parse TD3', () => {
-  it('Utopia example', function () {
+  it('Utopia example', () => {
     const MRZ = [
       'P<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<',
       'L898902C36UTO7408122F1204159ZE184226B<<<<<10',

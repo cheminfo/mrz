@@ -10,7 +10,8 @@ describe('check countries', function () {
         expect(code).toHaveLength(3);
       }
     }
-    expect(codes).toHaveLength(270);
+    expect(codes).toHaveLength(276);
     expect(states.CHE).toBe('Switzerland');
+    expect(states.DEU).toBe('Germany');
   });
 });
