@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.1.4](https://www.github.com/cheminfo/mrz/compare/v3.1.3...v3.1.4) (2022-04-21)
+
+
+### Bug Fixes
+
+* update list of country codes ([#18](https://www.github.com/cheminfo/mrz/issues/18)) ([5cda639](https://www.github.com/cheminfo/mrz/commit/5cda63981cd8e2110f3fdb547ac85f1ba4d6ec7d))
+
 ### [3.1.3](https://www.github.com/cheminfo/mrz/compare/v3.1.2...v3.1.3) (2021-05-17)
 
 
