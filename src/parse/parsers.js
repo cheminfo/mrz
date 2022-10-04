@@ -7,9 +7,9 @@ const parseTD2 = require('./td2');
 const parseTD3 = require('./td3');
 
 module.exports = {
-  TD1: parseTD1,
-  TD2: parseTD2,
-  TD3: parseTD3,
-  SWISS_DRIVING_LICENSE: parseSwissDrivingLicense,
-  FRENCH_NATIONAL_ID: parseFrenchNationalId,
+  td1: parseTD1,
+  td2: parseTD2,
+  td3: parseTD3,
+  swissDrivingLicense: parseSwissDrivingLicense,
+  frenchNationalId: parseFrenchNationalId,
 };
