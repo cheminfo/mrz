@@ -37,6 +37,7 @@
   },
   "homepage": "https://github.com/cheminfo/mrz#readme",
   "devDependencies": {
+    "@types/jest": "^29.1.1",
     "cheminfo-build": "^1.1.11",
     "eslint": "^8.24.0",
     "eslint-config-cheminfo": "^8.0.2",

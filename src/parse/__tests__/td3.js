@@ -68,7 +68,7 @@ describe('parse TD3', () => {
       'C01X0006H1D<<6408125F1710319<<<<<<<<<<<<<<<0',
     ];
 
-    const result = parse.td3(MRZ);
+    const result = parse(MRZ);
     expect(result.valid).toBe(true);
     expect(result.fields).toStrictEqual({
       documentCode: 'P',
@@ -94,7 +94,7 @@ describe('parse TD3', () => {
       'P<IND<<FIRST<NAME<<<<<<<<<<<<<<<<<<<<<<<<<<<',
       'C01X0006H1D<<6408125F1710319<<<<<<<<<<<<<<<0',
     ];
-    const result = parse.td3(MRZ);
+    const result = parse(MRZ);
     expect(result.valid).toBe(true);
     expect(result.fields).toStrictEqual({
       documentCode: 'P',
