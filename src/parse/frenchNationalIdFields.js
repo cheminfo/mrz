@@ -20,23 +20,15 @@ const {
 } = require('./fieldTemplates');
 
 module.exports = [
-  Object.assign({}, documentCodeTemplate, {
+  {
+    ...documentCodeTemplate,
     line: 0,
     start: 0,
     end: 2,
     parser: parseDocumentCode,
-  }),
-  Object.assign({}, issuingStateTemplate, {
-    line: 0,
-    start: 2,
-    end: 5,
-  }),
-  Object.assign({}, lastNameTemplate, {
-    line: 0,
-    start: 5,
-    end: 30,
-    parser: parseAlpha,
-  }),
+  },
+  { ...issuingStateTemplate, line: 0, start: 2, end: 5 },
+  { ...lastNameTemplate, line: 0, start: 5, end: 30, parser: parseAlpha },
   {
     label: 'Administrative code',
     field: 'administrativeCode',
@@ -45,11 +37,7 @@ module.exports = [
     end: 36,
     parser: parseOptional,
   },
-  Object.assign({}, issueDateTemplate, {
-    line: 1,
-    start: 0,
-    end: 4,
-  }),
+  { ...issueDateTemplate, line: 1, start: 0, end: 4 },
   {
     label: 'Administrative code 2',
     field: 'administrativeCode2',
@@ -58,12 +46,9 @@ module.exports = [
     end: 7,
     parser: parseOptional,
   },
-  Object.assign({}, documentNumberTemplate, {
-    line: 1,
-    start: 7,
-    end: 12,
-  }),
-  Object.assign({}, documentNumberCheckDigitTemplate, {
+  { ...documentNumberTemplate, line: 1, start: 7, end: 12 },
+  {
+    ...documentNumberCheckDigitTemplate,
     line: 1,
     start: 12,
     end: 13,
@@ -74,19 +59,11 @@ module.exports = [
         end: 12,
       },
     ],
-  }),
-  Object.assign({}, firstNameTemplate, {
-    line: 1,
-    start: 13,
-    end: 27,
-    parser: parseAlpha,
-  }),
-  Object.assign({}, birthDateTemplate, {
-    line: 1,
-    start: 27,
-    end: 33,
-  }),
-  Object.assign({}, birthDateCheckDigitTemplate, {
+  },
+  { ...firstNameTemplate, line: 1, start: 13, end: 27, parser: parseAlpha },
+  { ...birthDateTemplate, line: 1, start: 27, end: 33 },
+  {
+    ...birthDateCheckDigitTemplate,
     line: 1,
     start: 33,
     end: 34,
@@ -97,13 +74,10 @@ module.exports = [
         end: 33,
       },
     ],
-  }),
-  Object.assign({}, sexTemplate, {
-    line: 1,
-    start: 34,
-    end: 35,
-  }),
-  Object.assign({}, compositeCheckDigitTemplate, {
+  },
+  { ...sexTemplate, line: 1, start: 34, end: 35 },
+  {
+    ...compositeCheckDigitTemplate,
     line: 1,
     start: 35,
     end: 36,
@@ -119,5 +93,5 @@ module.exports = [
         end: 35,
       },
     ],
-  }),
+  },
 ].map(createFieldParser);
