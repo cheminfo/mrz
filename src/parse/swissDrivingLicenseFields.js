@@ -18,12 +18,10 @@ const {
 } = require('./fieldTemplates');
 
 module.exports = [
-  Object.assign({}, documentNumberTemplate, {
-    line: 0,
+  { ...documentNumberTemplate, line: 0,
     start: 0,
     end: 9,
-    parser: parseDocumentNumber,
-  }),
+    parser: parseDocumentNumber,},
   {
     label: 'Language code',
     field: 'languageCode',
@@ -32,18 +30,14 @@ module.exports = [
     end: 7,
     parser: parseLanguageCode,
   },
-  Object.assign({}, documentCodeTemplate, {
-    line: 1,
+  { ...documentCodeTemplate, line: 1,
     start: 0,
     end: 2,
-    parser: parseDocumentCode,
-  }),
-  Object.assign({}, issuingStateTemplate, {
-    line: 1,
+    parser: parseDocumentCode,},
+  { ...issuingStateTemplate, line: 1,
     start: 2,
     end: 5,
-    parser: parseIssuingState,
-  }),
+    parser: parseIssuingState,},
   {
     label: 'PIN code',
     field: 'pinCode',
@@ -68,11 +62,9 @@ module.exports = [
     end: 19,
     parser: checkSeparator,
   },
-  Object.assign({}, birthDateTemplate, {
-    line: 1,
+  { ...birthDateTemplate, line: 1,
     start: 19,
-    end: 25,
-  }),
+    end: 25,},
   {
     label: 'Separator 2',
     field: null,
@@ -81,14 +73,10 @@ module.exports = [
     end: 30,
     parser: checkSeparator,
   },
-  Object.assign({}, lastNameTemplate, {
-    line: 2,
+  { ...lastNameTemplate, line: 2,
     start: 0,
-    end: 30,
-  }),
-  Object.assign({}, firstNameTemplate, {
-    line: 2,
+    end: 30,},
+  { ...firstNameTemplate, line: 2,
     start: 0,
-    end: 30,
-  }),
+    end: 30,},
 ].map(createFieldParser);
