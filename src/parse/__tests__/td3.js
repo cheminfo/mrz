@@ -114,4 +114,64 @@ describe('parse TD3', () => {
       compositeCheckDigit: '0',
     });
   });
+
+  it('digits in name', () => {
+    //Notice how we put a number (0) as part of the surname - In cases where we have misinterpreted an O as a 0
+    const MRZ = [
+      'P<UTOERIKSS0N<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<',
+      'L898902C36UTO7408122F1204159ZE184226B<<<<<10',
+    ];
+
+    const result = parse(MRZ);
+    expect(result).toMatchObject({
+      valid: false,
+      format: 'TD3',
+    });
+    expect(result.valid).toBe(false);
+    const errors = result.details.filter((a) => !a.valid);
+    expect(errors).toHaveLength(2);
+    expect(result.fields).toStrictEqual({
+      documentCode: 'P',
+      firstName: 'ANNA MARIA',
+      lastName: 'ERIKSSON',
+      documentNumber: 'L898902C3',
+      documentNumberCheckDigit: '6',
+      nationality: null,
+      sex: 'female',
+      expirationDate: '120415',
+      expirationDateCheckDigit: '9',
+      personalNumber: 'ZE184226B',
+      personalNumberCheckDigit: '1',
+      birthDate: '740812',
+      birthDateCheckDigit: '2',
+      issuingState: null,
+      compositeCheckDigit: '0',
+    });
+
+    const personalNumberDetails = result.details.find(
+        (d) => d.field === 'personalNumber',
+    );
+    expect(personalNumberDetails).toStrictEqual({
+      label: 'Personal number',
+      field: 'personalNumber',
+      value: 'ZE184226B',
+      valid: true,
+      ranges: [{ line: 1, start: 28, end: 42, raw: 'ZE184226B<<<<<' }],
+      line: 1,
+      start: 28,
+      end: 37,
+    });
+
+    expect(errors[0]).toStrictEqual({
+      label: 'Issuing state',
+      field: 'issuingState',
+      value: null,
+      valid: false,
+      ranges: [{ line: 0, start: 2, end: 5, raw: 'UTO' }],
+      line: 0,
+      start: 2,
+      end: 5,
+      error: 'invalid state code: UTO',
+    });
+  });
 });
