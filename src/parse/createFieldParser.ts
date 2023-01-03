@@ -92,8 +92,12 @@ export function createFieldParser(fieldOptions: FieldOptions): ParseFunction {
         result.start = range.start + parsed.start;
         result.end = range.start + parsed.end;
       }
-    } catch (e: any) {
-      result.error = e.message;
+    } catch (e) {
+      if (typeof e === 'string') {
+        result.error = e;
+      } else if (e instanceof Error) {
+        result.error = e.message;
+      }
     }
     return result;
   };
@@ -105,7 +109,7 @@ function getText(lines: string | string[], options) {
 }
 
 function checkType(
-  options: Record<string, any>,
+  options: object,
   name: string,
   type: 'string' | 'number' | 'function',
 ) {
