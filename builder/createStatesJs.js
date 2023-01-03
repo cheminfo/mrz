@@ -42,11 +42,11 @@ const statesObject = {
   ...readAdditionalStates(),
 };
 
-let result = [];
+const result = [];
 result.push("'use strict';");
 result.push(`const states = ${JSON.stringify(statesObject, null, 2)};`);
 result.push('Object.freeze(states);');
-result.push('module.exports = states;');
+result.push('export default states;');
 result.push('');
 
-fs.writeFileSync(`${__dirname}/../src/generated/states.js`, result.join('\n'));
+fs.writeFileSync(`${__dirname}/../src/generated/states.ts`, result.join('\n'));
