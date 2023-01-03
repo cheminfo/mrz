@@ -109,7 +109,7 @@ https://fr.wikipedia.org/wiki/Carte_nationale_d%27identit%C3%A9_en_France#Codage
 
 [npm-image]: https://img.shields.io/npm/v/mrz.svg
 [npm-url]: https://npmjs.org/package/mrz
-[ci-image]: https://github.com/cheminfo/mrz/workflows/Node.js%20CI/badge.svg?branch=master
+[ci-image]: https://github.com/cheminfo/mrz/workflows/Node.js%20CI/badge.svg?branch=main
 [ci-url]: https://github.com/cheminfo/mrz/actions?query=workflow%3A%22Node.js+CI%22
 [download-image]: https://img.shields.io/npm/dm/mrz.svg
 [download-url]: https://npmjs.org/package/mrz
