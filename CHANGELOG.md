@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/cheminfo/mrz/compare/v3.1.4...v3.2.0) (2023-01-03)
+
+
+### Features
+
+* refactor to typescript ([b6c0c54](https://github.com/cheminfo/mrz/commit/b6c0c54a8955908d5d1bc92f1ac4c148eeefdf60))
+
 ### [3.1.4](https://www.github.com/cheminfo/mrz/compare/v3.1.3...v3.1.4) (2022-04-21)
 
 
