@@ -1,4 +1,4 @@
-extends: cheminfo
+extends: cheminfo-typescript
 env:
   node: true
 parserOptions:
