@@ -1,0 +1,119 @@
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>mrz</title><meta name="description" content="Documentation for mrz"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">mrz</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>mrz</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#mrz" id="mrz" style="color: inherit; text-decoration: none;">
+  <h1>mrz</h1>
+</a>
+<p>Parse MRZ (Machine Readable Zone) from identity documents.</p>
+<h3 align="center">
+
+  <a href="https://www.zakodium.com">
+    <img src="https://www.zakodium.com/brand/zakodium-logo-white.svg" width="50" alt="Zakodium logo" />
+  </a>
+
+  <p>
+    Maintained by <a href="https://www.zakodium.com">Zakodium</a>
+  </p>
+
+<p><a href="https://npmjs.org/package/mrz"><img src="https://img.shields.io/npm/v/mrz.svg" alt="NPM version"></a>
+<a href="https://github.com/cheminfo/mrz/actions?query=workflow%3A%22Node.js+CI%22"><img src="https://github.com/cheminfo/mrz/workflows/Node.js%20CI/badge.svg?branch=main" alt="build status"></a>
+<a href="https://npmjs.org/package/mrz"><img src="https://img.shields.io/npm/dm/mrz.svg" alt="npm download"></a></p>
+</h3>
+
+
+<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+  <h2>Installation</h2>
+</a>
+<p><code>$ npm install mrz</code></p>
+
+<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+  <h2>Example</h2>
+</a>
+<pre><code class="language-js"><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">parse</span><span class="hl-1"> = </span><span class="hl-3">require</span><span class="hl-1">(</span><span class="hl-4">&#39;mrz&#39;</span><span class="hl-1">).</span><span class="hl-5">parse</span><span class="hl-1">;</span><br/><br/><span class="hl-0">let</span><span class="hl-1"> </span><span class="hl-5">mrz</span><span class="hl-1"> = [</span><br/><span class="hl-1">  </span><span class="hl-4">&#39;I&lt;UTOD23145890&lt;1233&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-4">&#39;7408122F1204159UTO&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;6&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-4">&#39;ERIKSSON&lt;&lt;ANNA&lt;MARIA&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">];</span><br/><br/><span class="hl-0">var</span><span class="hl-1"> </span><span class="hl-5">result</span><span class="hl-1"> = </span><span class="hl-3">parse</span><span class="hl-1">(</span><span class="hl-5">mrz</span><span class="hl-1">);</span><br/><span class="hl-5">console</span><span class="hl-1">.</span><span class="hl-3">log</span><span class="hl-1">(</span><span class="hl-5">result</span><span class="hl-1">);</span>
+</code></pre>
+
+<a href="#api" id="api" style="color: inherit; text-decoration: none;">
+  <h2>API</h2>
+</a>
+
+<a href="#parsemrz" id="parsemrz" style="color: inherit; text-decoration: none;">
+  <h3>parse(mrz)</h3>
+</a>
+<p>Parses the provided MRZ. The argument can be an array of lines or a single string
+including line breaks. This function throws an error if the input is in an
+unsupported format. It will never throw an error when there are invalid fields
+in the MRZ. Instead, the <code>result.valid</code> value will be <code>false</code> and
+details about the invalid fields can be found in <code>result.details</code>.</p>
+
+<a href="#resultformat" id="resultformat" style="color: inherit; text-decoration: none;">
+  <h4>result.format</h4>
+</a>
+<p>String identifying the format of the parsed MRZ. Supported formats are:</p>
+<ul>
+<li>TD1 (identity card with three MRZ lines)</li>
+<li>TD2 (identity card with two MRZ lines)</li>
+<li>TD3 (passport)</li>
+<li>SWISS_DRIVING_LICENSE</li>
+<li>FRENCH_NATIONAL_ID</li>
+</ul>
+
+<a href="#resultvalid" id="resultvalid" style="color: inherit; text-decoration: none;">
+  <h4>result.valid</h4>
+</a>
+<p><code>true</code> if all fields are valid. <code>false</code> otherwise.</p>
+
+<a href="#resultfields" id="resultfields" style="color: inherit; text-decoration: none;">
+  <h4>result.fields</h4>
+</a>
+<p>Object mapping field names to their respective value. The value is set to <code>null</code>
+if it is invalid. The value may be different than the raw value. For example
+<code>result.fields.sex</code> will be &quot;male&quot; when the raw value was &quot;M&quot;.</p>
+
+<a href="#resultdetails" id="resultdetails" style="color: inherit; text-decoration: none;">
+  <h4>result.details</h4>
+</a>
+<p>Array of objects describing all parsed fields. Its structure is:</p>
+<ul>
+<li>label {string} - Full english term for the field.</li>
+<li>field {string} - Name of the field in <code>result.fields</code>.</li>
+<li>value {string} - Value of the field or <code>null</code>.</li>
+<li>valid {boolean}</li>
+<li>ranges {Array} - Array of ranges that are necessary to compute this field.
+Ranges are objects with <code>line</code>, <code>start</code>, <code>end</code> and <code>raw</code>.</li>
+<li>line {number} - Index of the line where the field is located.</li>
+<li>start {number} - Index of the start of the field in <code>line</code>.</li>
+<li>end {number} - Index of the end of the field in <code>line</code>.</li>
+</ul>
+
+<a href="#formats" id="formats" style="color: inherit; text-decoration: none;">
+  <h3>formats</h3>
+</a>
+<p>Static mapping of supported formats.</p>
+
+<a href="#states" id="states" style="color: inherit; text-decoration: none;">
+  <h3>states</h3>
+</a>
+<p>Static mapping of state code to state name.</p>
+
+<a href="#specifications" id="specifications" style="color: inherit; text-decoration: none;">
+  <h2>Specifications</h2>
+</a>
+
+<a href="#td1-td2-and-td3" id="td1-td2-and-td3" style="color: inherit; text-decoration: none;">
+  <h3>TD1, TD2 and TD3</h3>
+</a>
+<p><a href="https://www.icao.int/publications/pages/publication.aspx?docnum=9303">https://www.icao.int/publications/pages/publication.aspx?docnum=9303</a></p>
+
+<a href="#swiss-driving-license" id="swiss-driving-license" style="color: inherit; text-decoration: none;">
+  <h3>Swiss driving license</h3>
+</a>
+<p><a href="http://www.astra2.admin.ch/media/pdfpub/2003-10-15_2262_f.pdf">http://www.astra2.admin.ch/media/pdfpub/2003-10-15_2262_f.pdf</a></p>
+
+<a href="#french-national-id" id="french-national-id" style="color: inherit; text-decoration: none;">
+  <h3>French national id</h3>
+</a>
+<p><a href="https://fr.wikipedia.org/wiki/Carte_nationale_d%27identit%C3%A9_en_France#Codage_Bande_MRZ_(lecture_optique)">https://fr.wikipedia.org/wiki/Carte_nationale_d%27identit%C3%A9_en_France#Codage_Bande_MRZ_(lecture_optique)</a></p>
+
+<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+  <h2>License</h2>
+</a>
+<p><a href="./LICENSE">MIT</a></p>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-property"><a href="modules.html#default" class="tsd-kind-icon">default</a></li></ul></nav></div></div></div><footer class=""><div class="container"><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="overlay"></div><script src="assets/main.js"></script></body></html>
