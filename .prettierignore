@@ -1,5 +1,5 @@
 coverage
-src/generated/states.js
+src/generated/states.ts
 node_modules
 CHANGELOG.md
 dist
