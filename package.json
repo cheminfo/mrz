@@ -11,17 +11,17 @@
     "lib-esm"
   ],
   "scripts": {
+    "build": "npm run buildStates && cheminfo-build",
     "buildStates": "node builder/createStatesJs.js",
     "check-types": "tsc --noEmit",
     "clean": "rimraf lib lib-esm",
     "eslint": "eslint builder src",
     "eslint-fix": "npm run eslint -- --fix",
-    "test": "npm run test-only && npm run eslint && npm run prettier && npm run check-types",
-    "test-only": "jest --coverage",
-    "build": "npm run buildStates && cheminfo-build",
     "prepack": "npm run tsc",
     "prettier": "prettier --check src",
     "prettier-write": "prettier --write src",
+    "test": "npm run test-only && npm run eslint && npm run prettier && npm run check-types",
+    "test-only": "jest --coverage",
     "tsc": "npm run clean && npm run tsc-cjs && npm run tsc-esm",
     "tsc-cjs": "tsc --project tsconfig.cjs.json",
     "tsc-esm": "tsc --project tsconfig.esm.json"
