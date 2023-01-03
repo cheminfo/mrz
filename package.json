@@ -20,8 +20,8 @@
     "test-only": "jest --coverage",
     "build": "npm run buildStates && cheminfo-build",
     "prepack": "npm run tsc",
-    "prettier": "prettier --check .",
-    "prettier-write": "prettier --write .",
+    "prettier": "prettier --check src",
+    "prettier-write": "prettier --write src",
     "tsc": "npm run clean && npm run tsc-cjs && npm run tsc-esm",
     "tsc-cjs": "tsc --project tsconfig.cjs.json",
     "tsc-esm": "tsc --project tsconfig.esm.json"
