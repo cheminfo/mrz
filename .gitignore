@@ -5,3 +5,5 @@ logs
 npm-debug.log*
 coverage
 dist
+lib
+lib-esm
