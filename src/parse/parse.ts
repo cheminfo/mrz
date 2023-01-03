@@ -3,7 +3,7 @@
 import formats from '../formats';
 
 import checkLines from './checkLines';
-import parsers from './parsers';
+import { parsers } from './parsers';
 
 function parseMRZ(lines: string | string[]) {
   const result = checkLines(lines);

@@ -11,7 +11,7 @@ export default function parseSwissDrivingLicense(lines: string | string[]) {
   const result = checkLines(lines);
   if (result.length !== 3) {
     throw new Error(
-      `invalid number of lines: ${lines.length}: Must be 3 for ${SWISS_DRIVING_LICENSE}`,
+      `invalid number of lines: ${result.length}: Must be 3 for ${SWISS_DRIVING_LICENSE}`,
     );
   }
   if (result[0].length !== 9) {

@@ -6,7 +6,7 @@ import parseTD1 from './td1';
 import parseTD2 from './td2';
 import parseTD3 from './td3';
 
-export default {
+export const parsers = {
   td1: parseTD1,
   td2: parseTD2,
   td3: parseTD3,

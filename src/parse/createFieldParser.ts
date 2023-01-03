@@ -92,12 +92,8 @@ export function createFieldParser(fieldOptions: FieldOptions): ParseFunction {
         result.start = range.start + parsed.start;
         result.end = range.start + parsed.end;
       }
-    } catch (e) {
-      if (typeof e === 'string') {
-        result.error = e;
-      } else if (e instanceof Error) {
-        result.error = e.message;
-      }
+    } catch (e: any) {
+      result.error = e.message;
     }
     return result;
   };
