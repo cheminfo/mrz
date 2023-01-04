@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.1](https://github.com/cheminfo/mrz/compare/v3.2.0...v3.2.1) (2023-01-04)
+
+
+### Bug Fixes
+
+* exports & some parsers ([#26](https://github.com/cheminfo/mrz/issues/26)) ([953189f](https://github.com/cheminfo/mrz/commit/953189f2ae9300fbde8c64c295ddd246f9e4d4fe))
+
 ## [3.2.0](https://github.com/cheminfo/mrz/compare/v3.1.4...v3.2.0) (2023-01-03)
 
 
