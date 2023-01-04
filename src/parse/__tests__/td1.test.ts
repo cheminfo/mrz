@@ -71,9 +71,9 @@ describe('parse TD1', () => {
       compositeCheckDigit: '1',
     });
     expect(result.valid).toBe(false);
-    expect(
-      result.details.find((a) => a.field && a.field === 'issuingState')?.valid,
-    ).toBe(false);
+    expect(result.details.find((a) => a.field === 'issuingState')?.valid).toBe(
+      false,
+    );
 
     const optional1 = result.details.find((a) => a.field === 'optional1');
     expect(optional1).toMatchObject({

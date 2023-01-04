@@ -11,7 +11,7 @@ export default function parseFrenchNationalId(lines: string | string[]) {
   const result = checkLines(lines);
   if (result.length !== 2) {
     throw new Error(
-      `invalid number of lines: ${lines.length}: Must be 2 for ${FRENCH_NATIONAL_ID}`,
+      `invalid number of lines: ${result.length}: Must be 2 for ${FRENCH_NATIONAL_ID}`,
     );
   }
   result.forEach((line, index) => {
