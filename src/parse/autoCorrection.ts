@@ -2,6 +2,7 @@
 
 import { formats, FormatType } from '../formats';
 
+import { frenchNationalIdCorrection } from './frenchNationalIdCorrection';
 import { swissDrivingLicenseCorrection } from './swissDrivingLicenseCorrection';
 import { td1Correction } from './td1Correction';
 import { td2Correction } from './td2Correction';
@@ -24,6 +25,8 @@ export function autoCorrection(format: FormatType, lines: string[]) {
       return innerCorrection(lines, td3Correction);
     case formats.SWISS_DRIVING_LICENSE:
       return innerCorrection(lines, swissDrivingLicenseCorrection);
+    case formats.FRENCH_NATIONAL_ID:
+      return innerCorrection(lines, frenchNationalIdCorrection);
     default:
       return { correctedLines: lines, autocorrect: [] };
   }
