@@ -60,8 +60,7 @@ export function innerCorrection(
           });
         }
         correctedLine += correctedChar;
-      }
-      if (numbersOnly[lineNumber].includes(charNumber + 1)) {
+      } else if (numbersOnly[lineNumber].includes(charNumber + 1)) {
         const correctedChar = letterToNumber(char);
         if (correctedChar !== char) {
           autocorrect.push({
@@ -72,6 +71,8 @@ export function innerCorrection(
           });
         }
         correctedLine += correctedChar;
+      } else {
+        correctedLine += char;
       }
     });
     correctedLines.push(correctedLine);

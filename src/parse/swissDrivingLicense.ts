@@ -6,7 +6,10 @@ import { getResult } from './getResult';
 import swissDrivingLicenseFields from './swissDrivingLicenseFields';
 
 const SWISS_DRIVING_LICENSE = formats.SWISS_DRIVING_LICENSE;
-export default function parseSwissDrivingLicense(lines: string[]) {
+export default function parseSwissDrivingLicense(
+  lines: string[],
+  autocorrect: boolean,
+) {
   if (lines.length !== 3) {
     throw new Error(
       `invalid number of lines: ${lines.length}: Must be 3 for ${SWISS_DRIVING_LICENSE}`,
@@ -28,5 +31,10 @@ export default function parseSwissDrivingLicense(lines: string[]) {
       `invalid number of characters for line 3: ${lines[2].length}. Must be 30 for ${SWISS_DRIVING_LICENSE}`,
     );
   }
-  return getResult(SWISS_DRIVING_LICENSE, lines, swissDrivingLicenseFields);
+  return getResult(
+    SWISS_DRIVING_LICENSE,
+    lines,
+    swissDrivingLicenseFields,
+    autocorrect,
+  );
 }

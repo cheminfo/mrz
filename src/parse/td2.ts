@@ -6,7 +6,7 @@ import { getResult } from './getResult';
 import TD2Fields from './td2Fields';
 
 const TD2 = formats.TD2;
-export default function parseTD2(lines: string[]) {
+export default function parseTD2(lines: string[], autocorrect: boolean) {
   if (lines.length !== 2) {
     throw new Error(
       `invalid number of lines: ${lines.length}: Must be 2 for ${TD2}`,
@@ -21,5 +21,5 @@ export default function parseTD2(lines: string[]) {
       );
     }
   });
-  return getResult(TD2, lines, TD2Fields);
+  return getResult(TD2, lines, TD2Fields, autocorrect);
 }

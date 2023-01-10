@@ -2,6 +2,7 @@
 
 import { FormatType } from '../formats';
 
+import { autoCorrection } from './autoCorrection';
 import { ParseFunction, Details } from './createFieldParser';
 
 function getDetails(lines: string[], fieldParsers: ParseFunction[]) {
@@ -28,7 +29,13 @@ export function getResult(
   format: FormatType,
   lines: string[],
   fieldParsers: ParseFunction[],
+  autocorrect: boolean,
 ) {
+  const corrected = autoCorrection(format, lines);
+  if (autocorrect) {
+    lines = corrected.correctedLines;
+  }
+
   const details = getDetails(lines, fieldParsers);
   const fields = getFields(details);
   const result = {
@@ -36,6 +43,7 @@ export function getResult(
     details,
     fields: fields.fields,
     valid: fields.valid,
+    autocorrect: corrected.autocorrect,
   };
   return result;
 }

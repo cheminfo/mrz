@@ -8,7 +8,8 @@ describe('parse French National Id', () => {
       'IDFRATEST<NAME<<<<<<<<<<<<<<<<0CHE02',
       '1710GVA123451ROBERTA<<<<<<<9112311F2',
     ];
-    let result = parse(MRZ);
+
+    const result = parse(MRZ);
     expect(result.format).toBe('FRENCH_NATIONAL_ID');
     // expect(result.valid).toStrictEqual(true);
     expect(result.details.filter((a) => !a.valid)).toHaveLength(0);

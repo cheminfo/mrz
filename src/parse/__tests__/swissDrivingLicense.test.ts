@@ -9,7 +9,8 @@ describe('parse Swiss Driving License', () => {
       'FACHE305142128097<<800126<<<<<',
       'MARCHAND<<FABIENNE<<<<<<<<<<<<',
     ];
-    let result = parse(MRZ);
+
+    const result = parse(MRZ);
     expect(result.format).toBe('SWISS_DRIVING_LICENSE');
     expect(result.valid).toBe(true);
     expect(result.details.filter((a) => !a.valid)).toHaveLength(0);

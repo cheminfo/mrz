@@ -6,7 +6,10 @@ import frenchNationalIdFields from './frenchNationalIdFields';
 import { getResult } from './getResult';
 
 const FRENCH_NATIONAL_ID = formats.FRENCH_NATIONAL_ID;
-export default function parseFrenchNationalId(lines: string[]) {
+export default function parseFrenchNationalId(
+  lines: string[],
+  autocorrect: boolean,
+) {
   if (lines.length !== 2) {
     throw new Error(
       `invalid number of lines: ${lines.length}: Must be 2 for ${FRENCH_NATIONAL_ID}`,
@@ -21,5 +24,10 @@ export default function parseFrenchNationalId(lines: string[]) {
       );
     }
   });
-  return getResult(FRENCH_NATIONAL_ID, lines, frenchNationalIdFields);
+  return getResult(
+    FRENCH_NATIONAL_ID,
+    lines,
+    frenchNationalIdFields,
+    autocorrect,
+  );
 }

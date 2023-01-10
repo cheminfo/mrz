@@ -34,4 +34,24 @@ describe('parse TD2', () => {
     });
     expect(result.valid).toBe(false);
   });
+  it('Use autocorrect', () => {
+    const MRZ = [
+      'I<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<',
+      'D231458907UTO7408122F1204159<<<<<<<6',
+    ];
+    const falseMRZ = [
+      'I<UTOERIKSSON<<ANNA<MAR1A<<<<<<<<<<<',
+      'D231458907UTO740B1Z2F1204159<<<<<<<6',
+    ];
+
+    const result = parse(MRZ);
+    const correctedResult = parse(falseMRZ, { autocorrect: true });
+
+    expect(result.fields).toStrictEqual(correctedResult.fields);
+    expect(correctedResult.autocorrect).toStrictEqual([
+      { line: 0, column: 23, original: '1', corrected: 'I' },
+      { line: 1, column: 16, original: 'B', corrected: '8' },
+      { line: 1, column: 18, original: 'Z', corrected: '2' },
+    ]);
+  });
 });

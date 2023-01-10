@@ -114,4 +114,28 @@ describe('parse TD3', () => {
       compositeCheckDigit: '0',
     });
   });
+  it('Use autocorrection', () => {
+    const MRZ = [
+      'P<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<',
+      'L898902C36UTO7408122F1204159ZE184226B<<<<<10',
+    ];
+    const falseMRZ = [
+      'P<UT0ERIK55ON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<',
+      'L898902C36UTO74081ZZF12O4159ZE184226B<<<<<1O',
+    ];
+
+    const result = parse(MRZ);
+    const correctedResult = parse(falseMRZ, { autocorrect: true });
+
+    expect(result.fields).toStrictEqual(correctedResult.fields);
+    expect(correctedResult.autocorrect).toStrictEqual([
+      { line: 0, column: 4, original: '0', corrected: 'O' },
+      { line: 0, column: 9, original: '5', corrected: 'S' },
+      { line: 0, column: 10, original: '5', corrected: 'S' },
+      { line: 1, column: 18, original: 'Z', corrected: '2' },
+      { line: 1, column: 19, original: 'Z', corrected: '2' },
+      { line: 1, column: 23, original: 'O', corrected: '0' },
+      { line: 1, column: 43, original: 'O', corrected: '0' },
+    ]);
+  });
 });

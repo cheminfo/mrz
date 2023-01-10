@@ -6,7 +6,7 @@ import { getResult } from './getResult';
 import TD3Fields from './td3Fields';
 
 const TD3 = formats.TD3;
-export default function parseTD3(lines: string[]) {
+export default function parseTD3(lines: string[], autocorrect: boolean) {
   if (lines.length !== 2) {
     throw new Error(
       `invalid number of lines: ${lines.length}: Must be 2 for ${TD3}`,
@@ -21,5 +21,5 @@ export default function parseTD3(lines: string[]) {
       );
     }
   });
-  return getResult(TD3, lines, TD3Fields);
+  return getResult(TD3, lines, TD3Fields, autocorrect);
 }

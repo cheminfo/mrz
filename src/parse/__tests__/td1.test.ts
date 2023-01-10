@@ -144,4 +144,27 @@ describe('parse TD1', () => {
     expect(result.fields.lastName).toBe('');
     expect(result.fields.firstName).toBe('ANNA MARIA');
   });
+  it('Use autocorrection', () => {
+    const data = [
+      'IDCHEA1234567<6<<<<<<<<<<<<<<<',
+      '7510256M2009018CHE<<<<<<<<<<<8',
+      'SMITH<<JOHN<ALBERT<<<<<<<<<<<<',
+    ];
+
+    const falseData = [
+      'IDCHEA1234567<6<<<<<<<<<<<<<<<',
+      '7510256M2009018CHE<<<<<<<<<<<8',
+      '5M1TH<<J0HN<AL8ERT<<<<<<<<<<<<',
+    ];
+
+    const result = parse(data);
+    const correctedResult = parse(falseData, { autocorrect: true });
+    expect(result.fields).toStrictEqual(correctedResult.fields);
+    expect(correctedResult.autocorrect).toStrictEqual([
+      { line: 2, column: 0, original: '5', corrected: 'S' },
+      { line: 2, column: 2, original: '1', corrected: 'I' },
+      { line: 2, column: 8, original: '0', corrected: 'O' },
+      { line: 2, column: 14, original: '8', corrected: 'B' },
+    ]);
+  });
 });
