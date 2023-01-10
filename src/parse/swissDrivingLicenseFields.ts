@@ -7,7 +7,7 @@ import parseDocumentNumber from '../parsers/swissDrivingLicense/parseDocumentNum
 import parseIssuingState from '../parsers/swissDrivingLicense/parseIssuingState';
 import parseLanguageCode from '../parsers/swissDrivingLicense/parseLanguageCode';
 
-import { createFieldParser } from './createFieldParser';
+import createFieldParser from './createFieldParser';
 import {
   documentNumberTemplate,
   documentCodeTemplate,

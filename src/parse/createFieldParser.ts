@@ -35,7 +35,9 @@ interface Range {
   end: number;
 }
 export type ParseFunction = (lines: string | string[]) => Details;
-export function createFieldParser(fieldOptions: FieldOptions): ParseFunction {
+export default function createFieldParser(
+  fieldOptions: FieldOptions,
+): ParseFunction {
   checkType(fieldOptions, 'label', 'string');
   if (fieldOptions.field !== null) {
     checkType(fieldOptions, 'field', 'string');

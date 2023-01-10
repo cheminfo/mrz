@@ -4,7 +4,7 @@ import parseDocumentCode from '../parsers/parseDocumentCodeId';
 import { parseDocumentNumberOptional } from '../parsers/parseDocumentNumberOptional';
 import { parseOptional } from '../parsers/parseOptional';
 
-import { createFieldParser } from './createFieldParser';
+import createFieldParser from './createFieldParser';
 import {
   documentCodeTemplate,
   issuingStateTemplate,

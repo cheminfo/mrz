@@ -1,6 +1,6 @@
 'use strict';
 
-import formats from './formats';
+import { formats } from './formats';
 import states from './generated/states';
 import parse from './parse/parse';
 

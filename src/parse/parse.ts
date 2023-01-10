@@ -1,6 +1,6 @@
 'use strict';
 
-import formats from '../formats';
+import { formats } from '../formats';
 
 import checkLines from './checkLines';
 import { parsers } from './parsers';

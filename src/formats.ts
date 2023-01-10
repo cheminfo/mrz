@@ -1,6 +1,6 @@
 'use strict';
 
-const formats = {
+export const formats = {
   TD1: 'TD1',
   TD2: 'TD2',
   TD3: 'TD3',
@@ -8,5 +8,4 @@ const formats = {
   FRENCH_NATIONAL_ID: 'FRENCH_NATIONAL_ID',
 };
 Object.freeze(formats);
-
-export default formats;
+export type FormatType = typeof formats[keyof typeof formats];

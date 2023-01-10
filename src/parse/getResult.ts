@@ -1,5 +1,7 @@
 'use strict';
 
+import { FormatType } from '../formats';
+
 import { ParseFunction, Details } from './createFieldParser';
 
 function getDetails(lines: string | string[], fieldParsers: ParseFunction[]) {
@@ -23,7 +25,7 @@ function getFields(details: Details[]) {
 }
 
 export default function getResult(
-  format: string,
+  format: FormatType,
   lines: string | string[],
   fieldParsers: ParseFunction[],
 ) {
