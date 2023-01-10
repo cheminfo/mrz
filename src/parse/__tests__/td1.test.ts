@@ -153,7 +153,7 @@ describe('parse TD1', () => {
 
     const falseData = [
       'IDCHEA1234567<6<<<<<<<<<<<<<<<',
-      '7510256M2009018CHE<<<<<<<<<<<8',
+      '75IOZ56M2009018CHE<<<<<<<<<<<8',
       '5M1TH<<J0HN<AL8ERT<<<<<<<<<<<<',
     ];
 
@@ -161,6 +161,9 @@ describe('parse TD1', () => {
     const correctedResult = parse(falseData, { autocorrect: true });
     expect(result.fields).toStrictEqual(correctedResult.fields);
     expect(correctedResult.autocorrect).toStrictEqual([
+      { line: 1, column: 2, original: 'I', corrected: '1' },
+      { line: 1, column: 3, original: 'O', corrected: '0' },
+      { line: 1, column: 4, original: 'Z', corrected: '2' },
       { line: 2, column: 0, original: '5', corrected: 'S' },
       { line: 2, column: 2, original: '1', corrected: 'I' },
       { line: 2, column: 8, original: '0', corrected: 'O' },

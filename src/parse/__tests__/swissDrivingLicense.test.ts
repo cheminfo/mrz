@@ -53,4 +53,33 @@ describe('parse Swiss Driving License', () => {
       lastName: 'MARCHAND',
     });
   });
+  it('Use autocorrect', () => {
+    const MRZ = [
+      'AAA001D<<',
+      'FACHE305142128097<<800126<<<<<',
+      'MARCHAND<<FABIENNE<<<<<<<<<<<<',
+    ];
+    const falseMRZ = [
+      'AAAOOID<<',
+      'FACHE30514Z1ZB097<<B001Z6<<<<<',
+      'MARCHAND<<FA81ENNE<<<<<<<<<<<<',
+    ];
+
+    const result = parse(MRZ);
+    const correctedResult = parse(falseMRZ, { autocorrect: true });
+
+    expect(result.fields).toStrictEqual(correctedResult.fields);
+    expect(correctedResult.autocorrect).toStrictEqual([
+      { line: 0, column: 3, original: 'O', corrected: '0' },
+      { line: 0, column: 4, original: 'O', corrected: '0' },
+      { line: 0, column: 5, original: 'I', corrected: '1' },
+      { line: 1, column: 10, original: 'Z', corrected: '2' },
+      { line: 1, column: 12, original: 'Z', corrected: '2' },
+      { line: 1, column: 13, original: 'B', corrected: '8' },
+      { line: 1, column: 19, original: 'B', corrected: '8' },
+      { line: 1, column: 23, original: 'Z', corrected: '2' },
+      { line: 2, column: 12, original: '8', corrected: 'B' },
+      { line: 2, column: 13, original: '1', corrected: 'I' },
+    ]);
+  });
 });
