@@ -34,7 +34,7 @@ interface Range {
   start: number;
   end: number;
 }
-export type ParseFunction = (lines: string | string[]) => Details;
+export type ParseFunction = (lines: string[]) => Details;
 export default function createFieldParser(
   fieldOptions: FieldOptions,
 ): ParseFunction {
@@ -63,7 +63,7 @@ export default function createFieldParser(
     }
   }
 
-  return function parseField(lines: string | string[]) {
+  return function parseField(lines: string[]) {
     const source = getText(lines, fieldOptions);
     const related = fieldOptions.related || [];
     const textRelated = related.map((r) => getText(lines, r));

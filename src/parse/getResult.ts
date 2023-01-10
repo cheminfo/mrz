@@ -4,7 +4,7 @@ import { FormatType } from '../formats';
 
 import { ParseFunction, Details } from './createFieldParser';
 
-function getDetails(lines: string | string[], fieldParsers: ParseFunction[]) {
+function getDetails(lines: string[], fieldParsers: ParseFunction[]) {
   const details: Details[] = [];
   for (const parser of fieldParsers) {
     details.push(parser(lines));
@@ -24,9 +24,9 @@ function getFields(details: Details[]) {
   return { fields, valid };
 }
 
-export default function getResult(
+export function getResult(
   format: FormatType,
-  lines: string | string[],
+  lines: string[],
   fieldParsers: ParseFunction[],
 ) {
   const details = getDetails(lines, fieldParsers);
