@@ -7,5 +7,4 @@ export const formats = {
   SWISS_DRIVING_LICENSE: 'SWISS_DRIVING_LICENSE',
   FRENCH_NATIONAL_ID: 'FRENCH_NATIONAL_ID',
 };
-Object.freeze(formats);
 export type FormatType = typeof formats[keyof typeof formats];
