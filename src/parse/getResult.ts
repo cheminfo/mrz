@@ -2,13 +2,17 @@
 
 import { FormatType } from '../formats';
 
-import { autoCorrection } from './autoCorrection';
 import { ParseFunction, Details } from './createFieldParser';
+import { ParseMRZOptions } from './parse';
 
-function getDetails(lines: string[], fieldParsers: ParseFunction[]) {
+function getDetails(
+  lines: string[],
+  fieldParsers: ParseFunction[],
+  options: ParseMRZOptions,
+) {
   const details: Details[] = [];
   for (const parser of fieldParsers) {
-    details.push(parser(lines));
+    details.push(parser(lines, options));
   }
   return details;
 }
@@ -29,21 +33,15 @@ export function getResult(
   format: FormatType,
   lines: string[],
   fieldParsers: ParseFunction[],
-  autocorrect: boolean,
+  options: ParseMRZOptions,
 ) {
-  const corrected = autoCorrection(format, lines);
-  if (autocorrect) {
-    lines = corrected.correctedLines;
-  }
-
-  const details = getDetails(lines, fieldParsers);
+  const details = getDetails(lines, fieldParsers, options);
   const fields = getFields(details);
   const result = {
     format,
     details,
     fields: fields.fields,
     valid: fields.valid,
-    autocorrect: corrected.autocorrect,
   };
   return result;
 }

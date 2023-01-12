@@ -23,6 +23,7 @@ describe('parse Swiss Driving License', () => {
       end: 7,
       value: 'AAA001D',
       valid: true,
+      autocorrect: [],
     });
     expect(result.details[result.details.length - 1]).toStrictEqual({
       label: 'First name',
@@ -40,6 +41,7 @@ describe('parse Swiss Driving License', () => {
       line: 2,
       start: 10,
       end: 18,
+      autocorrect: [],
     });
     expect(result.fields).toStrictEqual({
       documentNumber: 'AAA001D',
@@ -60,8 +62,8 @@ describe('parse Swiss Driving License', () => {
       'MARCHAND<<FABIENNE<<<<<<<<<<<<',
     ];
     const falseMRZ = [
-      'AAAOOID<<',
-      'FACHE30514Z1ZB097<<B001Z6<<<<<',
+      'AAA001D<<',
+      'FACHE305142IZBO97<<8OO126<<<<<',
       'MARCHAND<<FA81ENNE<<<<<<<<<<<<',
     ];
 
@@ -69,17 +71,33 @@ describe('parse Swiss Driving License', () => {
     const correctedResult = parse(falseMRZ, { autocorrect: true });
 
     expect(result.fields).toStrictEqual(correctedResult.fields);
-    expect(correctedResult.autocorrect).toStrictEqual([
-      { line: 0, column: 3, original: 'O', corrected: '0' },
-      { line: 0, column: 4, original: 'O', corrected: '0' },
-      { line: 0, column: 5, original: 'I', corrected: '1' },
-      { line: 1, column: 10, original: 'Z', corrected: '2' },
-      { line: 1, column: 12, original: 'Z', corrected: '2' },
-      { line: 1, column: 13, original: 'B', corrected: '8' },
-      { line: 1, column: 19, original: 'B', corrected: '8' },
-      { line: 1, column: 23, original: 'Z', corrected: '2' },
-      { line: 2, column: 12, original: '8', corrected: 'B' },
-      { line: 2, column: 13, original: '1', corrected: 'I' },
+    expect(
+      correctedResult.details.map(({ autocorrect }) => autocorrect),
+    ).toStrictEqual([
+      [],
+      [],
+      [],
+      [],
+      [
+        { line: 1, column: 11, original: 'I', corrected: '1' },
+        { line: 1, column: 12, original: 'Z', corrected: '2' },
+        { line: 1, column: 13, original: 'B', corrected: '8' },
+      ],
+      [{ line: 1, column: 14, original: 'O', corrected: '0' }],
+      [],
+      [
+        { line: 1, column: 20, original: 'O', corrected: '0' },
+        { line: 1, column: 21, original: 'O', corrected: '0' },
+      ],
+      [],
+      [
+        { line: 2, column: 12, original: '8', corrected: 'B' },
+        { line: 2, column: 13, original: '1', corrected: 'I' },
+      ],
+      [
+        { line: 2, column: 12, original: '8', corrected: 'B' },
+        { line: 2, column: 13, original: '1', corrected: 'I' },
+      ],
     ]);
   });
 });

@@ -3,12 +3,13 @@
 import { formats } from '../formats';
 
 import { getResult } from './getResult';
+import { ParseMRZOptions } from './parse';
 import swissDrivingLicenseFields from './swissDrivingLicenseFields';
 
 const SWISS_DRIVING_LICENSE = formats.SWISS_DRIVING_LICENSE;
 export default function parseSwissDrivingLicense(
   lines: string[],
-  autocorrect: boolean,
+  options: ParseMRZOptions,
 ) {
   if (lines.length !== 3) {
     throw new Error(
@@ -35,6 +36,6 @@ export default function parseSwissDrivingLicense(
     SWISS_DRIVING_LICENSE,
     lines,
     swissDrivingLicenseFields,
-    autocorrect,
+    options,
   );
 }

@@ -48,7 +48,8 @@ export default [
       },
     ],
   },
-  Object.assign(documentNumberCheckDigitTemplate, {
+  {
+    ...documentNumberCheckDigitTemplate,
     line: 0,
     start: 14,
     end: 15,
@@ -64,7 +65,7 @@ export default [
         end: 30,
       },
     ],
-  }),
+  },
   {
     label: 'Optional field 1',
     field: 'optional1',

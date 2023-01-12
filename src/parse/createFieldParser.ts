@@ -1,5 +1,8 @@
 'use strict';
 
+import { Autocorrect, autoCorrection } from './autoCorrection';
+import { ParseMRZOptions } from './parse';
+
 export interface Details {
   label: string;
   field: string | null;
@@ -10,6 +13,7 @@ export interface Details {
   start: number;
   end: number;
   error?: string;
+  autocorrect: Autocorrect[];
 }
 
 interface ParseResult {
@@ -20,7 +24,14 @@ interface ParseResult {
 
 type Parser = (source: string, ...related: string[]) => ParseResult | string;
 
-type FieldOptions = {
+type FieldTypes = keyof typeof fieldTypes;
+export const fieldTypes = {
+  NUMERIC: 'NUMERIC',
+  CHARACTERS: 'CHARACTERS',
+  BOTH: 'BOTH',
+} as const;
+
+export type FieldOptions = {
   label: string;
   field: string | null;
   line: number;
@@ -28,13 +39,17 @@ type FieldOptions = {
   end: number;
   parser: Parser;
   related?: Range[];
+  type?: FieldTypes;
 };
 interface Range {
   line: number;
   start: number;
   end: number;
 }
-export type ParseFunction = (lines: string[]) => Details;
+export type ParseFunction = (
+  lines: string[],
+  options: ParseMRZOptions,
+) => Details;
 export default function createFieldParser(
   fieldOptions: FieldOptions,
 ): ParseFunction {
@@ -62,9 +77,17 @@ export default function createFieldParser(
       ranges.push(related);
     }
   }
+  return function parseField(lines: string[], options: ParseMRZOptions) {
+    const { autocorrect: autocorrectOption = false } = options;
+    let source = getText(lines, fieldOptions);
+    let autocorrect: Autocorrect[] = [];
+    const type = fieldOptions.type || fieldTypes.BOTH;
 
-  return function parseField(lines: string[]) {
-    const source = getText(lines, fieldOptions);
+    if (autocorrectOption && type !== fieldTypes.BOTH) {
+      const corrected = autoCorrection(source, fieldOptions);
+      source = corrected.correctedLine;
+      autocorrect = corrected.autocorrect;
+    }
     const related = fieldOptions.related || [];
     const textRelated = related.map((r) => getText(lines, r));
     const result: Details = {
@@ -81,6 +104,7 @@ export default function createFieldParser(
       line: 0,
       start: 0,
       end: 0,
+      autocorrect,
     };
     const range = result.ranges[0];
     result.line = range.line;
@@ -101,7 +125,10 @@ export default function createFieldParser(
   };
 }
 
-function getText(lines: string | string[], options) {
+function getText(
+  lines: string | string[],
+  options: Pick<FieldOptions, 'line' | 'end' | 'start'>,
+) {
   const line = lines[options.line];
   return line.substring(options.start, options.end);
 }

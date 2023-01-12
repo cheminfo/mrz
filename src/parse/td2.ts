@@ -3,10 +3,11 @@
 import { formats } from '../formats';
 
 import { getResult } from './getResult';
+import { ParseMRZOptions } from './parse';
 import TD2Fields from './td2Fields';
 
 const TD2 = formats.TD2;
-export default function parseTD2(lines: string[], autocorrect: boolean) {
+export default function parseTD2(lines: string[], options: ParseMRZOptions) {
   if (lines.length !== 2) {
     throw new Error(
       `invalid number of lines: ${lines.length}: Must be 2 for ${TD2}`,
@@ -21,5 +22,5 @@ export default function parseTD2(lines: string[], autocorrect: boolean) {
       );
     }
   });
-  return getResult(TD2, lines, TD2Fields, autocorrect);
+  return getResult(TD2, lines, TD2Fields, options);
 }

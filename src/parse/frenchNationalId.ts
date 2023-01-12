@@ -4,11 +4,12 @@ import { formats } from '../formats';
 
 import frenchNationalIdFields from './frenchNationalIdFields';
 import { getResult } from './getResult';
+import { ParseMRZOptions } from './parse';
 
 const FRENCH_NATIONAL_ID = formats.FRENCH_NATIONAL_ID;
 export default function parseFrenchNationalId(
   lines: string[],
-  autocorrect: boolean,
+  options: ParseMRZOptions,
 ) {
   if (lines.length !== 2) {
     throw new Error(
@@ -24,10 +25,5 @@ export default function parseFrenchNationalId(
       );
     }
   });
-  return getResult(
-    FRENCH_NATIONAL_ID,
-    lines,
-    frenchNationalIdFields,
-    autocorrect,
-  );
+  return getResult(FRENCH_NATIONAL_ID, lines, frenchNationalIdFields, options);
 }

@@ -7,7 +7,7 @@ import parseDocumentNumber from '../parsers/swissDrivingLicense/parseDocumentNum
 import parseIssuingState from '../parsers/swissDrivingLicense/parseIssuingState';
 import parseLanguageCode from '../parsers/swissDrivingLicense/parseLanguageCode';
 
-import createFieldParser from './createFieldParser';
+import createFieldParser, { fieldTypes } from './createFieldParser';
 import {
   documentNumberTemplate,
   documentCodeTemplate,
@@ -32,6 +32,7 @@ export default [
     start: 6,
     end: 7,
     parser: parseLanguageCode,
+    type: fieldTypes.CHARACTERS,
   },
   {
     ...documentCodeTemplate,
@@ -54,6 +55,7 @@ export default [
     start: 5,
     end: 14,
     parser: parseNumber,
+    type: fieldTypes.NUMERIC,
   },
   {
     label: 'Version number',
@@ -62,6 +64,7 @@ export default [
     start: 14,
     end: 17,
     parser: parseNumber,
+    type: fieldTypes.NUMERIC,
   },
   {
     label: 'Separator 1',

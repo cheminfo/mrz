@@ -117,6 +117,7 @@ describe('parse TD1', () => {
       line: 0,
       start: 5,
       end: 18,
+      autocorrect: [],
     });
     expect(result.fields.documentNumber).toBe('D23145890124');
     expect(result.fields.documentNumberCheckDigit).toBe('0');
@@ -153,21 +154,41 @@ describe('parse TD1', () => {
 
     const falseData = [
       'IDCHEA1234567<6<<<<<<<<<<<<<<<',
-      '75IOZ56M2009018CHE<<<<<<<<<<<8',
+      '7510256M2009018CHE<<<<<<<<<<<B',
       '5M1TH<<J0HN<AL8ERT<<<<<<<<<<<<',
     ];
 
     const result = parse(data);
     const correctedResult = parse(falseData, { autocorrect: true });
     expect(result.fields).toStrictEqual(correctedResult.fields);
-    expect(correctedResult.autocorrect).toStrictEqual([
-      { line: 1, column: 2, original: 'I', corrected: '1' },
-      { line: 1, column: 3, original: 'O', corrected: '0' },
-      { line: 1, column: 4, original: 'Z', corrected: '2' },
-      { line: 2, column: 0, original: '5', corrected: 'S' },
-      { line: 2, column: 2, original: '1', corrected: 'I' },
-      { line: 2, column: 8, original: '0', corrected: 'O' },
-      { line: 2, column: 14, original: '8', corrected: 'B' },
+    expect(
+      correctedResult.details.map(({ autocorrect }) => autocorrect),
+    ).toStrictEqual([
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [{ line: 1, column: 29, original: 'B', corrected: '8' }],
+      [
+        { line: 2, column: 0, original: '5', corrected: 'S' },
+        { line: 2, column: 2, original: '1', corrected: 'I' },
+        { line: 2, column: 8, original: '0', corrected: 'O' },
+        { line: 2, column: 14, original: '8', corrected: 'B' },
+      ],
+      [
+        { line: 2, column: 0, original: '5', corrected: 'S' },
+        { line: 2, column: 2, original: '1', corrected: 'I' },
+        { line: 2, column: 8, original: '0', corrected: 'O' },
+        { line: 2, column: 14, original: '8', corrected: 'B' },
+      ],
     ]);
   });
 });
