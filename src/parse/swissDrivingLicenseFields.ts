@@ -32,7 +32,7 @@ export default [
     start: 6,
     end: 7,
     parser: parseLanguageCode,
-    type: fieldTypes.CHARACTERS,
+    type: fieldTypes.ALPHABETIC,
   },
   {
     ...documentCodeTemplate,

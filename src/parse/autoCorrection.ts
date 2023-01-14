@@ -46,7 +46,7 @@ export function autoCorrection(
   const autocorrect: Autocorrect[] = [];
   const chars = source.split('');
   chars.forEach((char, i) => {
-    if (fieldOptions.type === fieldTypes.CHARACTERS) {
+    if (fieldOptions.type === fieldTypes.ALPHABETIC) {
       const correctedChar = numberToLetter(char);
       if (correctedChar !== char) {
         autocorrect.push({

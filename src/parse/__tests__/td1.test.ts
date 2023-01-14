@@ -154,7 +154,7 @@ describe('parse TD1', () => {
 
     const falseData = [
       'IDCHEA1234567<6<<<<<<<<<<<<<<<',
-      '7510256M2009018CHE<<<<<<<<<<<B',
+      '7SIOZSGMZOO90IBCHE<<<<<<<<<<<B',
       '5M1TH<<J0HN<AL8ERT<<<<<<<<<<<<',
     ];
 
@@ -169,11 +169,22 @@ describe('parse TD1', () => {
       [],
       [],
       [],
+      [
+        { line: 1, column: 1, original: 'S', corrected: '5' },
+        { line: 1, column: 2, original: 'I', corrected: '1' },
+        { line: 1, column: 3, original: 'O', corrected: '0' },
+        { line: 1, column: 4, original: 'Z', corrected: '2' },
+        { line: 1, column: 5, original: 'S', corrected: '5' },
+      ],
+      [{ line: 1, column: 6, original: 'G', corrected: '6' }],
       [],
-      [],
-      [],
-      [],
-      [],
+      [
+        { line: 1, column: 8, original: 'Z', corrected: '2' },
+        { line: 1, column: 9, original: 'O', corrected: '0' },
+        { line: 1, column: 10, original: 'O', corrected: '0' },
+        { line: 1, column: 13, original: 'I', corrected: '1' },
+      ],
+      [{ line: 1, column: 14, original: 'B', corrected: '8' }],
       [],
       [],
       [{ line: 1, column: 29, original: 'B', corrected: '8' }],
@@ -183,12 +194,7 @@ describe('parse TD1', () => {
         { line: 2, column: 8, original: '0', corrected: 'O' },
         { line: 2, column: 14, original: '8', corrected: 'B' },
       ],
-      [
-        { line: 2, column: 0, original: '5', corrected: 'S' },
-        { line: 2, column: 2, original: '1', corrected: 'I' },
-        { line: 2, column: 8, original: '0', corrected: 'O' },
-        { line: 2, column: 14, original: '8', corrected: 'B' },
-      ],
+      [],
     ]);
   });
 });

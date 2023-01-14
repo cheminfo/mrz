@@ -35,8 +35,8 @@ describe('parse French National Id', () => {
       '1710GVA123451ROBERTA<<<<<<<9112311F2',
     ];
     const falseMRZ = [
-      'IDFRATEST<NAME<<<<<<<<<<<<<<<<0CHE02',
-      '1710GVA123451ROBERTA<<<<<<<9112311FZ',
+      '1DFRATE5T<NAME<<<<<<<<<<<<<<<<0CHE02',
+      'I7I0GVA123451RO8ERTA<<<<<<<9IIZ3IIF2',
     ];
 
     const result = parse(MRZ);
@@ -46,19 +46,27 @@ describe('parse French National Id', () => {
     expect(
       correctedResult.details.map(({ autocorrect }) => autocorrect),
     ).toStrictEqual([
+      [{ line: 0, column: 0, original: '1', corrected: 'I' }],
+      [],
+      [{ line: 0, column: 7, original: '5', corrected: 'S' }],
+      [],
+      [
+        { line: 1, column: 0, original: 'I', corrected: '1' },
+        { line: 1, column: 2, original: 'I', corrected: '1' },
+      ],
       [],
       [],
       [],
+      [{ line: 1, column: 15, original: '8', corrected: 'B' }],
+      [
+        { line: 1, column: 28, original: 'I', corrected: '1' },
+        { line: 1, column: 29, original: 'I', corrected: '1' },
+        { line: 1, column: 30, original: 'Z', corrected: '2' },
+        { line: 1, column: 32, original: 'I', corrected: '1' },
+      ],
+      [{ line: 1, column: 33, original: 'I', corrected: '1' }],
       [],
       [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [{ line: 1, column: 35, original: 'Z', corrected: '2' }],
     ]);
   });
 });

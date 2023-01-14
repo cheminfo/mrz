@@ -1,7 +1,6 @@
 'use strict';
 
 import { Autocorrect, autoCorrection } from './autoCorrection';
-import { ParseMRZOptions } from './parse';
 
 export interface Details {
   label: string;
@@ -27,8 +26,8 @@ type Parser = (source: string, ...related: string[]) => ParseResult | string;
 type FieldTypes = keyof typeof fieldTypes;
 export const fieldTypes = {
   NUMERIC: 'NUMERIC',
-  CHARACTERS: 'CHARACTERS',
-  BOTH: 'BOTH',
+  ALPHABETIC: 'ALPHABETIC',
+  ALPHANUMERIC: 'ALPHANUMERIC',
 } as const;
 
 export type FieldOptions = {
@@ -46,13 +45,18 @@ interface Range {
   start: number;
   end: number;
 }
-export type ParseFunction = (
-  lines: string[],
-  options: ParseMRZOptions,
-) => Details;
+
+export interface CreateFieldParserResult {
+  parser: (lines: string[], autocorrect?: Autocorrect[]) => Details;
+  autocorrector: (lines: string[]) => {
+    correctedLines: string[];
+    autocorrect: Autocorrect[];
+  };
+}
+
 export default function createFieldParser(
   fieldOptions: FieldOptions,
-): ParseFunction {
+): CreateFieldParserResult {
   checkType(fieldOptions, 'label', 'string');
   if (fieldOptions.field !== null) {
     checkType(fieldOptions, 'field', 'string');
@@ -77,17 +81,8 @@ export default function createFieldParser(
       ranges.push(related);
     }
   }
-  return function parseField(lines: string[], options: ParseMRZOptions) {
-    const { autocorrect: autocorrectOption = false } = options;
-    let source = getText(lines, fieldOptions);
-    let autocorrect: Autocorrect[] = [];
-    const type = fieldOptions.type || fieldTypes.BOTH;
-
-    if (autocorrectOption && type !== fieldTypes.BOTH) {
-      const corrected = autoCorrection(source, fieldOptions);
-      source = corrected.correctedLine;
-      autocorrect = corrected.autocorrect;
-    }
+  const parser = (lines: string[], autocorrect: Autocorrect[] = []) => {
+    const source = getText(lines, fieldOptions);
     const related = fieldOptions.related || [];
     const textRelated = related.map((r) => getText(lines, r));
     const result: Details = {
@@ -123,6 +118,20 @@ export default function createFieldParser(
     }
     return result;
   };
+  const autocorrector = (lines: string[]) => {
+    let corrected = lines;
+    let source = getText(lines, fieldOptions);
+    let autocorrect: Autocorrect[] = [];
+    const type = fieldOptions.type || fieldTypes.ALPHANUMERIC;
+    if (type !== fieldTypes.ALPHANUMERIC) {
+      const result = autoCorrection(source, fieldOptions);
+      source = result.correctedLine;
+      autocorrect = result.autocorrect;
+    }
+    corrected = changeText(lines, fieldOptions, source);
+    return { correctedLines: corrected, autocorrect };
+  };
+  return { parser, autocorrector };
 }
 
 function getText(
@@ -131,6 +140,18 @@ function getText(
 ) {
   const line = lines[options.line];
   return line.substring(options.start, options.end);
+}
+
+function changeText(
+  lines: string[],
+  options: Pick<FieldOptions, 'line' | 'end' | 'start'>,
+  text: string,
+) {
+  const line = lines[options.line];
+  const newText =
+    line.substring(0, options.start) + text + line.substring(options.end);
+  lines[options.line] = newText;
+  return lines;
 }
 
 function checkType(

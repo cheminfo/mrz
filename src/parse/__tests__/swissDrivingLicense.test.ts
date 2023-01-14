@@ -63,7 +63,7 @@ describe('parse Swiss Driving License', () => {
     ];
     const falseMRZ = [
       'AAA001D<<',
-      'FACHE305142IZBO97<<8OO126<<<<<',
+      'FACHE30S142IZBO97<<8OO12G<<<<<',
       'MARCHAND<<FA81ENNE<<<<<<<<<<<<',
     ];
 
@@ -79,6 +79,7 @@ describe('parse Swiss Driving License', () => {
       [],
       [],
       [
+        { line: 1, column: 7, original: 'S', corrected: '5' },
         { line: 1, column: 11, original: 'I', corrected: '1' },
         { line: 1, column: 12, original: 'Z', corrected: '2' },
         { line: 1, column: 13, original: 'B', corrected: '8' },
@@ -88,16 +89,14 @@ describe('parse Swiss Driving License', () => {
       [
         { line: 1, column: 20, original: 'O', corrected: '0' },
         { line: 1, column: 21, original: 'O', corrected: '0' },
+        { line: 1, column: 24, original: 'G', corrected: '6' },
       ],
       [],
       [
         { line: 2, column: 12, original: '8', corrected: 'B' },
         { line: 2, column: 13, original: '1', corrected: 'I' },
       ],
-      [
-        { line: 2, column: 12, original: '8', corrected: 'B' },
-        { line: 2, column: 13, original: '1', corrected: 'I' },
-      ],
+      [],
     ]);
   });
 });

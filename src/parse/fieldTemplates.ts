@@ -16,7 +16,7 @@ const documentNumberTemplate = {
   label: 'Document number',
   field: 'documentNumber',
   parser: parseDocumentNumber,
-  type: fieldTypes.BOTH,
+  type: fieldTypes.ALPHANUMERIC,
 };
 
 const documentNumberCheckDigitTemplate = {
@@ -29,21 +29,21 @@ const documentNumberCheckDigitTemplate = {
 const documentCodeTemplate = {
   label: 'Document code',
   field: 'documentCode',
-  type: fieldTypes.CHARACTERS,
+  type: fieldTypes.ALPHABETIC,
 };
 
 const nationalityTemplate = {
   label: 'Nationality',
   field: 'nationality',
   parser: parseState,
-  type: fieldTypes.CHARACTERS,
+  type: fieldTypes.ALPHABETIC,
 };
 
 const sexTemplate = {
   label: 'Sex',
   field: 'sex',
   parser: parseSex,
-  type: fieldTypes.CHARACTERS,
+  type: fieldTypes.ALPHABETIC,
 };
 
 const expirationDateTemplate = {
@@ -92,21 +92,21 @@ const firstNameTemplate = {
   label: 'First name',
   field: 'firstName',
   parser: parseFirstName,
-  type: fieldTypes.CHARACTERS,
+  type: fieldTypes.ALPHABETIC,
 };
 
 const lastNameTemplate = {
   label: 'Last name',
   field: 'lastName',
   parser: parseLastName,
-  type: fieldTypes.CHARACTERS,
+  type: fieldTypes.ALPHABETIC,
 };
 
 const issuingStateTemplate = {
   label: 'Issuing state',
   field: 'issuingState',
   parser: parseState,
-  type: fieldTypes.CHARACTERS,
+  type: fieldTypes.ALPHABETIC,
 };
 
 export {
