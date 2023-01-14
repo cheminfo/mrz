@@ -9,21 +9,11 @@ import { ParseMRZOptions } from './parse';
 function getDetails(
   lines: string[],
   fieldParsers: CreateFieldParserResult[],
-  options: ParseMRZOptions,
+  autocorrectArray: Autocorrect[][],
 ) {
-  const { autocorrect: autocorrectOption = false } = options;
-  let corrected = lines;
   const details: Details[] = [];
-  const detailsAutocorrect: Autocorrect[][] = [];
-  if (autocorrectOption) {
-    fieldParsers.forEach(({ autocorrector }) => {
-      const result = autocorrector(corrected);
-      detailsAutocorrect.push(result.autocorrect);
-      corrected = result.correctedLines;
-    });
-  }
   fieldParsers.forEach(({ parser }, i) => {
-    details.push(parser(corrected, detailsAutocorrect[i]));
+    details.push(parser(lines, autocorrectArray[i]));
   });
   return details;
 }
@@ -40,13 +30,37 @@ function getFields(details: Details[]) {
   return { fields, valid };
 }
 
+function getCorrection(
+  lines: string[],
+  fieldParsers: CreateFieldParserResult[],
+  autocorrect: boolean,
+) {
+  let corrected = lines;
+  const autocorrectArray: Autocorrect[][] = [];
+
+  if (autocorrect) {
+    fieldParsers.forEach(({ autocorrector }) => {
+      const result = autocorrector(corrected);
+      autocorrectArray.push(result.autocorrect);
+      corrected = result.correctedLines;
+    });
+  }
+  return { corrected, autocorrectArray };
+}
 export function getResult(
   format: FormatType,
   lines: string[],
   fieldParsers: CreateFieldParserResult[],
   options: ParseMRZOptions,
 ) {
-  const details = getDetails(lines, fieldParsers, options);
+  const { autocorrect = false } = options;
+
+  const { corrected, autocorrectArray } = getCorrection(
+    lines,
+    fieldParsers,
+    autocorrect,
+  );
+  const details = getDetails(corrected, fieldParsers, autocorrectArray);
   const fields = getFields(details);
   const result = {
     format,
