@@ -4,7 +4,7 @@ import parseDocumentCode from '../parsers/parseDocumentCodeId';
 import { parseDocumentNumberOptional } from '../parsers/parseDocumentNumberOptional';
 import { parseOptional } from '../parsers/parseOptional';
 
-import { createFieldParser } from './createFieldParser';
+import createFieldParser from './createFieldParser';
 import {
   documentCodeTemplate,
   issuingStateTemplate,
@@ -48,7 +48,8 @@ export default [
       },
     ],
   },
-  Object.assign(documentNumberCheckDigitTemplate, {
+  {
+    ...documentNumberCheckDigitTemplate,
     line: 0,
     start: 14,
     end: 15,
@@ -64,7 +65,7 @@ export default [
         end: 30,
       },
     ],
-  }),
+  },
   {
     label: 'Optional field 1',
     field: 'optional1',

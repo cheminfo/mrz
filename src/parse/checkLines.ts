@@ -1,6 +1,6 @@
 'use strict';
 
-export default function checkLines(lines: string | string[]) {
+export function checkLines(lines: string | string[]) {
   if (typeof lines === 'string') {
     lines = lines.split(/[\r\n]+/);
   }

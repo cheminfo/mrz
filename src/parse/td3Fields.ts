@@ -4,7 +4,7 @@ import parseDocumentCode from '../parsers/parseDocumentCodePassport';
 import { parsePersonalNumber } from '../parsers/parsePersonalNumber';
 import { parsePersonalNumberCheckDigit } from '../parsers/parsePersonalNumberCheckDigit';
 
-import { createFieldParser } from './createFieldParser';
+import createFieldParser from './createFieldParser';
 import {
   documentCodeTemplate,
   issuingStateTemplate,

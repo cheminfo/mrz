@@ -47,6 +47,7 @@ describe('parse TD3', () => {
       line: 1,
       start: 28,
       end: 37,
+      autocorrect: [],
     });
 
     expect(errors[0]).toStrictEqual({
@@ -59,6 +60,7 @@ describe('parse TD3', () => {
       start: 2,
       end: 5,
       error: 'invalid state code: UTO',
+      autocorrect: [],
     });
   });
 
@@ -113,5 +115,46 @@ describe('parse TD3', () => {
       personalNumberCheckDigit: '<',
       compositeCheckDigit: '0',
     });
+  });
+  it('Use autocorrection', () => {
+    const MRZ = [
+      'P<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<',
+      'L898902C36UTO7408122F1204159ZE184226B<<<<<10',
+    ];
+    const falseMRZ = [
+      'P<UT0ERIK55ON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<',
+      'L898902C36UTO740BIZZF12041S9ZE184226B<<<<<1O',
+    ];
+
+    const result = parse(MRZ);
+    const correctedResult = parse(falseMRZ, { autocorrect: true });
+
+    expect(result.fields).toStrictEqual(correctedResult.fields);
+    expect(
+      correctedResult.details.map(({ autocorrect }) => autocorrect),
+    ).toStrictEqual([
+      [],
+      [{ line: 0, column: 4, original: '0', corrected: 'O' }],
+      [
+        { line: 0, column: 9, original: '5', corrected: 'S' },
+        { line: 0, column: 10, original: '5', corrected: 'S' },
+      ],
+      [],
+      [],
+      [],
+      [],
+      [
+        { line: 1, column: 16, original: 'B', corrected: '8' },
+        { line: 1, column: 17, original: 'I', corrected: '1' },
+        { line: 1, column: 18, original: 'Z', corrected: '2' },
+      ],
+      [{ line: 1, column: 19, original: 'Z', corrected: '2' }],
+      [],
+      [{ line: 1, column: 26, original: 'S', corrected: '5' }],
+      [],
+      [],
+      [],
+      [{ line: 1, column: 43, original: 'O', corrected: '0' }],
+    ]);
   });
 });
