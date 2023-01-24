@@ -116,6 +116,62 @@ describe('parse TD3', () => {
       compositeCheckDigit: '0',
     });
   });
+
+  it('CHN PO', () => {
+    // found on https://www.rfa.org/english/news/uyghur/return-09252019172016.html/uyghur-ablikim-abla-passport-crop.jpg/@@images/image
+    const MRZ = [
+      'POCHNABULIKEMU<<ABULA<<<<<<<<<<<<<<<<<<<<<<<',
+      'E596593216CHN9701078M2510077LAKCLCLMMBKGG932',
+    ];
+    const result = parse(MRZ);
+    expect(result.valid).toBe(true);
+
+    expect(result.fields).toStrictEqual({
+      documentCode: 'PO',
+      issuingState: 'CHN',
+      lastName: 'ABULIKEMU',
+      firstName: 'ABULA',
+      documentNumber: 'E59659321',
+      documentNumberCheckDigit: '6',
+      nationality: 'CHN',
+      birthDate: '970107',
+      birthDateCheckDigit: '8',
+      sex: 'male',
+      expirationDate: '251007',
+      expirationDateCheckDigit: '7',
+      personalNumber: 'LAKCLCLMMBKGG9',
+      personalNumberCheckDigit: '3',
+      compositeCheckDigit: '2',
+    });
+  });
+
+  it('CHN PT', () => {
+    // found on https://upload.wikimedia.org/wikipedia/commons/a/a6/People%27s_Republic_of_China_Passport_%2897-2_version_for_Single_Exit_and_Entry%29.png
+    const MRZ = [
+      'PTCHNCESHI<<YANGBEN<<<<<<<<<<<<<<<<<<<<<<<<<',
+      'G622925996CHN8310291F1904220LCOCMKNENBPJB984',
+    ];
+    const result = parse(MRZ);
+    expect(result.valid).toBe(true);
+    expect(result.fields).toStrictEqual({
+      documentCode: 'PT',
+      issuingState: 'CHN',
+      lastName: 'CESHI',
+      firstName: 'YANGBEN',
+      documentNumber: 'G62292599',
+      documentNumberCheckDigit: '6',
+      nationality: 'CHN',
+      birthDate: '831029',
+      birthDateCheckDigit: '1',
+      sex: 'female',
+      expirationDate: '190422',
+      expirationDateCheckDigit: '0',
+      personalNumber: 'LCOCMKNENBPJB9',
+      personalNumberCheckDigit: '8',
+      compositeCheckDigit: '4',
+    });
+  });
+
   it('Use autocorrection', () => {
     const MRZ = [
       'P<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<',
