@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/cheminfo/mrz/compare/v3.2.1...v3.3.0) (2023-01-25)
+
+
+### Features
+
+* add autocorrect option ([#29](https://github.com/cheminfo/mrz/issues/29)) ([2eb597c](https://github.com/cheminfo/mrz/commit/2eb597c077fbc40d30020ce6c0c35b795ed6f768))
+
 ## [3.2.1](https://github.com/cheminfo/mrz/compare/v3.2.0...v3.2.1) (2023-01-04)
 
 
