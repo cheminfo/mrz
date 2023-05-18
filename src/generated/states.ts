@@ -256,6 +256,7 @@ const states = {
   "GBP": "British Protected Person",
   "RKS": "Republic of Kosovo",
   "D": "Germany",
+  "XXK": "Kosovo",
   "EUE": "European Union (EU)",
   "UNO": "United Nations Organization or one of its officials",
   "UNA": "United Nations specialized agency or one of its officials",
