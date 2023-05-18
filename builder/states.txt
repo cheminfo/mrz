@@ -8,6 +8,8 @@ British Protected Person _ GBP
 Republic of Kosovo KS RKS
 # Manually add Germany is it uses an invalid code
 Germany DE D
+# Temporary country code for Kosovo in use in the EU
+Kosovo XK XXK
 
 # Part B - Other Codes Reserved by ISO 3166/MA
 European Union (EU) _ EUE
