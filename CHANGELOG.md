@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/cheminfo/mrz/compare/v3.3.0...v3.4.0) (2023-05-18)
+
+
+### Features
+
+* add code for Kosovo ([#40](https://github.com/cheminfo/mrz/issues/40)) ([dd52450](https://github.com/cheminfo/mrz/commit/dd524508cd6c5feda867099bdab8b2291344a709))
+
 ## [3.3.0](https://github.com/cheminfo/mrz/compare/v3.2.1...v3.3.0) (2023-01-25)
 
 
