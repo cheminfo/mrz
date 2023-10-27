@@ -32,10 +32,11 @@ export default function parseSwissDrivingLicense(
       `invalid number of characters for line 3: ${lines[2].length}. Must be 30 for ${SWISS_DRIVING_LICENSE}`,
     );
   }
+
   return getResult(
     SWISS_DRIVING_LICENSE,
     lines,
-    swissDrivingLicenseFields,
+    swissDrivingLicenseFields(lines),
     options,
   );
 }
