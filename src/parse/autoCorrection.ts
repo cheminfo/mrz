@@ -42,7 +42,7 @@ export function autoCorrection(
   source: string,
   fieldOptions: Pick<FieldOptions, 'line' | 'type' | 'start'>,
 ) {
-  let correctedLine = '';
+  let correctedText = '';
   const autocorrect: Autocorrect[] = [];
   const chars = source.split('');
   chars.forEach((char, i) => {
@@ -56,7 +56,7 @@ export function autoCorrection(
           corrected: correctedChar,
         });
       }
-      correctedLine += correctedChar;
+      correctedText += correctedChar;
     } else if (fieldOptions.type === fieldTypes.NUMERIC) {
       const correctedChar = letterToNumber(char);
       if (correctedChar !== char) {
@@ -67,10 +67,10 @@ export function autoCorrection(
           corrected: correctedChar,
         });
       }
-      correctedLine += correctedChar;
+      correctedText += correctedChar;
     } else {
-      correctedLine += char;
+      correctedText += char;
     }
   });
-  return { correctedLine, autocorrect };
+  return { correctedText, autocorrect };
 }

@@ -178,7 +178,7 @@ describe('parse TD3', () => {
       'L898902C36UTO7408122F1204159ZE184226B<<<<<10',
     ];
     const falseMRZ = [
-      'P<UT0ERIK55ON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<',
+      'P<UT0ERIK55ON<<ANNA<MAR1A<<<<<<<<<<<<<<<<<<<',
       'L898902C36UTO740BIZZF12041S9ZE184226B<<<<<1O',
     ];
 
@@ -195,7 +195,7 @@ describe('parse TD3', () => {
         { line: 0, column: 9, original: '5', corrected: 'S' },
         { line: 0, column: 10, original: '5', corrected: 'S' },
       ],
-      [],
+      [{ line: 0, column: 23, original: '1', corrected: 'I' }],
       [],
       [],
       [],

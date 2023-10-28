@@ -56,9 +56,8 @@ describe('parse TD2', () => {
       [
         { line: 0, column: 9, original: '5', corrected: 'S' },
         { line: 0, column: 10, original: '5', corrected: 'S' },
-        { line: 0, column: 23, original: '1', corrected: 'I' },
       ],
-      [],
+      [{ line: 0, column: 23, original: '1', corrected: 'I' }],
       [],
       [],
       [{ line: 1, column: 12, original: '0', corrected: 'O' }],
