@@ -191,10 +191,11 @@ describe('parse TD1', () => {
       [
         { line: 2, column: 0, original: '5', corrected: 'S' },
         { line: 2, column: 2, original: '1', corrected: 'I' },
+      ],
+      [
         { line: 2, column: 8, original: '0', corrected: 'O' },
         { line: 2, column: 14, original: '8', corrected: 'B' },
       ],
-      [],
     ]);
   });
 });

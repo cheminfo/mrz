@@ -47,10 +47,11 @@ interface Range {
 }
 
 export interface CreateFieldParserResult {
-  parser: (lines: string[], autocorrect?: Autocorrect[]) => Details;
+  parser: (lines: string[], autocorrect: Autocorrect[]) => Details;
   autocorrector: (lines: string[]) => {
-    correctedLines: string[];
     autocorrect: Autocorrect[];
+    correctedText: string;
+    range: Range;
   };
 }
 
@@ -66,13 +67,13 @@ export default function createFieldParser(
   checkType(fieldOptions, 'end', 'number');
   checkType(fieldOptions, 'parser', 'function');
 
-  const ranges: Range[] = [
-    {
-      line: fieldOptions.line,
-      start: fieldOptions.start,
-      end: fieldOptions.end,
-    },
-  ];
+  const mainRange: Range = {
+    line: fieldOptions.line,
+    start: fieldOptions.start,
+    end: fieldOptions.end,
+  };
+
+  const ranges: Range[] = [mainRange];
   if (Array.isArray(fieldOptions.related)) {
     for (const related of fieldOptions.related) {
       checkType(related, 'line', 'number');
@@ -81,7 +82,10 @@ export default function createFieldParser(
       ranges.push(related);
     }
   }
-  const parser = (lines: string[], autocorrect: Autocorrect[] = []) => {
+  const parser: CreateFieldParserResult['parser'] = (
+    lines: string[],
+    autocorrect: Autocorrect[],
+  ) => {
     const source = getText(lines, fieldOptions);
     const related = fieldOptions.related || [];
     const textRelated = related.map((r) => getText(lines, r));
@@ -91,16 +95,15 @@ export default function createFieldParser(
       value: null,
       valid: false,
       ranges: ranges.map((range) => ({
-        line: range.line,
-        start: range.start,
-        end: range.end,
+        ...range,
         raw: getText(lines, range),
       })),
       line: 0,
       start: 0,
       end: 0,
-      autocorrect,
+      autocorrect: [],
     };
+
     const range = result.ranges[0];
     result.line = range.line;
     result.start = range.start;
@@ -116,42 +119,36 @@ export default function createFieldParser(
     } catch (e) {
       result.error = e.message;
     }
+
+    for (const autocorrectElement of autocorrect) {
+      if (
+        autocorrectElement.line === result.line &&
+        autocorrectElement.column >= result.start &&
+        autocorrectElement.column < result.end
+      ) {
+        result.autocorrect.push(autocorrectElement);
+      }
+    }
+
     return result;
   };
-  const autocorrector = (lines: string[]) => {
-    let corrected = lines;
-    let source = getText(lines, fieldOptions);
-    let autocorrect: Autocorrect[] = [];
-    const type = fieldOptions.type || fieldTypes.ALPHANUMERIC;
-    if (type !== fieldTypes.ALPHANUMERIC) {
-      const result = autoCorrection(source, fieldOptions);
-      source = result.correctedLine;
-      autocorrect = result.autocorrect;
-    }
-    corrected = changeText(lines, fieldOptions, source);
-    return { correctedLines: corrected, autocorrect };
+
+  const autocorrector: CreateFieldParserResult['autocorrector'] = (
+    lines: string[],
+  ) => {
+    const originalText = getText(lines, fieldOptions);
+    return {
+      ...autoCorrection(originalText, fieldOptions),
+      range: mainRange,
+    };
   };
+
   return { parser, autocorrector };
 }
 
-function getText(
-  lines: string | string[],
-  options: Pick<FieldOptions, 'line' | 'end' | 'start'>,
-) {
+function getText(lines: string | string[], options: Range) {
   const line = lines[options.line];
   return line.substring(options.start, options.end);
-}
-
-function changeText(
-  lines: string[],
-  options: Pick<FieldOptions, 'line' | 'end' | 'start'>,
-  text: string,
-) {
-  const line = lines[options.line];
-  const newText =
-    line.substring(0, options.start) + text + line.substring(options.end);
-  lines[options.line] = newText;
-  return lines;
 }
 
 function checkType(

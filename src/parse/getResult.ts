@@ -35,18 +35,23 @@ function getCorrection(
   fieldParsers: CreateFieldParserResult[],
   autocorrect: boolean,
 ) {
-  let corrected = lines;
-  const autocorrectArray: Autocorrect[][] = [];
+  const corrected = lines.slice();
+  let autocorrectArray: Autocorrect[][] = [];
 
   if (autocorrect) {
     fieldParsers.forEach(({ autocorrector }) => {
-      const result = autocorrector(corrected);
-      autocorrectArray.push(result.autocorrect);
-      corrected = result.correctedLines;
+      const { autocorrect, correctedText, range } = autocorrector(lines);
+      autocorrectArray.push(autocorrect);
+      const line = corrected[range.line];
+      corrected[range.line] =
+        line.slice(0, range.start) + correctedText + line.slice(range.end);
     });
+  } else {
+    autocorrectArray = new Array(fieldParsers.length).fill([]);
   }
   return { corrected, autocorrectArray };
 }
+
 export function getResult(
   format: FormatType,
   lines: string[],
@@ -62,11 +67,10 @@ export function getResult(
   );
   const details = getDetails(corrected, fieldParsers, autocorrectArray);
   const fields = getFields(details);
-  const result = {
+  return {
     format,
     details,
     fields: fields.fields,
     valid: fields.valid,
   };
-  return result;
 }
