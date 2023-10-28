@@ -6,7 +6,7 @@ import { cleanText } from './cleanText';
 
 export default function parseState(source: string) {
   source = cleanText(source);
-  let state = STATES[source];
+  const state = STATES[source];
   if (!state) {
     throw new Error(`invalid state code: ${source}`);
   }
