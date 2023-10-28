@@ -92,11 +92,11 @@ describe('parse Swiss Driving License', () => {
         { line: 1, column: 24, original: 'G', corrected: '6' },
       ],
       [],
+      [],
       [
         { line: 2, column: 12, original: '8', corrected: 'B' },
         { line: 2, column: 13, original: '1', corrected: 'I' },
       ],
-      [],
     ]);
   });
 });

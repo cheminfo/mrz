@@ -35,15 +35,23 @@ function getCorrection(
   fieldParsers: CreateFieldParserResult[],
   autocorrect: boolean,
 ) {
-  let corrected = lines;
   const autocorrectArray: Autocorrect[][] = [];
 
   if (autocorrect) {
     fieldParsers.forEach(({ autocorrector }) => {
-      const result = autocorrector(corrected);
-      autocorrectArray.push(result.autocorrect);
-      corrected = result.correctedLines;
+      autocorrectArray.push(autocorrector(lines));
     });
+  }
+  // Apply autocorrect on the whole MRZ
+  const corrected = lines.slice();
+  for (let autocorrect of autocorrectArray) {
+    for (let correction of autocorrect) {
+      corrected[correction.line] = setCharAt(
+        corrected[correction.line],
+        correction.column,
+        correction.corrected,
+      );
+    }
   }
   return { corrected, autocorrectArray };
 }
@@ -60,6 +68,7 @@ export function getResult(
     fieldParsers,
     autocorrect,
   );
+
   const details = getDetails(corrected, fieldParsers, autocorrectArray);
   const fields = getFields(details);
   const result = {
@@ -69,4 +78,9 @@ export function getResult(
     valid: fields.valid,
   };
   return result;
+}
+
+function setCharAt(source: string, index: number, replaceWith: string) {
+  if (index > source.length - 1) return source;
+  return source.substring(0, index) + replaceWith + source.substring(index + 1);
 }

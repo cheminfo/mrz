@@ -48,10 +48,7 @@ interface Range {
 
 export interface CreateFieldParserResult {
   parser: (lines: string[], autocorrect?: Autocorrect[]) => Details;
-  autocorrector: (lines: string[]) => {
-    correctedLines: string[];
-    autocorrect: Autocorrect[];
-  };
+  autocorrector: (lines: string[]) => Autocorrect[];
 }
 
 export default function createFieldParser(
@@ -113,13 +110,23 @@ export default function createFieldParser(
         result.start = range.start + parsed.start;
         result.end = range.start + parsed.end;
       }
+
+      // We ignore any autocorrect which applied to a character outside of the
+      // field's start / end range.
+      result.autocorrect = result.autocorrect.filter((autoCorrect) => {
+        return (
+          autoCorrect.line === result.line &&
+          autoCorrect.column >= result.start &&
+          autoCorrect.column < result.end
+        );
+      });
     } catch (e: any) {
       result.error = e.message;
     }
+
     return result;
   };
   const autocorrector = (lines: string[]) => {
-    let corrected = lines;
     let source = getText(lines, fieldOptions);
     let autocorrect: Autocorrect[] = [];
     const type = fieldOptions.type || fieldTypes.ALPHANUMERIC;
@@ -128,8 +135,7 @@ export default function createFieldParser(
       source = result.correctedLine;
       autocorrect = result.autocorrect;
     }
-    corrected = changeText(lines, fieldOptions, source);
-    return { correctedLines: corrected, autocorrect };
+    return autocorrect;
   };
   return { parser, autocorrector };
 }
@@ -140,18 +146,6 @@ function getText(
 ) {
   const line = lines[options.line];
   return line.substring(options.start, options.end);
-}
-
-function changeText(
-  lines: string[],
-  options: Pick<FieldOptions, 'line' | 'end' | 'start'>,
-  text: string,
-) {
-  const line = lines[options.line];
-  const newText =
-    line.substring(0, options.start) + text + line.substring(options.end);
-  lines[options.line] = newText;
-  return lines;
 }
 
 function checkType(
