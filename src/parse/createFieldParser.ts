@@ -30,7 +30,7 @@ export const fieldTypes = {
   ALPHANUMERIC: 'ALPHANUMERIC',
 } as const;
 
-export type FieldOptions = {
+export interface FieldOptions {
   label: string;
   field: string | null;
   line: number;
@@ -39,7 +39,7 @@ export type FieldOptions = {
   parser: Parser;
   related?: Range[];
   type?: FieldTypes;
-};
+}
 interface Range {
   line: number;
   start: number;
@@ -113,7 +113,7 @@ export default function createFieldParser(
         result.start = range.start + parsed.start;
         result.end = range.start + parsed.end;
       }
-    } catch (e: any) {
+    } catch (e) {
       result.error = e.message;
     }
     return result;
