@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.1](https://github.com/cheminfo/mrz/compare/v3.4.0...v3.4.1) (2023-10-30)
+
+
+### Bug Fixes
+
+* do not change lines in-place and account for ranges during autocorrect ([4fd0ead](https://github.com/cheminfo/mrz/commit/4fd0ead0e8fad38f64225e8b545dd8bf046e1c59))
+
 ## [3.4.0](https://github.com/cheminfo/mrz/compare/v3.3.0...v3.4.0) (2023-05-18)
 
 
