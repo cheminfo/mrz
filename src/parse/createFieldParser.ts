@@ -1,19 +1,8 @@
 'use strict';
 
-import { Autocorrect, autoCorrection } from './autoCorrection';
+import { Autocorrect, Details, FieldName, Range } from '../types';
 
-export interface Details {
-  label: string;
-  field: string | null;
-  value: string | null;
-  valid: boolean;
-  ranges: Range[];
-  line: number;
-  start: number;
-  end: number;
-  error?: string;
-  autocorrect: Autocorrect[];
-}
+import { autoCorrection } from './autoCorrection';
 
 interface ParseResult {
   value: string;
@@ -32,18 +21,13 @@ export const fieldTypes = {
 
 export interface FieldOptions {
   label: string;
-  field: string | null;
+  field: FieldName | null;
   line: number;
   start: number;
   end: number;
   parser: Parser;
   related?: Range[];
   type?: FieldTypes;
-}
-interface Range {
-  line: number;
-  start: number;
-  end: number;
 }
 
 export interface CreateFieldParserResult {

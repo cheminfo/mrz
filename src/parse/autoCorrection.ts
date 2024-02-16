@@ -1,5 +1,7 @@
 'use strict';
 
+import { Autocorrect } from '../types';
+
 import { FieldOptions, fieldTypes } from './createFieldParser';
 
 const numberToLetterMismatches = {
@@ -18,12 +20,6 @@ const letterToNumberMismatches = {
   S: '5',
   Z: '2',
 };
-export interface Autocorrect {
-  line: number;
-  column: number;
-  original: string;
-  corrected: string;
-}
 export function letterToNumber(char: string): string {
   if (letterToNumberMismatches[char]) {
     return letterToNumberMismatches[char];

@@ -1,9 +1,9 @@
 'use strict';
 
 import { FormatType } from '../formats';
+import { Autocorrect, Details, FieldRecords, ParseResult } from '../types';
 
-import { Autocorrect } from './autoCorrection';
-import { Details, CreateFieldParserResult } from './createFieldParser';
+import { CreateFieldParserResult } from './createFieldParser';
 import { ParseMRZOptions } from './parse';
 
 function getDetails(
@@ -19,7 +19,7 @@ function getDetails(
 }
 
 function getFields(details: Details[]) {
-  const fields: Record<string, string | null> = {};
+  const fields: FieldRecords = {};
   let valid = true;
   for (const detail of details) {
     if (!detail.valid) valid = false;
@@ -57,7 +57,7 @@ export function getResult(
   lines: string[],
   fieldParsers: CreateFieldParserResult[],
   options: ParseMRZOptions,
-) {
+): ParseResult {
   const { autocorrect = false } = options;
 
   const { corrected, autocorrectArray } = getCorrection(
