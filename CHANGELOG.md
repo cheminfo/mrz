@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.5.0](https://github.com/cheminfo/mrz/compare/v3.4.1...v3.5.0) (2024-02-16)
+
+
+### Features
+
+* improve and export types ([#48](https://github.com/cheminfo/mrz/issues/48)) ([66c31bc](https://github.com/cheminfo/mrz/commit/66c31bc8d686554b9cbf937fbe298a3915475b5e))
+
 ## [3.4.1](https://github.com/cheminfo/mrz/compare/v3.4.0...v3.4.1) (2023-10-30)
 
 
