@@ -28,12 +28,7 @@ export interface Range {
 
 export interface ParseResult {
   valid: boolean;
-  format:
-    | 'TD1'
-    | 'TD3'
-    | 'TD2'
-    | 'FRENCH_NATIONAL_ID'
-    | 'SWISS_DRIVING_LICENSE';
+  format: MRZFormat;
   details: Details[];
   fields: FieldRecords;
 }
@@ -65,3 +60,10 @@ export type FieldName =
   | 'pinCode'
   | 'sex'
   | 'versionNumber';
+
+export type MRZFormat =
+  | 'TD1'
+  | 'TD3'
+  | 'TD2'
+  | 'FRENCH_NATIONAL_ID'
+  | 'SWISS_DRIVING_LICENSE';
