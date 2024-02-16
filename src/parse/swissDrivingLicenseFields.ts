@@ -7,17 +7,20 @@ import parseDocumentNumber from '../parsers/swissDrivingLicense/parseDocumentNum
 import parseIssuingState from '../parsers/swissDrivingLicense/parseIssuingState';
 import parseLanguageCode from '../parsers/swissDrivingLicense/parseLanguageCode';
 
-import createFieldParser, { fieldTypes } from './createFieldParser';
+import createFieldParser, {
+  FieldOptions,
+  fieldTypes,
+} from './createFieldParser';
 import {
-  documentNumberTemplate,
-  documentCodeTemplate,
-  issuingStateTemplate,
   birthDateTemplate,
-  lastNameTemplate,
+  documentCodeTemplate,
+  documentNumberTemplate,
   firstNameTemplate,
+  issuingStateTemplate,
+  lastNameTemplate,
 } from './fieldTemplates';
 
-export default [
+const fields: FieldOptions[] = [
   {
     ...documentNumberTemplate,
     line: 0,
@@ -85,4 +88,5 @@ export default [
   },
   { ...lastNameTemplate, line: 2, start: 0, end: 30 },
   { ...firstNameTemplate, line: 2, start: 0, end: 30 },
-].map(createFieldParser);
+];
+export default fields.map(createFieldParser);

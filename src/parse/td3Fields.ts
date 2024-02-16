@@ -4,24 +4,24 @@ import parseDocumentCode from '../parsers/parseDocumentCodePassport';
 import { parsePersonalNumber } from '../parsers/parsePersonalNumber';
 import { parsePersonalNumberCheckDigit } from '../parsers/parsePersonalNumberCheckDigit';
 
-import createFieldParser from './createFieldParser';
+import createFieldParser, { FieldOptions } from './createFieldParser';
 import {
+  birthDateCheckDigitTemplate,
+  birthDateTemplate,
+  compositeCheckDigitTemplate,
   documentCodeTemplate,
+  documentNumberCheckDigitTemplate,
+  documentNumberTemplate,
+  expirationDateCheckDigitTemplate,
+  expirationDateTemplate,
+  firstNameTemplate,
   issuingStateTemplate,
   lastNameTemplate,
-  firstNameTemplate,
-  documentNumberTemplate,
-  documentNumberCheckDigitTemplate,
   nationalityTemplate,
-  birthDateTemplate,
-  birthDateCheckDigitTemplate,
   sexTemplate,
-  expirationDateTemplate,
-  expirationDateCheckDigitTemplate,
-  compositeCheckDigitTemplate,
 } from './fieldTemplates';
 
-export default [
+const fields: FieldOptions[] = [
   {
     ...documentCodeTemplate,
     line: 0,
@@ -122,4 +122,6 @@ export default [
       },
     ],
   },
-].map(createFieldParser);
+];
+
+export default fields.map(createFieldParser);
