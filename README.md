@@ -27,7 +27,7 @@ Parse MRZ (Machine Readable Zone) from identity documents.
 ```js
 const parse = require('mrz').parse;
 
-let mrz = [
+const mrz = [
   'I<UTOD23145890<1233<<<<<<<<<<<',
   '7408122F1204159UTO<<<<<<<<<<<6',
   'ERIKSSON<<ANNA<MARIA<<<<<<<<<<',
@@ -39,7 +39,7 @@ console.log(result);
 
 ## API
 
-### parse(mrz)
+### `parse(mrz, [options])`
 
 Parses the provided MRZ. The argument can be an array of lines or a single string
 including line breaks. This function throws an error if the input is in an
@@ -47,7 +47,21 @@ unsupported format. It will never throw an error when there are invalid fields
 in the MRZ. Instead, the `result.valid` value will be `false` and
 details about the invalid fields can be found in `result.details`.
 
-#### result.format
+#### Options
+
+##### `options.autocorrect`
+
+If set to `true`, some ambiguous characters will be automatically corrected by the parser if the field is supposed to
+only contain numeric or alphabetic characters.
+For example, in a date field, the letter "O" will be converted to the number "0".
+
+Information about autocorrected characters will be added to the result details.
+
+Default: `false`.
+
+#### Shape of the parse result
+
+##### result.format
 
 String identifying the format of the parsed MRZ. Supported formats are:
 
@@ -57,35 +71,37 @@ String identifying the format of the parsed MRZ. Supported formats are:
 - SWISS_DRIVING_LICENSE
 - FRENCH_NATIONAL_ID
 
-#### result.valid
+##### result.valid
 
 `true` if all fields are valid. `false` otherwise.
 
-#### result.fields
+##### result.fields
 
 Object mapping field names to their respective value. The value is set to `null`
-if it is invalid. The value may be different than the raw value. For example
+if it is invalid. The value may be different from the raw value. For example,
 `result.fields.sex` will be "male" when the raw value was "M".
 
-#### result.details
+##### result.details
 
 Array of objects describing all parsed fields. Its structure is:
 
 - label {string} - Full english term for the field.
-- field {string} - Name of the field in `result.fields`.
-- value {string} - Value of the field or `null`.
-- valid {boolean}
+- field {string|null} - Name of the field in `result.fields`. Null for some fields such as separators that don't contain a value.
+- value {string} - Value of the field (if it's valid) or `null`.
+- valid {boolean} - Whether the field is valid.
 - ranges {Array} - Array of ranges that are necessary to compute this field.
   Ranges are objects with `line`, `start`, `end` and `raw`.
-- line {number} - Index of the line where the field is located.
-- start {number} - Index of the start of the field in `line`.
-- end {number} - Index of the end of the field in `line`.
+- line {number} - Index of the line where the field's value is located.
+- start {number} - Index of the start of the field's value in `line`.
+- end {number} - Index of the end of the field's value in `line`.
+- error {undefined|string} - Contains a message describing the error if the field is invalid.
+- autocorrect {array} - Contains indices of characters that were autocorrected and their original value.
 
-### formats
+### `formats`
 
 Static mapping of supported formats.
 
-### states
+### `states`
 
 Static mapping of state code to state name.
 
