@@ -20,14 +20,16 @@ function getDetails(
 
 function getFields(details: Details[]) {
   const fields: FieldRecords = {};
-  let valid = true;
+  let allValid = true;
   for (const detail of details) {
-    if (!detail.valid) valid = false;
+    if (!detail.valid) {
+      allValid = false;
+    }
     if (detail.field) {
-      fields[detail.field] = detail.value;
+      fields[detail.field] = detail.valid ? detail.value : null;
     }
   }
-  return { fields, valid };
+  return { fields, allValid };
 }
 
 function getCorrection(
@@ -71,6 +73,6 @@ export function getResult(
     format,
     details,
     fields: fields.fields,
-    valid: fields.valid,
+    valid: fields.allValid,
   };
 }

@@ -1,5 +1,6 @@
 'use strict';
 
+import { ParseTextError } from '../parsers/parseText';
 import { Autocorrect, Details, FieldName, Range } from '../types';
 
 import { autoCorrection } from './autoCorrection';
@@ -100,8 +101,13 @@ export default function createFieldParser(
         result.start = range.start + parsed.start;
         result.end = range.start + parsed.end;
       }
-    } catch (e) {
-      result.error = e.message;
+    } catch (err) {
+      result.error = err.message;
+      if (err instanceof ParseTextError) {
+        result.value = err.value;
+        result.start = range.start + err.start;
+        result.end = range.start + err.end;
+      }
     }
 
     for (const autocorrectElement of autocorrect) {
