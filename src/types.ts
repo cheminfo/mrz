@@ -27,10 +27,10 @@ export interface Range {
 }
 
 export interface ParseResult {
-  valid: boolean;
   format: MRZFormat;
-  details: Details[];
+  valid: boolean;
   fields: FieldRecords;
+  details: Details[];
 }
 
 export type FieldRecords = Partial<Record<FieldName, string | null>>;
