@@ -3,7 +3,7 @@
 import { parseText } from './parseText';
 
 export function parsePersonalNumber(source: string) {
-  const value = parseText(source, /^[A-Z0-9<]+<*$/);
+  const value = parseText(source, 0, /^[A-Z0-9<]+<*$/);
   return {
     value,
     start: 0,
