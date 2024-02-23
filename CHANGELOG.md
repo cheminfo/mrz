@@ -1,5 +1,21 @@
 # Changelog
 
+## [4.0.0](https://github.com/cheminfo/mrz/compare/v3.5.0...v4.0.0) (2024-02-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* The result's `details` may now include a non-null `value` even when it's invalid. The `start` and `end` fields will refer to it instead of the entire range when that happens. The `fields` object is unchanged and still contains `null` for invalid fields.
+
+### Features
+
+* include parsed value in details for invalid text fields ([#51](https://github.com/cheminfo/mrz/issues/51)) ([b6e2652](https://github.com/cheminfo/mrz/commit/b6e2652a0532c57b55c46397a265e82854e1885e))
+
+
+### Documentation
+
+* improve and complete API documentation ([#52](https://github.com/cheminfo/mrz/issues/52)) ([5be3275](https://github.com/cheminfo/mrz/commit/5be3275818afc526d7fa0f1b766edf328c681bb3))
+
 ## [3.5.0](https://github.com/cheminfo/mrz/compare/v3.4.1...v3.5.0) (2024-02-16)
 
 
