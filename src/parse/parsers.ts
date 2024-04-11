@@ -1,5 +1,6 @@
 'use strict';
 
+import parseFrenchDrivingLicense from './frenchDrivingLicence';
 import parseFrenchNationalId from './frenchNationalId';
 import parseSwissDrivingLicense from './swissDrivingLicense';
 import parseTD1 from './td1';
@@ -12,4 +13,5 @@ export const parsers = {
   td3: parseTD3,
   swissDrivingLicense: parseSwissDrivingLicense,
   frenchNationalId: parseFrenchNationalId,
+  frenchDrivingLicense: parseFrenchDrivingLicense,
 };
