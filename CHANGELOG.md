@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/cheminfo/mrz/compare/v4.0.0...v4.1.0) (2024-04-15)
+
+
+### Features
+
+* parse french driving licences ([#55](https://github.com/cheminfo/mrz/issues/55)) ([f7d7205](https://github.com/cheminfo/mrz/commit/f7d7205af8c177f1f602ac2680294f85019bc7c2))
+
 ## [4.0.0](https://github.com/cheminfo/mrz/compare/v3.5.0...v4.0.0) (2024-02-23)
 
 
