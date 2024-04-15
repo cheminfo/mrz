@@ -34,6 +34,12 @@ const documentCodeTemplate = {
   type: fieldTypes.ALPHABETIC,
 } satisfies FieldOptionTemplate;
 
+const documentCodeAlphaNumTemplate = {
+  label: 'Document code',
+  field: 'documentCode',
+  type: fieldTypes.ALPHANUMERIC,
+} satisfies FieldOptionTemplate;
+
 const nationalityTemplate = {
   label: 'Nationality',
   field: 'nationality',
@@ -115,6 +121,7 @@ export {
   documentNumberTemplate,
   documentNumberCheckDigitTemplate,
   documentCodeTemplate,
+  documentCodeAlphaNumTemplate,
   nationalityTemplate,
   sexTemplate,
   expirationDateTemplate,

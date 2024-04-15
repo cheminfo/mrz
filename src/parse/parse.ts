@@ -12,6 +12,16 @@ function parseMRZ(
 ) {
   const lines = checkLines(inputLines);
   switch (lines.length) {
+    case 1: {
+      switch (lines[0].length) {
+        case 30:
+          return parsers.frenchDrivingLicense(lines, options);
+        default:
+          throw new Error(
+            `unrecognized document format. First line of input must have 30 (French Driving License) characters and it has a length of ${lines[0].length}`,
+          );
+      }
+    }
     case 2:
     case 3: {
       switch (lines[0].length) {
@@ -37,7 +47,7 @@ function parseMRZ(
     }
     default:
       throw new Error(
-        `unrecognized document format. Input must have two or three lines, found ${lines.length}`,
+        `unrecognized document format. Input must have one, two or three lines, found ${lines.length}`,
       );
   }
 }

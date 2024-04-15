@@ -66,4 +66,5 @@ export type MRZFormat =
   | 'TD3'
   | 'TD2'
   | 'FRENCH_NATIONAL_ID'
+  | 'FRENCH_DRIVING_LICENSE'
   | 'SWISS_DRIVING_LICENSE';
