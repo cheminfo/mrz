@@ -43,7 +43,6 @@ const statesObject = {
 };
 
 const result = [];
-result.push("'use strict';");
 result.push(`const states = ${JSON.stringify(statesObject, null, 2)};`);
 result.push('Object.freeze(states);');
 result.push('export default states;');

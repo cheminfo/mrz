@@ -1,5 +1,3 @@
-'use strict';
-
 import parseDocumentCode from '../parsers/parseDocumentCodePassport';
 import { parsePersonalNumber } from '../parsers/parsePersonalNumber';
 import { parsePersonalNumberCheckDigit } from '../parsers/parsePersonalNumberCheckDigit';

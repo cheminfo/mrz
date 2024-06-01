@@ -1,5 +1,3 @@
-'use strict';
-
 export default function parseDocumentCodeId(source: string) {
   const first = source.charAt(0);
   if (first !== 'A' && first !== 'C' && first !== 'I') {

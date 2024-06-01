@@ -1,5 +1,3 @@
-'use strict';
-
 import { check } from './check';
 
 export default function parseCompositeCheckDigit(

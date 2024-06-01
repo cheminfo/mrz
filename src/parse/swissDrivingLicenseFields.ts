@@ -1,5 +1,3 @@
-'use strict';
-
 import { parseNumber } from '../parsers/parseNumber';
 import { checkSeparator } from '../parsers/swissDrivingLicense/checkSeparator';
 import parseDocumentCode from '../parsers/swissDrivingLicense/parseDocumentCode';

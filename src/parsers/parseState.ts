@@ -1,5 +1,3 @@
-'use strict';
-
 import STATES from '../generated/states';
 
 import { cleanText } from './cleanText';

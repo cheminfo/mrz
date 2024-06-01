@@ -1,5 +1,3 @@
 extends: cheminfo-typescript
 env:
   node: true
-parserOptions:
-  sourceType: script

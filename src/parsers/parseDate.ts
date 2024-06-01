@@ -1,5 +1,3 @@
-'use strict';
-
 export default function parseDate(value: string) {
   if (!value.match(/^[0-9<]{4,6}$/)) {
     throw new Error(`invalid date: ${value}`);

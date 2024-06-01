@@ -1,4 +1,4 @@
-'use strict';
+import { ParseResult } from '../types';
 
 import { checkLines } from './checkLines';
 import { parsers } from './parsers';
@@ -6,10 +6,11 @@ import { parsers } from './parsers';
 export interface ParseMRZOptions {
   autocorrect?: boolean;
 }
+
 function parseMRZ(
   inputLines: string | string[],
   options: ParseMRZOptions = {},
-) {
+): ParseResult {
   const lines = checkLines(inputLines);
   switch (lines.length) {
     case 1: {

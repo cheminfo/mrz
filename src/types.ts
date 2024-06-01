@@ -1,5 +1,3 @@
-'use strict';
-
 export interface Autocorrect {
   line: number;
   column: number;

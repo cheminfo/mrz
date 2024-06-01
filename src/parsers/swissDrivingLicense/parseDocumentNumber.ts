@@ -1,5 +1,3 @@
-'use strict';
-
 import parseLanguageCode from './parseLanguageCode';
 
 export default function parseDocumentNumber(source: string) {

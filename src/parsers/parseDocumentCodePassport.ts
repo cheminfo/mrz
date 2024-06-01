@@ -1,5 +1,3 @@
-'use strict';
-
 export default function parseDocumentCodePassport(source: string) {
   const first = source.charAt(0);
   if (first !== 'P') {

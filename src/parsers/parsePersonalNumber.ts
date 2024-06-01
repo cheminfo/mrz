@@ -1,5 +1,3 @@
-'use strict';
-
 import { parseText } from './parseText';
 
 export function parsePersonalNumber(source: string) {

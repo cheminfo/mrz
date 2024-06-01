@@ -1,5 +1,3 @@
-'use strict';
-
 import parseCompositeCheckDigit from '../parsers/parseCompositeCheckDigit';
 import parseDate from '../parsers/parseDate';
 import parseDateCheckDigit from '../parsers/parseDateCheckDigit';

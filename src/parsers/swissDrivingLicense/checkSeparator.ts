@@ -1,5 +1,3 @@
-'use strict';
-
 export function checkSeparator(source: string) {
   if (!source.match(/^<*$/)) {
     throw new Error(
