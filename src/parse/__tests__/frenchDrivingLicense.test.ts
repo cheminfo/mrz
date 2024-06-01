@@ -6,9 +6,12 @@ describe('parse French Driving License', () => {
 
     const result = parse(MRZ);
 
-    expect(result.format).toBe('FRENCH_DRIVING_LICENSE');
-    expect(result.valid).toBe(true);
-    expect(result.details.filter((a) => !a.valid)).toHaveLength(0);
+    expect(result).toMatchObject({
+      format: 'FRENCH_DRIVING_LICENSE',
+      valid: true,
+      documentNumber: result.fields.documentNumber,
+    });
+
     expect(result.fields).toStrictEqual({
       documentCode: 'D1',
       issuingState: 'FRA',
@@ -18,6 +21,8 @@ describe('parse French Driving License', () => {
       lastName: 'MARTIN',
       compositeCheckDigit: '9',
     });
+
+    expect(result.details.filter((a) => !a.valid)).toHaveLength(0);
   });
 
   it('Use autocorrect', () => {

@@ -8,13 +8,13 @@ describe('parse TD3', () => {
     ];
 
     const result = parse(MRZ);
+
     expect(result).toMatchObject({
-      valid: false,
       format: 'TD3',
+      valid: false,
+      documentNumber: result.fields.documentNumber,
     });
-    expect(result.valid).toBe(false);
-    const errors = result.details.filter((a) => !a.valid);
-    expect(errors).toHaveLength(2);
+
     expect(result.fields).toStrictEqual({
       documentCode: 'P',
       firstName: 'ANNA MARIA',
@@ -32,6 +32,9 @@ describe('parse TD3', () => {
       issuingState: null,
       compositeCheckDigit: '0',
     });
+
+    const errors = result.details.filter((a) => !a.valid);
+    expect(errors).toHaveLength(2);
 
     const personalNumberDetails = result.details.find(
       (d) => d.field === 'personalNumber',
@@ -69,7 +72,13 @@ describe('parse TD3', () => {
     ];
 
     const result = parse(MRZ);
-    expect(result.valid).toBe(true);
+
+    expect(result).toMatchObject({
+      format: 'TD3',
+      valid: true,
+      documentNumber: result.fields.documentNumber,
+    });
+
     expect(result.fields).toStrictEqual({
       documentCode: 'P',
       issuingState: 'D',
@@ -94,8 +103,15 @@ describe('parse TD3', () => {
       'P<IND<<FIRST<NAME<<<<<<<<<<<<<<<<<<<<<<<<<<<',
       'C01X0006H1D<<6408125F1710319<<<<<<<<<<<<<<<0',
     ];
+
     const result = parse(MRZ);
-    expect(result.valid).toBe(true);
+
+    expect(result).toMatchObject({
+      format: 'TD3',
+      valid: true,
+      documentNumber: result.fields.documentNumber,
+    });
+
     expect(result.fields).toStrictEqual({
       documentCode: 'P',
       issuingState: 'IND',
@@ -121,8 +137,14 @@ describe('parse TD3', () => {
       'POCHNABULIKEMU<<ABULA<<<<<<<<<<<<<<<<<<<<<<<',
       'E596593216CHN9701078M2510077LAKCLCLMMBKGG932',
     ];
+
     const result = parse(MRZ);
-    expect(result.valid).toBe(true);
+
+    expect(result).toMatchObject({
+      format: 'TD3',
+      valid: true,
+      documentNumber: result.fields.documentNumber,
+    });
 
     expect(result.fields).toStrictEqual({
       documentCode: 'PO',
@@ -149,8 +171,15 @@ describe('parse TD3', () => {
       'PTCHNCESHI<<YANGBEN<<<<<<<<<<<<<<<<<<<<<<<<<',
       'G622925996CHN8310291F1904220LCOCMKNENBPJB984',
     ];
+
     const result = parse(MRZ);
-    expect(result.valid).toBe(true);
+
+    expect(result).toMatchObject({
+      format: 'TD3',
+      valid: true,
+      documentNumber: result.fields.documentNumber,
+    });
+
     expect(result.fields).toStrictEqual({
       documentCode: 'PT',
       issuingState: 'CHN',
@@ -175,15 +204,18 @@ describe('parse TD3', () => {
       'P<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<',
       'L898902C36UTO7408122F1204159ZE184226B<<<<<10',
     ];
+
+    const reference = parse(MRZ);
+
     const falseMRZ = [
       'P<UT0ERIK55ON<<ANNA<MAR1A<<<<<<<<<<<<<<<<<<<',
       'L898902C36UTO740BIZZF12041S9ZE184226B<<<<<1O',
     ];
 
-    const result = parse(MRZ);
     const correctedResult = parse(falseMRZ, { autocorrect: true });
 
-    expect(result.fields).toStrictEqual(correctedResult.fields);
+    expect(correctedResult.fields).toStrictEqual(reference.fields);
+
     expect(
       correctedResult.details.map(({ autocorrect }) => autocorrect),
     ).toStrictEqual([
