@@ -81,6 +81,12 @@ Object mapping field names to their respective value. The value is set to `null`
 if it is invalid. The value may be different from the raw value. For example,
 `result.fields.sex` will be "male" when the raw value was "M".
 
+##### result.documentNumber
+
+The document number, as can be found in the visual elements of the document, outside the MRZ. For some documents, it may
+be composed of multiple parsed fields. It may also not include the MRZ field named `documentNumber`. If any of the used
+fields is invalid, this field will be set to `null`.
+
 ##### result.details
 
 Array of objects describing all parsed fields. Its structure is:
@@ -113,11 +119,11 @@ https://www.icao.int/publications/pages/publication.aspx?docnum=9303
 
 ### Swiss driving license
 
-http://www.astra2.admin.ch/media/pdfpub/2003-10-15_2262_f.pdf
+https://www.astra.admin.ch/dam/astra/fr/dokumente/dokumente-strassenverkehr/kreisschreiben/ch-fak.pdf.download.pdf/Le%20permis%20de%20conduire%20suisse%20format%20carte%20de%20cr%C3%A9dit%20(PCC).pdf
 
 ### French national id
 
-https://fr.wikipedia.org/wiki/Carte_nationale_d%27identit%C3%A9_en_France#Codage_Bande_MRZ_(lecture_optique)
+https://fr.wikipedia.org/wiki/Carte_nationale_d%27identit%C3%A9_en_France#Codage_bande_%C3%A0_lecture_optique
 
 ## License
 

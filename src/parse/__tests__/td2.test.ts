@@ -8,12 +8,13 @@ describe('parse TD2', () => {
     ];
 
     const result = parse(MRZ);
-    const failed = result.details.filter((a) => !a.valid);
+
     expect(result).toMatchObject({
       format: 'TD2',
       valid: false,
+      documentNumber: result.fields.documentNumber,
     });
-    expect(failed).toHaveLength(2);
+
     expect(result.fields).toStrictEqual({
       firstName: 'ANNA MARIA',
       lastName: 'ERIKSSON',
@@ -30,22 +31,28 @@ describe('parse TD2', () => {
       compositeCheckDigit: '6',
       optional: '',
     });
-    expect(result.valid).toBe(false);
+
+    const failed = result.details.filter((a) => !a.valid);
+    expect(failed).toHaveLength(2);
   });
+
   it('Use autocorrect', () => {
     const MRZ = [
       'I<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<',
       'D231458907UTO7408122F1204159<<<<<<<6',
     ];
+
+    const reference = parse(MRZ);
+
     const falseMRZ = [
       'I<UTOERIK55ON<<ANNA<MAR1A<<<<<<<<<<<',
       'D231458907UT0740BIZZF12O4IS9<<<<<<<G',
     ];
 
-    const result = parse(MRZ);
     const correctedResult = parse(falseMRZ, { autocorrect: true });
 
-    expect(result.fields).toStrictEqual(correctedResult.fields);
+    expect(correctedResult.fields).toStrictEqual(reference.fields);
+
     expect(
       correctedResult.details.map(({ autocorrect }) => autocorrect),
     ).toStrictEqual([

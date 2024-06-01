@@ -28,6 +28,7 @@ export interface ParseResult {
   format: MRZFormat;
   valid: boolean;
   fields: FieldRecords;
+  documentNumber: string | null;
   details: Details[];
 }
 

@@ -2,6 +2,7 @@ import { FormatType } from '../formats';
 import { Autocorrect, Details, FieldRecords, ParseResult } from '../types';
 
 import { CreateFieldParserResult } from './createFieldParser';
+import { getDocumentNumber } from './getDocumentNumber';
 import { ParseMRZOptions } from './parse';
 
 function getDetails(
@@ -71,6 +72,7 @@ export function getResult(
     format,
     details,
     fields: fields.fields,
+    documentNumber: getDocumentNumber(format, fields.fields),
     valid: fields.allValid,
   };
 }

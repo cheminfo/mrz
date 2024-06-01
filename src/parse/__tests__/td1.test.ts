@@ -2,17 +2,20 @@ import parse from '../parse';
 
 describe('parse TD1', () => {
   it('swiss ID - valid', () => {
-    const data = [
+    const MRZ = [
       'IDCHEA1234567<6<<<<<<<<<<<<<<<',
       '7510256M2009018CHE<<<<<<<<<<<8',
       'SMITH<<JOHN<ALBERT<<<<<<<<<<<<',
     ];
 
-    const result = parse(data);
+    const result = parse(MRZ);
+
     expect(result).toMatchObject({
       format: 'TD1',
       valid: true,
+      documentNumber: result.fields.documentNumber,
     });
+
     expect(result.fields).toStrictEqual({
       documentCode: 'ID',
       issuingState: 'CHE',
@@ -50,7 +53,13 @@ describe('parse TD1', () => {
     ];
 
     const result = parse(MRZ);
-    expect(result.details.filter((a) => !a.valid)).toHaveLength(2);
+
+    expect(result).toMatchObject({
+      format: 'TD1',
+      valid: false,
+      documentNumber: result.fields.documentNumber,
+    });
+
     expect(result.fields).toStrictEqual({
       firstName: 'ANNA MARIA',
       lastName: 'ERIKSSON',
@@ -68,7 +77,8 @@ describe('parse TD1', () => {
       optional2: '',
       compositeCheckDigit: '1',
     });
-    expect(result.valid).toBe(false);
+
+    expect(result.details.filter((a) => !a.valid)).toHaveLength(2);
     expect(result.details.find((a) => a.field === 'issuingState')?.valid).toBe(
       false,
     );
@@ -96,8 +106,15 @@ describe('parse TD1', () => {
       '7408122F1204159UTO<<<<<<<<<<<8',
       'ERIKSSON<<ANNA<MARIA<<<<<<<<<<',
     ];
+
     const result = parse(MRZ);
-    expect(result.valid).toBe(false);
+
+    expect(result).toMatchObject({
+      format: 'TD1',
+      valid: false,
+      documentNumber: result.fields.documentNumber,
+    });
+
     expect(result.details.filter((f) => !f.valid)).toHaveLength(2);
     const documentNumberDetails = result.details.find(
       (d) => d.field === 'documentNumber',
@@ -139,26 +156,36 @@ describe('parse TD1', () => {
     ];
 
     const result = parse(MRZ);
-    expect(result.valid).toBe(true);
+
+    expect(result).toMatchObject({
+      format: 'TD1',
+      valid: true,
+      documentNumber: result.fields.documentNumber,
+    });
+
     expect(result.fields.lastName).toBe('');
     expect(result.fields.firstName).toBe('ANNA MARIA');
   });
+
   it('Use autocorrection', () => {
-    const data = [
+    const MRZ = [
       'IDCHEA1234567<6<<<<<<<<<<<<<<<',
       '7510256M2009018CHE<<<<<<<<<<<8',
       'SMITH<<JOHN<ALBERT<<<<<<<<<<<<',
     ];
 
-    const falseData = [
+    const reference = parse(MRZ);
+
+    const falseMRZ = [
       'IDCHEA1234567<6<<<<<<<<<<<<<<<',
       '7SIOZSGMZOO90IBCHE<<<<<<<<<<<B',
       '5M1TH<<J0HN<AL8ERT<<<<<<<<<<<<',
     ];
 
-    const result = parse(data);
-    const correctedResult = parse(falseData, { autocorrect: true });
-    expect(result.fields).toStrictEqual(correctedResult.fields);
+    const correctedResult = parse(falseMRZ, { autocorrect: true });
+
+    expect(correctedResult.fields).toStrictEqual(reference.fields);
+
     expect(
       correctedResult.details.map(({ autocorrect }) => autocorrect),
     ).toStrictEqual([

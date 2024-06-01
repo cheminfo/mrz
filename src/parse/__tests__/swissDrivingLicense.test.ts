@@ -9,8 +9,25 @@ describe('parse Swiss Driving License', () => {
     ];
 
     const result = parse(MRZ);
-    expect(result.format).toBe('SWISS_DRIVING_LICENSE');
-    expect(result.valid).toBe(true);
+
+    expect(result).toMatchObject({
+      format: 'SWISS_DRIVING_LICENSE',
+      valid: true,
+      documentNumber: '305142128097',
+    });
+
+    expect(result.fields).toStrictEqual({
+      documentNumber: 'AAA001D',
+      languageCode: 'D',
+      documentCode: 'FA',
+      issuingState: 'CHE',
+      pinCode: '305142128',
+      versionNumber: '097',
+      birthDate: '800126',
+      firstName: 'FABIENNE',
+      lastName: 'MARCHAND',
+    });
+
     expect(result.details.filter((a) => !a.valid)).toHaveLength(0);
     expect(result.details[0]).toStrictEqual({
       label: 'Document number',
@@ -41,29 +58,36 @@ describe('parse Swiss Driving License', () => {
       end: 18,
       autocorrect: [],
     });
+  });
+
+  it('invalid text', () => {
+    const MRZ = [
+      'AAA001D<<',
+      'FACHE305142128?97<<800126<<<<<',
+      'M4RCHAND<<FABI3NNE<<<<<<<<<<<<',
+    ];
+
+    const result = parse(MRZ);
+
+    expect(result).toMatchObject({
+      format: 'SWISS_DRIVING_LICENSE',
+      valid: false,
+      documentNumber: null,
+    });
+
     expect(result.fields).toStrictEqual({
       documentNumber: 'AAA001D',
       languageCode: 'D',
       documentCode: 'FA',
       issuingState: 'CHE',
       pinCode: '305142128',
-      versionNumber: '097',
+      versionNumber: null,
       birthDate: '800126',
-      firstName: 'FABIENNE',
-      lastName: 'MARCHAND',
+      firstName: null,
+      lastName: null,
     });
-  });
-  it('invalid text', () => {
-    const MRZ = [
-      'AAA001D<<',
-      'FACHE305142128097<<800126<<<<<',
-      'M4RCHAND<<FABI3NNE<<<<<<<<<<<<',
-    ];
 
-    const result = parse(MRZ);
-    expect(result.format).toBe('SWISS_DRIVING_LICENSE');
-    expect(result.valid).toBe(false);
-    expect(result.details.filter((a) => !a.valid)).toHaveLength(2);
+    expect(result.details.filter((a) => !a.valid)).toHaveLength(3);
     expect(result.details[0]).toStrictEqual({
       label: 'Document number',
       field: 'documentNumber',
@@ -103,17 +127,6 @@ describe('parse Swiss Driving License', () => {
       start: 0,
       end: 8,
     });
-    expect(result.fields).toStrictEqual({
-      documentNumber: 'AAA001D',
-      languageCode: 'D',
-      documentCode: 'FA',
-      issuingState: 'CHE',
-      pinCode: '305142128',
-      versionNumber: '097',
-      birthDate: '800126',
-      firstName: null,
-      lastName: null,
-    });
   });
   it('Use autocorrect', () => {
     const MRZ = [
@@ -121,16 +134,18 @@ describe('parse Swiss Driving License', () => {
       'FACHE305142128097<<800126<<<<<',
       'MARCHAND<<FABIENNE<<<<<<<<<<<<',
     ];
+
+    const reference = parse(MRZ);
+
     const falseMRZ = [
       'AAA001D<<',
       'FACHE30S142IZBO97<<8OO12G<<<<<',
       'MARCHAND<<FA81ENNE<<<<<<<<<<<<',
     ];
 
-    const result = parse(MRZ);
     const correctedResult = parse(falseMRZ, { autocorrect: true });
 
-    expect(result.fields).toStrictEqual(correctedResult.fields);
+    expect(correctedResult.fields).toStrictEqual(reference.fields);
     expect(
       correctedResult.details.map(({ autocorrect }) => autocorrect),
     ).toStrictEqual([
