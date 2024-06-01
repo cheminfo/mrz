@@ -1,5 +1,3 @@
-'use strict';
-
 import { cleanText } from './cleanText';
 
 export function parseText(

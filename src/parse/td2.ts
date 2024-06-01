@@ -1,5 +1,3 @@
-'use strict';
-
 import { formats } from '../formats';
 
 import { getResult } from './getResult';

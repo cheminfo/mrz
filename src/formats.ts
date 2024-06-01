@@ -1,5 +1,3 @@
-'use strict';
-
 export type FormatType = keyof typeof formats;
 
 export const formats = {

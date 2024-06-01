@@ -1,5 +1,3 @@
-'use strict';
-
 import parse from '../parse';
 
 describe('parse French National Id', () => {

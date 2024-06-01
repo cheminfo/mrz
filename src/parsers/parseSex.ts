@@ -1,5 +1,3 @@
-'use strict';
-
 export default function parseSex(source: string) {
   switch (source) {
     case 'M':

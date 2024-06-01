@@ -1,5 +1,3 @@
-'use strict';
-
 import { check } from './check';
 import { cleanText } from './cleanText';
 

@@ -1,5 +1,3 @@
-'use strict';
-
 import { FormatType } from '../formats';
 import { Autocorrect, Details, FieldRecords, ParseResult } from '../types';
 

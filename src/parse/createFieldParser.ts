@@ -1,5 +1,3 @@
-'use strict';
-
 import { ParseTextError } from '../parsers/parseText';
 import { Autocorrect, Details, FieldName, Range } from '../types';
 

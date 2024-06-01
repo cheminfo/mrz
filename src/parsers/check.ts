@@ -1,5 +1,3 @@
-'use strict';
-
 export function check(string: string, value: string | number) {
   let code = 0;
   const factors = [7, 3, 1];

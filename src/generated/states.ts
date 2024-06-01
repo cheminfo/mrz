@@ -1,4 +1,3 @@
-'use strict';
 const states = {
   "AFG": "Afghanistan",
   "ALB": "Albania",

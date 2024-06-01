@@ -1,5 +1,3 @@
-'use strict';
-
 import parseDocumentCode from '../parsers/parseDocumentCodeId';
 import { parseDocumentNumberOptional } from '../parsers/parseDocumentNumberOptional';
 import { parseOptional } from '../parsers/parseOptional';

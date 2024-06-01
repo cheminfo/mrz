@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "checkJs": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
     "noImplicitAny": false,

@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * D1 seems to be the most common,
  * but with Google image search we can find some B1, A1, A2

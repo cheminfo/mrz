@@ -1,5 +1,3 @@
-'use strict';
-
 import { Autocorrect } from '../types';
 
 import { FieldOptions, fieldTypes } from './createFieldParser';

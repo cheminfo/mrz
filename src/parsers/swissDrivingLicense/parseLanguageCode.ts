@@ -1,5 +1,3 @@
-'use strict';
-
 export default function parseLanguageCode(languageCode: string) {
   switch (languageCode) {
     case 'D':

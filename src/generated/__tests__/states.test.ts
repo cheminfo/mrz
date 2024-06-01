@@ -1,5 +1,3 @@
-'use strict';
-
 import states from '../states';
 
 describe('check countries', function () {

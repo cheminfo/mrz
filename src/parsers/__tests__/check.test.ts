@@ -1,5 +1,3 @@
-'use strict';
-
 import { check } from '../check';
 
 test('check digits', () => {

@@ -1,5 +1,3 @@
-'use strict';
-
 import parseDocumentCode from '../parsers/frenchDrivingLicence/parseDocumentCode';
 import { parseAlpha } from '../parsers/parseAlpha';
 
