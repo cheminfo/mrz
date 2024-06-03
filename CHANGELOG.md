@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.2.0](https://github.com/cheminfo/mrz/compare/v4.1.0...v4.2.0) (2024-06-03)
+
+
+### Features
+
+* add `documentNumber` field to the result object ([37f619d](https://github.com/cheminfo/mrz/commit/37f619daa77e0bdd756a58d58f2a1bc48be1b0d4))
+
 ## [4.1.0](https://github.com/cheminfo/mrz/compare/v4.0.0...v4.1.0) (2024-04-15)
 
 
