@@ -9,7 +9,8 @@ export default function parseDocumentCode(source: string) {
     throw new Error(`invalid document code: ${source}. must be 2 char length`);
   }
 
-  const [first, second] = source;
+  const first = source[0];
+  const second = source[1];
 
   validateFirstChar(first, source);
   validateSecondChar(second, source);
@@ -19,12 +20,8 @@ export default function parseDocumentCode(source: string) {
 
 function validateFirstChar(char: string, source: string) {
   if (!knownPrefixCode.includes(char)) {
-    const formatter = new Intl.ListFormat('en-US', {
-      style: 'short',
-      type: 'disjunction',
-    });
     throw new Error(
-      `invalid document code: ${source}. First character must be ${formatter.format(knownPrefixCode)}`,
+      `invalid document code: ${source}. First character must be ???`,
     );
   }
 }

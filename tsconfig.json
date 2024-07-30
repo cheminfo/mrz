@@ -6,7 +6,7 @@
     "outDir": "lib",
     "sourceMap": true,
     "strict": true,
-    "target": "es2021",
+    "target": "ES5",
     "useUnknownInCatchVariables": false,
     "skipLibCheck": true
   },
