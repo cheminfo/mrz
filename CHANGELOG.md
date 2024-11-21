@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.2.1](https://github.com/cheminfo/mrz/compare/v4.2.0...v4.2.1) (2024-11-21)
+
+
+### Bug Fixes
+
+* add support for French national id with no administrative code ([#61](https://github.com/cheminfo/mrz/issues/61)) ([506be15](https://github.com/cheminfo/mrz/commit/506be159ed14714166073b4880b9c18f351f558a))
+
 ## [4.2.0](https://github.com/cheminfo/mrz/compare/v4.1.0...v4.2.0) (2024-06-03)
 
 
