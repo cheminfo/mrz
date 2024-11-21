@@ -29,8 +29,10 @@ function parseMRZ(
         case 30:
           return parsers.td1(lines, options);
         case 36: {
-          const endLine1 = lines[0].substring(30, 66);
-          if (endLine1.match(/[0-9]/)) {
+          if (
+            lines[0].substring(30, 35).match(/[0-9]/) ||
+            lines[0].match(/^IDFRA/)
+          ) {
             return parsers.frenchNationalId(lines, options);
           } else {
             return parsers.td2(lines, options);

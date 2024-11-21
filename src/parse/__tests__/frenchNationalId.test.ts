@@ -34,6 +34,39 @@ describe('parse French National Id', () => {
     expect(result.details.filter((a) => !a.valid)).toHaveLength(0);
   });
 
+  it('valid MRZ with no administrative code', () => {
+    const MRZ = [
+      'IDFRABERTHIER<<<<<<<<<<<<<<<<<<<<<<<',
+      '9409923102854CORINNE<<<<<<<6512068F4',
+    ];
+
+    const result = parse(MRZ);
+
+    expect(result).toMatchObject({
+      format: 'FRENCH_NATIONAL_ID',
+      valid: true,
+      documentNumber: '940992310285',
+    });
+
+    expect(result.fields).toStrictEqual({
+      documentCode: 'ID',
+      issuingState: 'FRA',
+      lastName: 'BERTHIER',
+      administrativeCode: '',
+      issueDate: '9409',
+      administrativeCode2: '923',
+      documentNumber: '10285',
+      documentNumberCheckDigit: '4',
+      firstName: 'CORINNE',
+      birthDate: '651206',
+      birthDateCheckDigit: '8',
+      sex: 'female',
+      compositeCheckDigit: '4',
+    });
+
+    expect(result.details.filter((a) => !a.valid)).toHaveLength(0);
+  });
+
   it('invalid MRZ', () => {
     const MRZ = [
       'IDFRATEST<NAME<<<<<<<<<<<<<<<<0CHE02',
