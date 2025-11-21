@@ -1,5 +1,21 @@
 # Changelog
 
+## [5.0.0](https://github.com/cheminfo/mrz/compare/v4.2.1...v5.0.0) (2025-11-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* Library is now ESM-only
+
+### Features
+
+* allow parsing readonly arrays ([fd8d889](https://github.com/cheminfo/mrz/commit/fd8d88971a85eae3f1da8777237b414127ebe558))
+
+
+### Code Refactoring
+
+* migrate to ESM-only ([594619c](https://github.com/cheminfo/mrz/commit/594619c575c8de4d80566ebcdbe6638ca547bbca))
+
 ## [4.2.1](https://github.com/cheminfo/mrz/compare/v4.2.0...v4.2.1) (2024-11-21)
 
 
