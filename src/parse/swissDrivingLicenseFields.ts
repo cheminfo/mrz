@@ -1,14 +1,12 @@
-import { parseNumber } from '../parsers/parseNumber';
-import { checkSeparator } from '../parsers/swissDrivingLicense/checkSeparator';
-import parseDocumentCode from '../parsers/swissDrivingLicense/parseDocumentCode';
-import parseDocumentNumber from '../parsers/swissDrivingLicense/parseDocumentNumber';
-import parseIssuingState from '../parsers/swissDrivingLicense/parseIssuingState';
-import parseLanguageCode from '../parsers/swissDrivingLicense/parseLanguageCode';
+import { parseNumber } from '../parsers/parseNumber.ts';
+import { checkSeparator } from '../parsers/swissDrivingLicense/checkSeparator.ts';
+import parseDocumentCode from '../parsers/swissDrivingLicense/parseDocumentCode.ts';
+import parseDocumentNumber from '../parsers/swissDrivingLicense/parseDocumentNumber.ts';
+import parseIssuingState from '../parsers/swissDrivingLicense/parseIssuingState.ts';
+import parseLanguageCode from '../parsers/swissDrivingLicense/parseLanguageCode.ts';
 
-import createFieldParser, {
-  FieldOptions,
-  fieldTypes,
-} from './createFieldParser';
+import type { FieldOptions } from './createFieldParser.ts';
+import createFieldParser, { fieldTypes } from './createFieldParser.ts';
 import {
   birthDateTemplate,
   documentCodeTemplate,
@@ -16,7 +14,7 @@ import {
   firstNameTemplate,
   issuingStateTemplate,
   lastNameTemplate,
-} from './fieldTemplates';
+} from './fieldTemplates.ts';
 
 const fields: FieldOptions[] = [
   {

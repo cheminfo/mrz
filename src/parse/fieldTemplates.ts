@@ -1,14 +1,15 @@
-import parseCompositeCheckDigit from '../parsers/parseCompositeCheckDigit';
-import parseDate from '../parsers/parseDate';
-import parseDateCheckDigit from '../parsers/parseDateCheckDigit';
-import parseDocumentNumber from '../parsers/parseDocumentNumber';
-import parseDocumentNumberCheckDigit from '../parsers/parseDocumentNumberCheckDigit';
-import parseFirstName from '../parsers/parseFirstName';
-import parseLastName from '../parsers/parseLastName';
-import parseSex from '../parsers/parseSex';
-import parseState from '../parsers/parseState';
+import parseCompositeCheckDigit from '../parsers/parseCompositeCheckDigit.ts';
+import parseDate from '../parsers/parseDate.ts';
+import parseDateCheckDigit from '../parsers/parseDateCheckDigit.ts';
+import parseDocumentNumber from '../parsers/parseDocumentNumber.ts';
+import parseDocumentNumberCheckDigit from '../parsers/parseDocumentNumberCheckDigit.ts';
+import parseFirstName from '../parsers/parseFirstName.ts';
+import parseLastName from '../parsers/parseLastName.ts';
+import parseSex from '../parsers/parseSex.ts';
+import parseState from '../parsers/parseState.ts';
 
-import { FieldOptions, fieldTypes } from './createFieldParser';
+import type { FieldOptions } from './createFieldParser.ts';
+import { fieldTypes } from './createFieldParser.ts';
 
 type FieldOptionTemplate = Partial<FieldOptions>;
 
@@ -116,19 +117,19 @@ const issuingStateTemplate = {
 } satisfies FieldOptionTemplate;
 
 export {
-  documentNumberTemplate,
-  documentNumberCheckDigitTemplate,
-  documentCodeTemplate,
+  birthDateCheckDigitTemplate,
+  birthDateTemplate,
+  compositeCheckDigitTemplate,
   documentCodeAlphaNumTemplate,
+  documentCodeTemplate,
+  documentNumberCheckDigitTemplate,
+  documentNumberTemplate,
+  expirationDateCheckDigitTemplate,
+  expirationDateTemplate,
+  firstNameTemplate,
+  issueDateTemplate,
+  issuingStateTemplate,
+  lastNameTemplate,
   nationalityTemplate,
   sexTemplate,
-  expirationDateTemplate,
-  expirationDateCheckDigitTemplate,
-  birthDateTemplate,
-  birthDateCheckDigitTemplate,
-  issueDateTemplate,
-  compositeCheckDigitTemplate,
-  firstNameTemplate,
-  lastNameTemplate,
-  issuingStateTemplate,
 };

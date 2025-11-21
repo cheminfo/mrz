@@ -1,8 +1,8 @@
-import { formats } from '../formats';
+import { formats } from '../formats.ts';
 
-import frenchNationalIdFields from './frenchNationalIdFields';
-import { getResult } from './getResult';
-import { ParseMRZOptions } from './parse';
+import frenchNationalIdFields from './frenchNationalIdFields.ts';
+import { getResult } from './getResult.ts';
+import type { ParseMRZOptions } from './parse.ts';
 
 const FRENCH_NATIONAL_ID = formats.FRENCH_NATIONAL_ID;
 export default function parseFrenchNationalId(
@@ -14,7 +14,7 @@ export default function parseFrenchNationalId(
       `invalid number of lines: ${lines.length}: Must be 2 for ${FRENCH_NATIONAL_ID}`,
     );
   }
-  lines.forEach((line, index) => {
+  for (const [index, line] of lines.entries()) {
     if (line.length !== 36) {
       throw new Error(
         `invalid number of characters for line ${index + 1}: ${
@@ -22,6 +22,6 @@ export default function parseFrenchNationalId(
         }. Must be 36 for ${FRENCH_NATIONAL_ID}`,
       );
     }
-  });
+  }
   return getResult(FRENCH_NATIONAL_ID, lines, frenchNationalIdFields, options);
 }

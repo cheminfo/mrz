@@ -1,8 +1,9 @@
-import { Autocorrect } from '../types';
+import type { Autocorrect } from '../types.ts';
 
-import { FieldOptions, fieldTypes } from './createFieldParser';
+import type { FieldOptions } from './createFieldParser.ts';
+import { fieldTypes } from './createFieldParser.ts';
 
-const numberToLetterMismatches = {
+const numberToLetterMismatches: Record<string, string> = {
   '8': 'B',
   '6': 'G',
   '0': 'O',
@@ -10,7 +11,7 @@ const numberToLetterMismatches = {
   '5': 'S',
   '2': 'Z',
 };
-const letterToNumberMismatches = {
+const letterToNumberMismatches: Record<string, string> = {
   B: '8',
   G: '6',
   O: '0',
@@ -39,7 +40,7 @@ export function autoCorrection(
   let correctedText = '';
   const autocorrect: Autocorrect[] = [];
   const chars = source.split('');
-  chars.forEach((char, i) => {
+  for (const [i, char] of chars.entries()) {
     if (fieldOptions.type === fieldTypes.ALPHABETIC) {
       const correctedChar = numberToLetter(char);
       if (correctedChar !== char) {
@@ -65,6 +66,6 @@ export function autoCorrection(
     } else {
       correctedText += char;
     }
-  });
+  }
   return { correctedText, autocorrect };
 }

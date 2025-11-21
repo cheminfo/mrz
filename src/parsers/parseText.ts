@@ -1,4 +1,4 @@
-import { cleanText } from './cleanText';
+import { cleanText } from './cleanText.ts';
 
 export function parseText(
   source: string,
@@ -18,12 +18,14 @@ export function parseText(
 }
 
 export class ParseTextError extends Error {
-  constructor(
-    message: string,
-    public readonly value: string,
-    public readonly start: number,
-    public readonly end: number,
-  ) {
+  readonly value: string;
+  readonly start: number;
+  readonly end: number;
+
+  constructor(message: string, value: string, start: number, end: number) {
     super(message);
+    this.value = value;
+    this.start = start;
+    this.end = end;
   }
 }

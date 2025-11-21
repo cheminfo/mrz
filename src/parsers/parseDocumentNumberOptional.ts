@@ -1,4 +1,4 @@
-import { parseText } from './parseText';
+import { parseText } from './parseText.ts';
 
 export function parseDocumentNumberOptional(
   optional: string,
@@ -6,10 +6,7 @@ export function parseDocumentNumberOptional(
 ) {
   if (checkDigit === '<') {
     const firstFiller = optional.indexOf('<');
-    const value = parseText(
-      optional.substring(firstFiller + 1),
-      firstFiller + 1,
-    );
+    const value = parseText(optional.slice(firstFiller + 1), firstFiller + 1);
     return {
       value,
       start: firstFiller + 1,

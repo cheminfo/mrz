@@ -1,26 +1,26 @@
-# mrz
-
-Parse MRZ (Machine Readable Zone) from identity documents.
-
 <h3 align="center">
-
   <a href="https://www.zakodium.com">
     <img src="https://www.zakodium.com/brand/zakodium-logo-white.svg" width="50" alt="Zakodium logo" />
   </a>
-
   <p>
     Maintained by <a href="https://www.zakodium.com">Zakodium</a>
   </p>
-
-[![NPM version][npm-image]][npm-url]
-[![build status][ci-image]][ci-url]
-[![npm download][download-image]][download-url]
-
 </h3>
+
+# mrz
+
+[![NPM version](https://img.shields.io/npm/v/mrz.svg)](https://www.npmjs.com/package/mrz)
+[![npm download](https://img.shields.io/npm/dm/mrz.svg)](https://www.npmjs.com/package/mrz)
+[![test coverage](https://img.shields.io/codecov/c/github/cheminfo/mrz.svg)](https://codecov.io/gh/cheminfo/mrz)
+[![license](https://img.shields.io/npm/l/mrz.svg)](https://github.com/cheminfo/mrz/blob/main/LICENSE)
+
+Parse MRZ (Machine Readable Zone) from identity documents.
 
 ## Installation
 
-`$ npm install mrz`
+```console
+npm install mrz
+```
 
 ## Example
 
@@ -128,10 +128,3 @@ https://fr.wikipedia.org/wiki/Carte_nationale_d%27identit%C3%A9_en_France#Codage
 ## License
 
 [MIT](./LICENSE)
-
-[npm-image]: https://img.shields.io/npm/v/mrz.svg
-[npm-url]: https://npmjs.org/package/mrz
-[ci-image]: https://github.com/cheminfo/mrz/workflows/Node.js%20CI/badge.svg?branch=main
-[ci-url]: https://github.com/cheminfo/mrz/actions?query=workflow%3A%22Node.js+CI%22
-[download-image]: https://img.shields.io/npm/dm/mrz.svg
-[download-url]: https://npmjs.org/package/mrz

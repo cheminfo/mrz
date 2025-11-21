@@ -1,4 +1,6 @@
-import parse from '../parse';
+import { describe, expect, it } from 'vitest';
+
+import parse from '../parse.ts';
 
 describe('parse Swiss Driving License', () => {
   it('valid MRZ', () => {
@@ -128,6 +130,7 @@ describe('parse Swiss Driving License', () => {
       end: 8,
     });
   });
+
   it('Use autocorrect', () => {
     const MRZ = [
       'AAA001D<<',

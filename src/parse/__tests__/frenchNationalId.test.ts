@@ -1,4 +1,6 @@
-import parse from '../parse';
+import { describe, expect, it } from 'vitest';
+
+import parse from '../parse.ts';
 
 describe('parse French National Id', () => {
   it('valid MRZ', () => {
@@ -114,6 +116,7 @@ describe('parse French National Id', () => {
     ];
 
     const correctedResult = parse(falseMRZ, { autocorrect: true });
+
     expect(correctedResult.fields).toStrictEqual(reference.fields);
 
     expect(

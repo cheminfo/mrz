@@ -30,7 +30,7 @@ function validateFirstChar(char: string, source: string) {
 }
 
 function validateSecondChar(char: string, source: string) {
-  const num = parseInt(char, 10);
+  const num = Number.parseInt(char, 10);
 
   if (Number.isNaN(num)) {
     throw new Error(

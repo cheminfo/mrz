@@ -1,4 +1,6 @@
-import parse from '../parse';
+import { describe, expect, it } from 'vitest';
+
+import parse from '../parse.ts';
 
 describe('parse TD1', () => {
   it('swiss ID - valid', () => {
@@ -37,6 +39,7 @@ describe('parse TD1', () => {
     const optional1Details = result.details.find(
       (f) => f.field === 'optional1',
     );
+
     expect(optional1Details).toMatchObject({
       value: '',
       line: 0,
@@ -84,6 +87,7 @@ describe('parse TD1', () => {
     );
 
     const optional1 = result.details.find((a) => a.field === 'optional1');
+
     expect(optional1).toMatchObject({
       value: 'ABC',
       line: 0,
@@ -92,6 +96,7 @@ describe('parse TD1', () => {
     });
 
     const optional2 = result.details.find((a) => a.field === 'optional2');
+
     expect(optional2).toMatchObject({
       value: '',
       line: 1,
@@ -116,9 +121,11 @@ describe('parse TD1', () => {
     });
 
     expect(result.details.filter((f) => !f.valid)).toHaveLength(2);
+
     const documentNumberDetails = result.details.find(
       (d) => d.field === 'documentNumber',
     );
+
     expect(documentNumberDetails).toStrictEqual({
       label: 'Document number',
       field: 'documentNumber',
@@ -140,6 +147,7 @@ describe('parse TD1', () => {
     const documentNumberCheckDigitDetails = result.details.find(
       (d) => d.field === 'documentNumberCheckDigit',
     );
+
     expect(documentNumberCheckDigitDetails).toMatchObject({
       line: 0,
       start: 18,

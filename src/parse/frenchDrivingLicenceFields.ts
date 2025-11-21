@@ -1,7 +1,8 @@
-import parseDocumentCode from '../parsers/frenchDrivingLicence/parseDocumentCode';
-import { parseAlpha } from '../parsers/parseAlpha';
+import parseDocumentCode from '../parsers/frenchDrivingLicence/parseDocumentCode.ts';
+import { parseAlpha } from '../parsers/parseAlpha.ts';
 
-import createFieldParser, { FieldOptions } from './createFieldParser';
+import type { FieldOptions } from './createFieldParser.ts';
+import createFieldParser from './createFieldParser.ts';
 import {
   compositeCheckDigitTemplate,
   documentCodeAlphaNumTemplate,
@@ -10,7 +11,7 @@ import {
   expirationDateTemplate,
   issuingStateTemplate,
   lastNameTemplate,
-} from './fieldTemplates';
+} from './fieldTemplates.ts';
 
 const fields: FieldOptions[] = [
   {

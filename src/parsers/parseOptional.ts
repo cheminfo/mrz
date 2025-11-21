@@ -1,4 +1,4 @@
-import { parseText } from './parseText';
+import { parseText } from './parseText.ts';
 
 export function parseOptional(source: string) {
   const value = parseText(source, 0);

@@ -1,4 +1,4 @@
-const states = {
+const states: Record<string, string> = {
   "AFG": "Afghanistan",
   "ALB": "Albania",
   "DZA": "Algeria",

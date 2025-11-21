@@ -1,4 +1,6 @@
-import parse from '../parse';
+import { describe, expect, it } from 'vitest';
+
+import parse from '../parse.ts';
 
 describe('parse French Driving License', () => {
   it('valid MRZ', () => {
@@ -31,6 +33,7 @@ describe('parse French Driving License', () => {
 
     const result = parse(MRZok);
     const correctedResult = parse(MRZko, { autocorrect: true });
+
     expect(correctedResult.fields).toStrictEqual(result.fields);
   });
 });

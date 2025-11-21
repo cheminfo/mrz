@@ -3,14 +3,20 @@ export default function parseDate(value: string) {
     throw new Error(`invalid date: ${value}`);
   }
 
-  const month = value.substring(2, 4);
-  if (month !== '<<' && (parseInt(month, 10) < 1 || parseInt(month, 10) > 12)) {
+  const month = value.slice(2, 4);
+  if (
+    month !== '<<' &&
+    (Number.parseInt(month, 10) < 1 || Number.parseInt(month, 10) > 12)
+  ) {
     throw new Error(`invalid date month: ${month}`);
   }
 
   if (value.length === 6) {
-    const day = value.substring(4, 6);
-    if (day !== '<<' && (parseInt(day, 10) < 1 || parseInt(day, 10) > 31)) {
+    const day = value.slice(4, 6);
+    if (
+      day !== '<<' &&
+      (Number.parseInt(day, 10) < 1 || Number.parseInt(day, 10) > 31)
+    ) {
       throw new Error(`invalid date day: ${day}`);
     }
   }

@@ -1,10 +1,8 @@
-'use strict';
-
-const fs = require('fs');
+import fs from 'node:fs';
 
 function readIsoStates() {
   const states = fs
-    .readFileSync(`${__dirname}/states-iso3166.tsv`, 'utf8')
+    .readFileSync(`${import.meta.dirname}/states-iso3166.tsv`, 'utf8')
     .split('\n')
     .filter(
       (c) =>
@@ -22,16 +20,14 @@ function readIsoStates() {
 
 function readAdditionalStates() {
   const states = fs
-    .readFileSync(`${__dirname}/states.txt`, 'utf8')
+    .readFileSync(`${import.meta.dirname}/states.txt`, 'utf8')
     .split('\n')
     .filter((c) => c !== '' && !c.startsWith('#'));
 
   const statesObject = {};
   for (let state of states) {
     const split = state.split(' ');
-    statesObject[split[split.length - 1]] = split
-      .slice(0, split.length - 2)
-      .join(' ');
+    statesObject[split.at(-1)] = split.slice(0, -2).join(' ');
   }
 
   return statesObject;
@@ -42,10 +38,14 @@ const statesObject = {
   ...readAdditionalStates(),
 };
 
-const result = [];
-result.push(`const states = ${JSON.stringify(statesObject, null, 2)};`);
-result.push('Object.freeze(states);');
-result.push('export default states;');
-result.push('');
+const result = [
+  `const states: Record<string, string> = ${JSON.stringify(statesObject, null, 2)};`,
+  'Object.freeze(states);',
+  'export default states;',
+  '',
+];
 
-fs.writeFileSync(`${__dirname}/../src/generated/states.ts`, result.join('\n'));
+fs.writeFileSync(
+  `${import.meta.dirname}/../src/generated/states.ts`,
+  result.join('\n'),
+);

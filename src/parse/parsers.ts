@@ -1,9 +1,9 @@
-import parseFrenchDrivingLicense from './frenchDrivingLicence';
-import parseFrenchNationalId from './frenchNationalId';
-import parseSwissDrivingLicense from './swissDrivingLicense';
-import parseTD1 from './td1';
-import parseTD2 from './td2';
-import parseTD3 from './td3';
+import parseFrenchDrivingLicense from './frenchDrivingLicence.ts';
+import parseFrenchNationalId from './frenchNationalId.ts';
+import parseSwissDrivingLicense from './swissDrivingLicense.ts';
+import parseTD1 from './td1.ts';
+import parseTD2 from './td2.ts';
+import parseTD3 from './td3.ts';
 
 export const parsers = {
   td1: parseTD1,
