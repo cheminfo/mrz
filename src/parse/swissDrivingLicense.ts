@@ -6,7 +6,7 @@ import swissDrivingLicenseFields from './swissDrivingLicenseFields.ts';
 
 const SWISS_DRIVING_LICENSE = formats.SWISS_DRIVING_LICENSE;
 export default function parseSwissDrivingLicense(
-  lines: string[],
+  lines: readonly string[],
   options: ParseMRZOptions,
 ) {
   if (lines.length !== 3) {

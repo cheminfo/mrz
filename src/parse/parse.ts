@@ -8,7 +8,7 @@ export interface ParseMRZOptions {
 }
 
 function parseMRZ(
-  inputLines: string | string[],
+  inputLines: string | readonly string[],
   options: ParseMRZOptions = {},
 ): ParseResult {
   const lines = checkLines(inputLines);

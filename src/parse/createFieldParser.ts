@@ -30,8 +30,11 @@ export interface FieldOptions {
 }
 
 export interface CreateFieldParserResult {
-  parser: (lines: string[], autocorrect: Autocorrect[]) => Details;
-  autocorrector: (lines: string[]) => {
+  parser: (
+    lines: readonly string[],
+    autocorrect: readonly Autocorrect[],
+  ) => Details;
+  autocorrector: (lines: readonly string[]) => {
     autocorrect: Autocorrect[];
     correctedText: string;
     range: Range;
@@ -66,8 +69,8 @@ export default function createFieldParser(
     }
   }
   const parser: CreateFieldParserResult['parser'] = (
-    lines: string[],
-    autocorrect: Autocorrect[],
+    lines: readonly string[],
+    autocorrect: readonly Autocorrect[],
   ) => {
     const source = getText(lines, fieldOptions);
     const related = fieldOptions.related || [];
@@ -122,7 +125,7 @@ export default function createFieldParser(
   };
 
   const autocorrector: CreateFieldParserResult['autocorrector'] = (
-    lines: string[],
+    lines: readonly string[],
   ) => {
     const originalText = getText(lines, fieldOptions);
     return {
@@ -134,7 +137,7 @@ export default function createFieldParser(
   return { parser, autocorrector };
 }
 
-function getText(lines: string | string[], options: Range) {
+function getText(lines: readonly string[], options: Range) {
   const line = lines[options.line];
   return line.slice(options.start, options.end);
 }

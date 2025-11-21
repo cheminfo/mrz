@@ -37,8 +37,8 @@ function getFields(details: Details[]) {
 }
 
 function getCorrection(
-  lines: string[],
-  fieldParsers: CreateFieldParserResult[],
+  lines: readonly string[],
+  fieldParsers: readonly CreateFieldParserResult[],
   autocorrect: boolean,
 ) {
   const corrected = lines.slice();
@@ -60,7 +60,7 @@ function getCorrection(
 
 export function getResult(
   format: FormatType,
-  lines: string[],
+  lines: readonly string[],
   fieldParsers: CreateFieldParserResult[],
   options: ParseMRZOptions,
 ): ParseResult {

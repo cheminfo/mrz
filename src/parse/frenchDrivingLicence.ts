@@ -6,7 +6,7 @@ import type { ParseMRZOptions } from './parse.ts';
 
 const FRENCH_DRIVING_LICENSE = formats.FRENCH_DRIVING_LICENSE;
 export default function parseFrenchDrivingLicense(
-  lines: string[],
+  lines: readonly string[],
   options: ParseMRZOptions,
 ) {
   if (lines.length !== 1) {

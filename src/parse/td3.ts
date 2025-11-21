@@ -5,7 +5,10 @@ import type { ParseMRZOptions } from './parse.ts';
 import TD3Fields from './td3Fields.ts';
 
 const TD3 = formats.TD3;
-export default function parseTD3(lines: string[], options: ParseMRZOptions) {
+export default function parseTD3(
+  lines: readonly string[],
+  options: ParseMRZOptions,
+) {
   if (lines.length !== 2) {
     throw new Error(
       `invalid number of lines: ${lines.length}: Must be 2 for ${TD3}`,
