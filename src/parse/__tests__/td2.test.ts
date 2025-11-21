@@ -1,4 +1,6 @@
-import parse from '../parse';
+import { describe, expect, it } from 'vitest';
+
+import parse from '../parse.ts';
 
 describe('parse TD2', () => {
   it('Utopia example', () => {
@@ -33,6 +35,7 @@ describe('parse TD2', () => {
     });
 
     const failed = result.details.filter((a) => !a.valid);
+
     expect(failed).toHaveLength(2);
   });
 

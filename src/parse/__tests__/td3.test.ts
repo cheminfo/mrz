@@ -1,4 +1,6 @@
-import parse from '../parse';
+import { describe, expect, it } from 'vitest';
+
+import parse from '../parse.ts';
 
 describe('parse TD3', () => {
   it('Utopia example', () => {
@@ -34,11 +36,13 @@ describe('parse TD3', () => {
     });
 
     const errors = result.details.filter((a) => !a.valid);
+
     expect(errors).toHaveLength(2);
 
     const personalNumberDetails = result.details.find(
       (d) => d.field === 'personalNumber',
     );
+
     expect(personalNumberDetails).toStrictEqual({
       label: 'Personal number',
       field: 'personalNumber',

@@ -1,4 +1,4 @@
-import { parseText } from './parseText';
+import { parseText } from './parseText.ts';
 
 export default function parseFirstName(source: string) {
   const withoutStart = source.replace(/.*?<{2}/, '');

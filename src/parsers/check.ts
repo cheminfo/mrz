@@ -2,6 +2,7 @@ export function check(string: string, value: string | number) {
   let code = 0;
   const factors = [7, 3, 1];
   for (let i = 0; i < string.length; i++) {
+    // eslint-disable-next-line unicorn/prefer-code-point
     let charCode = string.charCodeAt(i);
     if (charCode === 60) charCode = 0;
     if (charCode >= 65) charCode -= 55;

@@ -1,4 +1,4 @@
-import { FieldRecords, MRZFormat } from '../types';
+import type { FieldRecords, MRZFormat } from '../types.ts';
 
 export function getDocumentNumber(format: MRZFormat, fields: FieldRecords) {
   switch (format) {

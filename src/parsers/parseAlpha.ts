@@ -1,4 +1,4 @@
-import { cleanText } from './cleanText';
+import { cleanText } from './cleanText.ts';
 
 export function parseAlpha(source: string) {
   if (!source.match(/^[A-Z<]+$/)) {

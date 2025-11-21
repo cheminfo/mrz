@@ -1,8 +1,8 @@
-import { formats } from '../formats';
+import { formats } from '../formats.ts';
 
-import { getResult } from './getResult';
-import { ParseMRZOptions } from './parse';
-import TD2Fields from './td2Fields';
+import { getResult } from './getResult.ts';
+import type { ParseMRZOptions } from './parse.ts';
+import TD2Fields from './td2Fields.ts';
 
 const TD2 = formats.TD2;
 export default function parseTD2(lines: string[], options: ParseMRZOptions) {
@@ -11,7 +11,7 @@ export default function parseTD2(lines: string[], options: ParseMRZOptions) {
       `invalid number of lines: ${lines.length}: Must be 2 for ${TD2}`,
     );
   }
-  lines.forEach((line, index) => {
+  for (const [index, line] of lines.entries()) {
     if (line.length !== 36) {
       throw new Error(
         `invalid number of characters for line ${index + 1}: ${
@@ -19,6 +19,6 @@ export default function parseTD2(lines: string[], options: ParseMRZOptions) {
         }. Must be 36 for TD2`,
       );
     }
-  });
+  }
   return getResult(TD2, lines, TD2Fields, options);
 }

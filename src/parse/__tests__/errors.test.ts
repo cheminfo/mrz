@@ -1,4 +1,6 @@
-import parse from '../parse';
+import { describe, expect, it } from 'vitest';
+
+import parse from '../parse.ts';
 
 describe('Bad MRZ', () => {
   it('More than 3 lines', () => {
@@ -8,15 +10,18 @@ describe('Bad MRZ', () => {
       '1710GVA123451ROBERTA<<<<<<<9112311F2',
       '1710GVA123451ROBERTA<<<<<<<9112311F2',
     ];
+
     expect(() => parse(MRZ)).toThrow(
       'unrecognized document format. Input must have one, two or three lines, found 4',
     );
   });
+
   it('Wrong format', () => {
     const MRZ = [
       'IDFRATEST<NAME<<<<<<<<<<<<<<<<0CHE02<<<<<<<<0CHE02',
       '1710GVA123451ROBERTA<<<<<<<9112311F2<<<<<<<<0CHE02',
     ];
+
     expect(() => parse(MRZ)).toThrow(
       'unrecognized document format. First line of input must have 30 (TD1), 36 (TD2 or French National Id), 44 (TD3) or 9 (Swiss Driving License) characters',
     );

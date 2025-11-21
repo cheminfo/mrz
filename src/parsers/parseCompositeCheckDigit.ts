@@ -1,4 +1,4 @@
-import { check } from './check';
+import { check } from './check.ts';
 
 export default function parseCompositeCheckDigit(
   checkDigit: string,

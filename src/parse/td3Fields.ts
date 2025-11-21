@@ -1,8 +1,9 @@
-import parseDocumentCode from '../parsers/parseDocumentCodePassport';
-import { parsePersonalNumber } from '../parsers/parsePersonalNumber';
-import { parsePersonalNumberCheckDigit } from '../parsers/parsePersonalNumberCheckDigit';
+import parseDocumentCode from '../parsers/parseDocumentCodePassport.ts';
+import { parsePersonalNumber } from '../parsers/parsePersonalNumber.ts';
+import { parsePersonalNumberCheckDigit } from '../parsers/parsePersonalNumberCheckDigit.ts';
 
-import createFieldParser, { FieldOptions } from './createFieldParser';
+import type { FieldOptions } from './createFieldParser.ts';
+import createFieldParser from './createFieldParser.ts';
 import {
   birthDateCheckDigitTemplate,
   birthDateTemplate,
@@ -17,7 +18,7 @@ import {
   lastNameTemplate,
   nationalityTemplate,
   sexTemplate,
-} from './fieldTemplates';
+} from './fieldTemplates.ts';
 
 const fields: FieldOptions[] = [
   {

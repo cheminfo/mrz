@@ -1,9 +1,14 @@
-import { FormatType } from '../formats';
-import { Autocorrect, Details, FieldRecords, ParseResult } from '../types';
+import type { FormatType } from '../formats.ts';
+import type {
+  Autocorrect,
+  Details,
+  FieldRecords,
+  ParseResult,
+} from '../types.ts';
 
-import { CreateFieldParserResult } from './createFieldParser';
-import { getDocumentNumber } from './getDocumentNumber';
-import { ParseMRZOptions } from './parse';
+import type { CreateFieldParserResult } from './createFieldParser.ts';
+import { getDocumentNumber } from './getDocumentNumber.ts';
+import type { ParseMRZOptions } from './parse.ts';
 
 function getDetails(
   lines: string[],
@@ -11,9 +16,9 @@ function getDetails(
   autocorrectArray: Autocorrect[][],
 ) {
   const details: Details[] = [];
-  fieldParsers.forEach(({ parser }, i) => {
+  for (const [i, { parser }] of fieldParsers.entries()) {
     details.push(parser(lines, autocorrectArray[i]));
-  });
+  }
   return details;
 }
 
@@ -40,13 +45,13 @@ function getCorrection(
   let autocorrectArray: Autocorrect[][] = [];
 
   if (autocorrect) {
-    fieldParsers.forEach(({ autocorrector }) => {
+    for (const { autocorrector } of fieldParsers) {
       const { autocorrect, correctedText, range } = autocorrector(lines);
       autocorrectArray.push(autocorrect);
       const line = corrected[range.line];
       corrected[range.line] =
         line.slice(0, range.start) + correctedText + line.slice(range.end);
-    });
+    }
   } else {
     autocorrectArray = new Array(fieldParsers.length).fill([]);
   }

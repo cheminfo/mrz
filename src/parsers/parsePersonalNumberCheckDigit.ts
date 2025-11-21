@@ -1,5 +1,5 @@
-import { check } from './check';
-import { cleanText } from './cleanText';
+import { check } from './check.ts';
+import { cleanText } from './cleanText.ts';
 
 export function parsePersonalNumberCheckDigit(
   checkDigit: string,

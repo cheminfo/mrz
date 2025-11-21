@@ -1,4 +1,4 @@
-import { cleanText } from './cleanText';
+import { cleanText } from './cleanText.ts';
 
 export default function parseDocumentNumber(
   source: string,
@@ -8,7 +8,7 @@ export default function parseDocumentNumber(
   let end: number, value: string;
   if (checkDigit === '<' && optional) {
     const firstFiller = optional.indexOf('<');
-    const tail = optional.substring(0, firstFiller - 1);
+    const tail = optional.slice(0, firstFiller - 1);
     value = source + tail;
     end = value.length + 1;
   } else {

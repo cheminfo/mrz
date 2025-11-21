@@ -1,3 +1,3 @@
 export function cleanText(string: string) {
-  return string.replace(/<+$/g, '').replace(/</g, ' ');
+  return string.replaceAll(/<+$/g, '').replaceAll('<', ' ');
 }

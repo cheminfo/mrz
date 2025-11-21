@@ -1,8 +1,8 @@
-import { formats } from '../formats';
+import { formats } from '../formats.ts';
 
-import { getResult } from './getResult';
-import { ParseMRZOptions } from './parse';
-import swissDrivingLicenseFields from './swissDrivingLicenseFields';
+import { getResult } from './getResult.ts';
+import type { ParseMRZOptions } from './parse.ts';
+import swissDrivingLicenseFields from './swissDrivingLicenseFields.ts';
 
 const SWISS_DRIVING_LICENSE = formats.SWISS_DRIVING_LICENSE;
 export default function parseSwissDrivingLicense(

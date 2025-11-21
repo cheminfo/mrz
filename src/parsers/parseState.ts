@@ -1,6 +1,6 @@
-import STATES from '../generated/states';
+import STATES from '../generated/states.ts';
 
-import { cleanText } from './cleanText';
+import { cleanText } from './cleanText.ts';
 
 export default function parseState(source: string) {
   source = cleanText(source);

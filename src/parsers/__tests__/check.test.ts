@@ -1,4 +1,6 @@
-import { check } from '../check';
+import { expect, test } from 'vitest';
+
+import { check } from '../check.ts';
 
 test('check digits', () => {
   expect(() => check('592166117<231', 8)).not.toThrow();

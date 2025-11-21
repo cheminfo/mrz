@@ -1,4 +1,4 @@
-import { check } from './check';
+import { check } from './check.ts';
 
 export default function parseDocumentNumberCheckDigit(
   checkDigit: string,
@@ -7,7 +7,7 @@ export default function parseDocumentNumberCheckDigit(
 ) {
   if (checkDigit === '<' && optional) {
     const firstFiller = optional.indexOf('<');
-    const tail = optional.substring(0, firstFiller - 1);
+    const tail = optional.slice(0, firstFiller - 1);
     source = `${source}<${tail}`;
     checkDigit = optional.charAt(firstFiller - 1);
     check(source, checkDigit);

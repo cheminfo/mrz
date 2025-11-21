@@ -1,11 +1,11 @@
-import parseLanguageCode from './parseLanguageCode';
+import parseLanguageCode from './parseLanguageCode.ts';
 
 export default function parseDocumentNumber(source: string) {
   // swiss driving license number
-  const first = source.substring(0, 3);
-  const second = source.substring(3, 6);
+  const first = source.slice(0, 3);
+  const second = source.slice(3, 6);
   const languageCode = source.charAt(6);
-  const end = source.substring(7);
+  const end = source.slice(7);
 
   if (!first.match(/^[A-Z0-9]{3}$/)) {
     throw new Error(
@@ -24,7 +24,7 @@ export default function parseDocumentNumber(source: string) {
   // calling this method to throw if languageCode invalid
   parseLanguageCode(languageCode);
   return {
-    value: source.substring(0, 7),
+    value: source.slice(0, 7),
     start: 0,
     end: 7,
   };

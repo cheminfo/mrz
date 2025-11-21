@@ -1,7 +1,7 @@
-import { ParseTextError } from '../parsers/parseText';
-import { Autocorrect, Details, FieldName, Range } from '../types';
+import { ParseTextError } from '../parsers/parseText.ts';
+import type { Autocorrect, Details, FieldName, Range } from '../types.ts';
 
-import { autoCorrection } from './autoCorrection';
+import { autoCorrection } from './autoCorrection.ts';
 
 interface ParseResult {
   value: string;
@@ -99,12 +99,12 @@ export default function createFieldParser(
         result.start = range.start + parsed.start;
         result.end = range.start + parsed.end;
       }
-    } catch (err) {
-      result.error = err.message;
-      if (err instanceof ParseTextError) {
-        result.value = err.value;
-        result.start = range.start + err.start;
-        result.end = range.start + err.end;
+    } catch (error) {
+      result.error = error.message;
+      if (error instanceof ParseTextError) {
+        result.value = error.value;
+        result.start = range.start + error.start;
+        result.end = range.start + error.end;
       }
     }
 
@@ -136,15 +136,15 @@ export default function createFieldParser(
 
 function getText(lines: string | string[], options: Range) {
   const line = lines[options.line];
-  return line.substring(options.start, options.end);
+  return line.slice(options.start, options.end);
 }
 
-function checkType(
-  options: object,
-  name: string,
+function checkType<T extends object>(
+  options: T,
+  name: keyof T,
   type: 'string' | 'number' | 'function',
 ) {
   if (typeof options[name] !== type) {
-    throw new TypeError(`${name} must be a ${type}`);
+    throw new TypeError(`${String(name)} must be a ${type}`);
   }
 }
