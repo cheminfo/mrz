@@ -6,7 +6,7 @@ import type { ParseMRZOptions } from './parse.ts';
 
 const FRENCH_NATIONAL_ID = formats.FRENCH_NATIONAL_ID;
 export default function parseFrenchNationalId(
-  lines: string[],
+  lines: readonly string[],
   options: ParseMRZOptions,
 ) {
   if (lines.length !== 2) {
