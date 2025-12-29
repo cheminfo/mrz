@@ -8,7 +8,7 @@ export default function parseDocumentNumberCheckDigit(
   if (checkDigit === '<' && optional) {
     const firstFiller = optional.indexOf('<');
     const tail = optional.slice(0, firstFiller - 1);
-    source = `${source}<${tail}`;
+    source = `${source}${tail}`;
     checkDigit = optional.charAt(firstFiller - 1);
     check(source, checkDigit);
     return {
