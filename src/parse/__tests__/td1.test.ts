@@ -142,7 +142,7 @@ describe('parse TD1', () => {
 
   it('Belgium ID BEL-BO-11005 - valid', () => {
     // source: https://www.consilium.europa.eu/prado/en/BEL-BO-11005/index.html
-    // Changed the country code from UTO to PRT to make it pass the country validation,
+    // Changed the country code from UTO to BEL to make it pass the country validation,
     // but that this part does not affect any check digit checks.
     const MRZ = [
       'IDBEL600001795<0152<<<<<<<<<<<',
