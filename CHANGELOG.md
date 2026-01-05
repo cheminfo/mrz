@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.0.1](https://github.com/cheminfo/mrz/compare/v5.0.0...v5.0.1) (2026-01-05)
+
+
+### Bug Fixes
+
+* calculation of the check digit when it is in the optional part ([#66](https://github.com/cheminfo/mrz/issues/66)) ([4ae81df](https://github.com/cheminfo/mrz/commit/4ae81df4c570f55b647cec1c80781b153df69317))
+
 ## [5.0.0](https://github.com/cheminfo/mrz/compare/v4.2.1...v5.0.0) (2025-11-21)
 
 
