@@ -1,4 +1,4 @@
-export function check(string: string, value: string | number) {
+export function computeCheckDigit(string: string) {
   let code = 0;
   const factors = [7, 3, 1];
   for (let i = 0; i < string.length; i++) {
@@ -10,7 +10,11 @@ export function check(string: string, value: string | number) {
     charCode *= factors[i % 3];
     code += charCode;
   }
-  code %= 10;
+  return code % 10;
+}
+
+export function check(string: string, value: string | number) {
+  const code = computeCheckDigit(string);
   if (code !== Number(value)) {
     throw new Error(`invalid check digit: ${value}. Must be ${code}`);
   }

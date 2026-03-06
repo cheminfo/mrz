@@ -470,4 +470,40 @@ describe('parse TD1', () => {
       ],
     ]);
   });
+
+  it('Belgium ID BEL-BO-03003 with embedded document check digit', () => {
+    // source: https://www.consilium.europa.eu/prado/en/BEL-BO-03003/index.html
+    // This Belgian ID has the document number check digit embedded in optional1
+    const MRZ = [
+      'IDBEL000590240<6013<<<<<<<<<<<',
+      '8512017F1311048BEL851201002007',
+      'REINARTZ<<ULRIKE<KATIA<E<<<<<<',
+    ];
+
+    const result = parse(MRZ);
+
+    expect(result).toMatchObject({
+      format: 'TD1',
+      valid: true,
+      documentNumber: result.fields.documentNumber,
+    });
+
+    expect(result.fields).toStrictEqual({
+      documentCode: 'ID',
+      issuingState: 'BEL',
+      documentNumber: '000590240601',
+      documentNumberCheckDigit: '3',
+      birthDate: '851201',
+      birthDateCheckDigit: '7',
+      sex: 'female',
+      expirationDate: '131104',
+      expirationDateCheckDigit: '8',
+      nationality: 'BEL',
+      optional1: '6013',
+      optional2: '85120100200',
+      compositeCheckDigit: '7',
+      lastName: 'REINARTZ',
+      firstName: 'ULRIKE KATIA E',
+    });
+  });
 });
