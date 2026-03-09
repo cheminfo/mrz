@@ -188,6 +188,51 @@ describe('parse TD1', () => {
     });
   });
 
+  it('PRADO Portugal ID PRT-BO-04001 - valid', () => {
+    // source: https://www.consilium.europa.eu/prado/en/PRT-BO-04001/index.html
+    const MRZ = [
+      'I<PRT007666667<ZZ00<<<<<<<<<<<',
+      '8303143M3405293PRT<<<<<<<<<<<4',
+      'CACADOR<DE<ARAUJO<<ANDRE<ESTEV',
+    ];
+
+    const result = parse(MRZ);
+
+    expect(result).toMatchObject({
+      format: 'TD1',
+      valid: true,
+      documentNumber: result.fields.documentNumber,
+    });
+
+    expect(result.fields).toStrictEqual({
+      documentCode: 'I',
+      issuingState: 'PRT',
+      documentNumber: '007666667ZZ0',
+      documentNumberCheckDigit: '0',
+      birthDate: '830314',
+      birthDateCheckDigit: '3',
+      sex: 'male',
+      expirationDate: '340529',
+      expirationDateCheckDigit: '3',
+      nationality: 'PRT',
+      optional1: 'ZZ00',
+      optional2: '',
+      compositeCheckDigit: '4',
+      lastName: 'CACADOR DE ARAUJO',
+      firstName: 'ANDRE ESTEV',
+    });
+
+    const optional1Details = result.details.find(
+      (d) => d.field === 'optional1',
+    );
+    expect(optional1Details).toMatchObject({
+      value: 'ZZ00',
+      line: 0,
+      start: 15,
+      end: 19,
+    });
+  });
+
   it('Finland ID FIN-BO-12001 - valid', () => {
     // source: https://www.consilium.europa.eu/prado/en/FIN-BO-12001/index.html
     const MRZ = [

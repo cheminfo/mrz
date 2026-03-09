@@ -71,18 +71,7 @@ const fields: FieldOptions[] = [
     line: 0,
     start: 15,
     end: 30,
-    related: [
-      {
-        line: 0,
-        start: 5,
-        end: 14,
-      },
-      {
-        line: 0,
-        start: 14,
-        end: 15,
-      },
-    ],
+    related: [],
     parser: parseDocumentNumberOptional,
   },
   { ...birthDateTemplate, start: 0, end: 6, line: 1 },
