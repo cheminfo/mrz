@@ -37,6 +37,7 @@ describe('parse TD3', () => {
 
     const errors = result.details.filter((a) => !a.valid);
 
+    // Issuing state and nationality
     expect(errors).toHaveLength(2);
 
     const personalNumberDetails = result.details.find(
@@ -66,6 +67,43 @@ describe('parse TD3', () => {
       end: 5,
       error: 'invalid state code: UTO',
       autocorrect: [],
+    });
+  });
+
+  it('Utopia example - wrong personal number check digit', () => {
+    // The same example as the previous one, but the 2nd character from the end was changed from a '1' to a '2'.
+    const MRZ = [
+      'P<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<',
+      'L898902C36UTO7408122F1204159ZE184226B<<<<<20',
+    ];
+
+    const result = parse(MRZ);
+
+    expect(result).toMatchObject({
+      format: 'TD3',
+      valid: false,
+      documentNumber: result.fields.documentNumber,
+    });
+
+    const wrongDetails = result.details.filter((item) => !item.valid);
+    // Issuing state, nationality, personal number check digit and composite check digit
+    expect(wrongDetails).toHaveLength(4);
+    expect(
+      wrongDetails.find((item) => item.field === 'personalNumberCheckDigit'),
+    ).toMatchObject({
+      start: 42,
+      end: 43,
+      value: '2',
+      error: 'invalid check digit: 2. Must be 1',
+    });
+
+    expect(
+      wrongDetails.find((item) => item.field === 'compositeCheckDigit'),
+    ).toMatchObject({
+      start: 43,
+      end: 44,
+      value: '0',
+      error: 'invalid check digit: 0. Must be 1',
     });
   });
 

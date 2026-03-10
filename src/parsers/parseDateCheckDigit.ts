@@ -1,6 +1,8 @@
 import { check } from './check.ts';
 
 export default function parseCheckDigit(checkDigit: string, value: string) {
-  check(value, checkDigit);
-  return checkDigit;
+  return {
+    value: checkDigit,
+    ...check(value, checkDigit),
+  };
 }

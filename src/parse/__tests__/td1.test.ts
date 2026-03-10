@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
+import { computeCheckDigit } from '../../parsers/check.ts';
 import parse from '../parse.ts';
 
 describe('parse TD1', () => {
@@ -336,7 +337,7 @@ describe('parse TD1', () => {
     });
   });
 
-  it('parse document number', () => {
+  it('Document number field details', () => {
     const MRZ = [
       'I<UTOD23145890<1233<<<<<<<<<<<',
       '7408122F1204159UTO<<<<<<<<<<<2',
@@ -351,7 +352,7 @@ describe('parse TD1', () => {
       documentNumber: result.fields.documentNumber,
     });
 
-    expect(result.details.filter((f) => !f.valid)).toHaveLength(2);
+    expect(result.details.filter((item) => !item.valid)).toHaveLength(2);
 
     const documentNumberDetails = result.details.find(
       (d) => d.field === 'documentNumber',
@@ -549,6 +550,113 @@ describe('parse TD1', () => {
       compositeCheckDigit: '7',
       lastName: 'REINARTZ',
       firstName: 'ULRIKE KATIA E',
+    });
+
+    const detailedCheckDigit = result.details.find(
+      (item) => item.field === 'documentNumberCheckDigit',
+    );
+    expect(detailedCheckDigit).toMatchObject({
+      valid: true,
+      start: 18,
+      end: 19,
+      value: '3',
+    });
+  });
+  it('Belgium ID BEL-BO-03003, with wrong document number check digit', () => {
+    // source: https://www.consilium.europa.eu/prado/en/BEL-BO-03003/index.html
+    // This Belgian ID has the document number check digit embedded in optional1
+    const MRZ = [
+      'IDBEL000590240<6016<<<<<<<<<<<',
+      '8512017F1311048BEL851201002007',
+      'REINARTZ<<ULRIKE<KATIA<E<<<<<<',
+    ];
+
+    const result = parse(MRZ);
+
+    expect(result).toMatchObject({
+      format: 'TD1',
+      valid: false,
+      documentNumber: result.fields.documentNumber,
+    });
+
+    const expectedCheckDigit = computeCheckDigit('000590240601');
+
+    const wrongFields = result.details.filter((item) => !item.valid);
+    expect(wrongFields).toHaveLength(2);
+
+    const documentNumberDetails = wrongFields.find(
+      (item) => item.field === 'documentNumberCheckDigit',
+    );
+
+    expect(documentNumberDetails).toStrictEqual({
+      valid: false,
+      start: 18,
+      end: 19,
+      value: '6',
+      field: 'documentNumberCheckDigit',
+      label: 'Document number check digit',
+      line: 0,
+      ranges: [
+        {
+          line: 0,
+          start: 14,
+          end: 15,
+          raw: '<',
+        },
+        {
+          line: 0,
+          start: 5,
+          end: 14,
+          raw: '000590240',
+        },
+        {
+          line: 0,
+          start: 15,
+          end: 30,
+          raw: '6016<<<<<<<<<<<',
+        },
+      ],
+      autocorrect: [],
+      error: `invalid check digit: 6. Must be ${expectedCheckDigit}`,
+    });
+
+    const compositeCheckDigitDetails = wrongFields.find(
+      (item) => item.field === 'compositeCheckDigit',
+    );
+
+    expect(compositeCheckDigitDetails).toBeDefined();
+  });
+
+  it('Belgium ID BEL-BO-03003, with wrong birth date check digit', () => {
+    // source: https://www.consilium.europa.eu/prado/en/BEL-BO-03003/index.html
+    // The birthdate check digit was changed
+    const MRZ = [
+      'IDBEL000590240<6013<<<<<<<<<<<',
+      '8512018F1311048BEL851201002007',
+      'REINARTZ<<ULRIKE<KATIA<E<<<<<<',
+    ];
+
+    const result = parse(MRZ);
+
+    expect(result).toMatchObject({
+      format: 'TD1',
+      valid: false,
+      documentNumber: result.fields.documentNumber,
+    });
+
+    const wrongDetails = result.details.filter((item) => !item.valid);
+    expect(wrongDetails).toHaveLength(2);
+
+    const birthDateDetails = wrongDetails.find(
+      (item) => item.field === 'birthDateCheckDigit',
+    );
+
+    expect(birthDateDetails).toMatchObject({
+      valid: false,
+      start: 6,
+      end: 7,
+      value: '8',
+      error: `invalid check digit: 8. Must be 7`,
     });
   });
 });

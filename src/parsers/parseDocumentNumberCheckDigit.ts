@@ -1,4 +1,4 @@
-import { check, computeCheckDigit } from './check.ts';
+import { check } from './check.ts';
 
 export default function parseDocumentNumberCheckDigit(
   checkDigit: string,
@@ -21,15 +21,22 @@ export default function parseDocumentNumberCheckDigit(
     // The specificiation is unclear about which one should be used.
     // See ICAO Doc 9303 Part 11 (https://www.icao.int/sites/default/files/publications/DocSeries/9303_p11_cons_en.pdf)
     // Page 88 has an example, but it yields the same check digit with or without the '<' character.
-    const isValid =
-      computeCheckDigit(`${source}<${tail}`) === Number(embeddedDigit);
-    if (isValid) {
-      return result;
+    let checkDigit = check(`${source}<${tail}`, embeddedDigit);
+    if (checkDigit.valid) {
+      return {
+        ...result,
+        ...checkDigit,
+      };
     }
-    check(`${source}${tail}`, embeddedDigit);
-    return result;
+    checkDigit = check(`${source}${tail}`, embeddedDigit);
+    return {
+      ...result,
+      ...checkDigit,
+    };
   } else {
-    check(source, checkDigit);
-    return checkDigit;
+    return {
+      value: checkDigit,
+      ...check(source, checkDigit),
+    };
   }
 }

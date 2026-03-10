@@ -5,6 +5,9 @@ export default function parseCompositeCheckDigit(
   ...sources: string[]
 ) {
   const source = sources.join('');
-  check(source, checkDigit);
-  return checkDigit;
+  const checkResult = check(source, checkDigit);
+  return {
+    value: checkDigit,
+    ...checkResult,
+  };
 }
