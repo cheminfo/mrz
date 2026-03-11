@@ -5,8 +5,10 @@ import { autoCorrection } from './autoCorrection.ts';
 
 interface ParseResult {
   value: string;
-  start: number;
-  end: number;
+  start?: number;
+  end?: number;
+  valid?: boolean;
+  error?: string | null;
 }
 
 type Parser = (source: string, ...related: string[]) => ParseResult | string;
@@ -96,11 +98,22 @@ export default function createFieldParser(
     result.end = range.end;
     try {
       const parsed = fieldOptions.parser(source, ...textRelated);
-      result.value = typeof parsed === 'object' ? parsed.value : parsed;
-      result.valid = true;
+
       if (typeof parsed === 'object') {
-        result.start = range.start + parsed.start;
-        result.end = range.start + parsed.end;
+        result.value = parsed.value;
+        result.valid = parsed.valid ?? true;
+        if (parsed.start !== undefined) {
+          result.start = range.start + parsed.start;
+        }
+        if (parsed.end !== undefined) {
+          result.end = range.start + parsed.end;
+        }
+        if (parsed.valid === false && parsed.error) {
+          result.error = parsed.error;
+        }
+      } else {
+        result.value = parsed;
+        result.valid = true;
       }
     } catch (error) {
       result.error = error.message;

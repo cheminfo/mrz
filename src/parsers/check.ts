@@ -13,9 +13,11 @@ export function computeCheckDigit(string: string) {
   return code % 10;
 }
 
-export function check(string: string, value: string | number) {
+export function check(string: string, input: string) {
   const code = computeCheckDigit(string);
-  if (code !== Number(value)) {
-    throw new Error(`invalid check digit: ${value}. Must be ${code}`);
-  }
+  const valid = code === Number(input);
+  return {
+    valid,
+    error: valid ? null : `invalid check digit: ${input}. Must be ${code}`,
+  };
 }

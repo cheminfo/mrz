@@ -8,11 +8,17 @@ export function parsePersonalNumberCheckDigit(
   const cleanNumber = cleanText(personalNumber);
   if (cleanNumber === '') {
     if (checkDigit !== '<' && checkDigit !== '0') {
-      throw new Error(`invalid check digit ${checkDigit}: must be 0 or <`);
+      return {
+        value: checkDigit,
+        valid: false,
+        error: `invalid check digit ${checkDigit}: must be 0 or <`,
+      };
     } else {
       return checkDigit;
     }
   }
-  check(personalNumber, checkDigit);
-  return checkDigit;
+  return {
+    value: checkDigit,
+    ...check(personalNumber, checkDigit),
+  };
 }
