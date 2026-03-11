@@ -1,6 +1,6 @@
 {
   "name": "mrz",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "license": "MIT",
   "description": "Parse MRZ (Machine Readable Zone) from identity documents",
   "author": "Luc Patiny <luc@patiny.com>",

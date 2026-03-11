@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.0.2](https://github.com/cheminfo/mrz/compare/v5.0.1...v5.0.2) (2026-03-11)
+
+
+### Bug Fixes
+
+* accept TD1 alternative check digit computation variant when embedded in optional1 ([#70](https://github.com/cheminfo/mrz/issues/70)) ([8d0aa52](https://github.com/cheminfo/mrz/commit/8d0aa52c2bc89c30e632800606f70de70bf2239b))
+* check digit position when it is not valid ([#74](https://github.com/cheminfo/mrz/issues/74)) ([06eb7be](https://github.com/cheminfo/mrz/commit/06eb7be36471860de779cd240eab3d5b91ae70d2))
+
 ## [5.0.1](https://github.com/cheminfo/mrz/compare/v5.0.0...v5.0.1) (2026-01-05)
 
 
